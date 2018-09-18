@@ -7,6 +7,7 @@ We are a group of students involved in Video Games Development.
 ### Alberto Blanco
 
 - VideoGame Developer especialized on coding. Experienced on different programming languages such as C#, Java or C++. 
+- Experience in Virtual Reality (VR) and Augmented Reality (AR).
 - Experience with videogame engines such us Unity and Unreal Engine.
 - Also experienced in web developement using PHP, HTML5, CSS3, Javascript and a little bit of WebGL. 
 - Some experience using CMS like Wordpress or Joomla.
@@ -18,7 +19,7 @@ Contact: <alber09055@gmail.com>
 - Videogame designer. Interested in designing levels, writing scripts and creating new stories.
 - Also interested in programming and using videogame engines. 
 
-Contact: em.perezfe@alumnos.urjc.es
+Contact: <em.perezfe@alumnos.urjc.es>
 ### Sergio Sánchez-Urán
 
 Future Video Game developer. I´m an passionate of programming and modelling. 
@@ -35,7 +36,7 @@ And for modelling i use:
 - 3D Max
 - Substance Painter (Beginner)
 
-Contact me: sergetelopez@gmail.com
+Contact me: <sergetelopez@gmail.com>
 
 ### José M. Segade
 
@@ -52,7 +53,7 @@ To design, I often use Photoshop, Blender and 3dsMax. Experience on Unity and Un
 - Experienced in web development. I've used HTML5, PHP, CSS, Javascript and Jquery.
 - Experienced in several game engines, especially Unity and Unreal Engine.
 - Experienced in programming in several languages, such as Java, C++, C# and others.
-Contact: jetese2@gmail.com
+Contact: <jetese2@gmail.com>
 
 ## Support or Contact
 
