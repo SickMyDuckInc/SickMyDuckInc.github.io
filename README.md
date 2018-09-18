@@ -7,8 +7,12 @@ We are a group of students involved in Video Games Development.
 ### Alberto Blanco
 
 - VideoGame Developer especialized on coding. Experienced on different programming languages such as C#, Java or C++. 
+- Experience with videogame engines such us Unity and Unreal Engine.
 - Also experienced in web developement using PHP, HTML5, CSS3, Javascript and a little bit of WebGL. 
-- Some experience using CMS like Wordpress or Joomla.s
+- Some experience using CMS like Wordpress or Joomla.
+- Some experience in design using Phothoshop.
+
+Contact: alber09055@gmail.com
 
 ### Eva M. Pérez
 Estudiante del 4º curso de videojuegos, futura diseñadora de videojuegos, aficionada a la escritura y al cine, procrastinadora profesional y mucho más
