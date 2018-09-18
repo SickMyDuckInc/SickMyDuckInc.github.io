@@ -12,7 +12,7 @@ We are a group of students involved in Video Games Development.
 - Some experience using CMS like Wordpress or Joomla.
 - Some experience in design using Phothoshop.
 
-Contact: alber09055@gmail.com
+Contact: <alber09055@gmail.com>
 
 ### Eva M. Pérez
 Estudiante del 4º curso de videojuegos, futura diseñadora de videojuegos, aficionada a la escritura y al cine, procrastinadora profesional y mucho más
