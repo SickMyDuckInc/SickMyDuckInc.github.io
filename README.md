@@ -48,10 +48,10 @@ Video Game developer. I'm interested in programming and design. I've programmed 
 To design, I often use Photoshop, Blender and 3dsMax. Experience on Unity and Unreal Engine as Game Engines. Contact me: <pepest97@gmail.com>
 
 ### Jesús Tellez
--Videogame developer. I am focused in programming and virtual reality development.
--Experienced in web development. I've used HTML5, PHP, CSS, Javascript and Jquery.
--Experienced in several game engines, especially Unity and Unreal Engine.
--Experienced in programming in several languages, such as Java, C++, C# and others.
+- Videogame developer. I am focused in programming and virtual reality development.
+- Experienced in web development. I've used HTML5, PHP, CSS, Javascript and Jquery.
+- Experienced in several game engines, especially Unity and Unreal Engine.
+- Experienced in programming in several languages, such as Java, C++, C# and others.
 Contact: jetese2@gmail.com
 
 ## Support or Contact
