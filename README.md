@@ -15,7 +15,8 @@ Video Game developer. I'm interested in programming and design. I've programmed 
 - C#
 - C++
 - JavaScript / HTML / CSS
-For design, I often use Photoshop, Blender and 3dsMax. Experience on Unity and Unreal Engine as Game Engines. Contact me: <pepest97@gmail.com>
+
+To design, I often use Photoshop, Blender and 3dsMax. Experience on Unity and Unreal Engine as Game Engines. Contact me: <pepest97@gmail.com>
 
 ### Jesús Tellez
 
