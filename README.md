@@ -20,6 +20,23 @@ Contact: alber09055@gmail.com
 
 Contact: em.perezfe@alumnos.urjc.es
 ### Sergio Sánchez-Urán
+
+Future Video Game developer. I´m an passionate of programming and modelling. 
+I have experience programming in several languages and graphic Engines such us:
+- Java
+- C++
+- C#
+- JavaScript
+- HTML / CSS
+- Unity / Unreal
+And for modelling i use:
+- Blender
+- Photoshop
+- 3D Max
+- Substance Painter (Beginner)
+
+Contact me: sergetelopez@gmail.com
+
 ### José M. Segade
 
 Video Game developer. I'm interested in programming and design. I've programmed in several languages such as:
