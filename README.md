@@ -8,6 +8,23 @@ We are a group of students involved in Video Games Development.
 ### Eva M. Pérez
 Estudiante del 4º curso de videojuegos, futura diseñadora de videojuegos, aficionada a la escritura y al cine, procrastinadora profesional y mucho más
 ### Sergio Sánchez-Urán
+
+Future Video Game developer. I´m an passionate of programming and modelling. 
+I have experience programming in several languages and graphic Engines such us:
+- Java
+- C++
+- C#
+- JavaScript
+- HTML / CSS
+- Unity / Unreal
+And for modelling i use:
+- Blender
+- Photoshop
+- 3D Max
+- Substance Painter (Beginner)
+
+Contact me: sergetelopez@gmail.com
+
 ### José M. Segade
 
 Video Game developer. I'm interested in programming and design. I've programmed in several languages such as:
