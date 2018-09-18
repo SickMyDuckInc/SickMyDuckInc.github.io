@@ -14,7 +14,7 @@ Video Game developer. I'm interested in programming and design. I've programmed 
 - Java 
 - C#
 - C++
-- JavaScript / HTML / CSS
+- JavaScript / HTML / CSS </br>
 
 To design, I often use Photoshop, Blender and 3dsMax. Experience on Unity and Unreal Engine as Game Engines. Contact me: <pepest97@gmail.com>
 
