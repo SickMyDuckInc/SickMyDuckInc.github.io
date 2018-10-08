@@ -96,8 +96,8 @@ body {
   letter-spacing: -1px;
 }
 
-.scroll{
-  scroll-behavior: smooth;
+.navbar-inverse a:hover{
+  color: orange !important;
 }
 
 
