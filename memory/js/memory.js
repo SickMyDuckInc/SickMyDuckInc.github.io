@@ -1,22 +1,8 @@
-$(document).ready(function(){
-    $(".flipper").on("click", function(){
-        if(!$(this).hasClass("selected")){
-            $(this).addClass("selected");
-            setTimeout(turnAround, 1000, $(this));
-        }
-        else{            
-            $(this).removeClass("selected");
-        }
-    });
-});
 
-function turnAround(element){
-    $(element).removeClass("selected");
-}
 var flipedCard;
 var flipedId;
 var index_c = 0;
-$( document ).ready(function() {
+$( document ).ready(function() {    
     /*
     var cartas = ["eva","eva"];
     $(".js_carta").each(function() {
@@ -25,28 +11,37 @@ $( document ).ready(function() {
       });
       */
     $(".js_carta").click(function(){
+        if(!$(this).hasClass("selected")){
+            $(this).addClass("selected");
+            //setTimeout(turnAround, 1000, $(this));
+        }
+        else{            
+            $(this).removeClass("selected");
+        }
         if(flipedCard == null){
             flipedCard = $(this).data("valor");
             flipedId = $(this).attr('id');
-            $(this).css("background-color", "red");
-        } else if(flipedId==$(this).attr('id')){
-            $(this).css("background-color", "blue");
-            
+        } else if(flipedId==$(this).attr('id')){            
             flipedCard = null;
             flipedId=null;
         }
         else{
             if(flipedCard == $(this).data("valor")){
-                $(this).css("background-color", "red");
+                $(this).addClass("selected");
                 setTimeout(flip,800, $(this))
             }
             else{
-                $(this).css("background-color", "red");
+                $(this).addClass("selected");
                 setTimeout(flip_back, 800, $(this));
             }
         }
     });
 });
+
+
+function turnAround(element){
+    $(element).removeClass("selected");
+}
 
 function flip(element) {
     $("#"+flipedId).remove();
@@ -56,8 +51,8 @@ function flip(element) {
 }
 
 function flip_back(element){
-    $("#"+flipedId).css("background-color", "blue");
-    $(element).css("background-color", "blue");
+    $("#"+flipedId).removeClass("selected");
+    $(element).removeClass("selected");
     flipedId=null;
     flipedCard = null;
 }
