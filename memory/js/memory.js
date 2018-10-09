@@ -1,0 +1,48 @@
+var flipedCard;
+var flipedId;
+var index_c = 0;
+$( document ).ready(function() {
+    /*
+    var cartas = ["eva","eva"];
+    $(".js_carta").each(function() {
+        $(this).data("valor", cartas[index_c] );
+        index_c++;
+      });
+      */
+    $(".js_carta").click(function(){
+        if(flipedCard == null){
+            flipedCard = $(this).data("valor");
+            flipedId = $(this).attr('id');
+            $(this).css("background-color", "red");
+        } else if(flipedId==$(this).attr('id')){
+            $(this).css("background-color", "blue");
+            
+            flipedCard = null;
+            flipedId=null;
+        }
+        else{
+            if(flipedCard == $(this).data("valor")){
+                $(this).css("background-color", "red");
+                setTimeout(flip,800, $(this))
+            }
+            else{
+                $(this).css("background-color", "red");
+                setTimeout(flip_back, 800, $(this));
+            }
+        }
+    });
+});
+
+function flip(element) {
+    $("#"+flipedId).remove();
+    $(element).remove();
+    flipedId=null;
+    flipedCard = null;
+}
+
+function flip_back(element){
+    $("#"+flipedId).css("background-color", "blue");
+    $(element).css("background-color", "blue");
+    flipedId=null;
+    flipedCard = null;
+}
