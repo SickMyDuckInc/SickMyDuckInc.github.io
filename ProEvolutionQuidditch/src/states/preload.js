@@ -5,13 +5,16 @@ ProEvolutionQuidditch.preloadState = function(game) {
 ProEvolutionQuidditch.preloadState.prototype = {
 
     init: function() {
-        game.load.image('loading1', 'assets/images/text/loading1.png');
+        
         
     },
    
 
     preload: function() {
-        var s = game.add.image(80, 0, 'loading1');
+        
+        //game.load.onLoadComplete.add(this.loadComplete, this);
+        game.add.sprite(0, 0, 'background1');
+        game.add.sprite(160, 240, 'loading1');
         //text
         game.load.image('loading2', 'assets/images/text/loading2.png');
         game.load.image('clean','assets/images/text/cleangame.png');
@@ -26,7 +29,7 @@ ProEvolutionQuidditch.preloadState.prototype = {
         game.load.image('winner', 'assets/images/text/winner.png');
 
         //background
-        game.load.image('background1', 'assets/images/background/background.png');
+        
         game.load.image('background2', 'assets/images/background/background2.png');
         game.load.image('stadium1', 'assets/images/background/stadium1.png');
         game.load.image('stadium2', 'assets/images/background/stadium2.png');
@@ -47,11 +50,11 @@ ProEvolutionQuidditch.preloadState.prototype = {
 
     create: function() {
         
-
+        this.state.start('menuState');
        
     },
 
     update: function() {
        
-    }
+    },
 }
