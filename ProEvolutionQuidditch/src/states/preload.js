@@ -3,11 +3,6 @@ ProEvolutionQuidditch.preloadState = function(game) {
 }
 
 ProEvolutionQuidditch.preloadState.prototype = {
-
-    init: function() {
-        
-        
-    },
    
 
     preload: function() {
@@ -52,15 +47,15 @@ ProEvolutionQuidditch.preloadState.prototype = {
         game.load.audio('youWin', 'assets/audio/youWin.ogg');
 
         //  Music
-        game.load.music('creepy','assets/music/bensound-creepy.mp3');
-        game.load.music('epic','assets/music/bensound-epic.mp3');
-        game.load.music('happyrock','assets/music/bensound-happyrock.mp3');
+        game.load.audio('creepy','assets/music/bensound-creepy.mp3');
+        game.load.audio('epic','assets/music/bensound-epic.mp3');
+        game.load.audio('happyrock','assets/music/bensound-happyrock.mp3');
 
     },
 
     create: function() {
         
-        this.state.start('menuState');
+        this.state.start('levelState');
        
     },
 
