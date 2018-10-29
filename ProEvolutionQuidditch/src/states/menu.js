@@ -9,7 +9,6 @@ ProEvolutionQuidditch.menuState.prototype = {
     },
 
     create: function() {
-
     },
 
     update: function() {
