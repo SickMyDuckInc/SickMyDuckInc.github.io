@@ -10,6 +10,8 @@ ProEvolutionQuidditch.menuState.prototype = {
     },
 
     create: function() {
+<<<<<<< HEAD
+=======
         game.add.sprite(0, 0, 'background1');
         var title = game.add.sprite(30, 100, 'title');
         title.scale.setTo(0.5 , 0.5);
@@ -32,6 +34,7 @@ ProEvolutionQuidditch.menuState.prototype = {
         keypress = game.input.keyboard.addKey(Phaser.Keyboard.S);
         keypress.onDown.add(this.intro, this);
         
+>>>>>>> 20877541064a29b88ec726cb7a31b567f01a4389
     },
 
     update: function() {
