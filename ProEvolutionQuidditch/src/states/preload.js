@@ -60,7 +60,7 @@ ProEvolutionQuidditch.preloadState.prototype = {
 
     create: function() {
         
-        this.state.start('menuState');
+        this.state.start('endingState');
        
     },
 
