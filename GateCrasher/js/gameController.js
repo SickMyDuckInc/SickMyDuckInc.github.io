@@ -1,3 +1,9 @@
+/*
+Esta clase es la que por jQuery creará el tablero y definirá los eventos del click, etc.
+Es la única clase que utilizará jQuery y funcionará como dispatcher. 
+El resto de clases serán prototipos de javascript.
+ */
+
 function startGame() {
     myGamePiece = new component(30, 30, "red", 10, 120);
     myGamePiece.gravity = 0.05;
