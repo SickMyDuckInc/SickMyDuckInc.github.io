@@ -16,14 +16,17 @@ var myGameArea = {
     selector: document.getElementById("enemy_selector"),
     start : function() {
         this.canvas = document.getElementById("myCanvas");
-        this.selector = $("#enemy_selector")
+        this.selector = $("#enemy_selector");
         this.context = this.canvas.getContext("2d");
         this.frameNo = 0;
+        this.context.fillStyle = RED_COLOR;
     },
-    addEnemies : function(numEnemies){
-        //numEnemies = 4;
+    addEnemies : function(numEnemies, maxEnemyCount){
         for(var i = 0; i<numEnemies; i++){
-            this.selector.append('<div id="enemy_'+ i +'" data-enemy="'+ i +'" class="single_enemy"></div>');
+            var str = '<div id="enemy_'+ i +'" data-enemy="'+ i +'" class="single_enemy">'+
+                        '<div class="enemy_number">'+ maxEnemyCount[i]+'</div>'+
+                    '</div>';
+            this.selector.append(str);
         }
     },
     resizeEnemies : function(numEnemies){
@@ -32,6 +35,9 @@ var myGameArea = {
         var height = totalHeight / numEnemies;
         console.log("Altura individual: " + height);
         $(".single_enemy").outerHeight(height);
+    },
+    changeEnemyCount : function(enemy_id, count){
+        $("#enemy_" + enemy_id + " .enemy_number").text(count);
     },
     clear : function() {
         this.context.clearRect(0, 0, this.canvas.scrollWidth, this.canvas.scrollHeight);
@@ -53,8 +59,16 @@ var myGameArea = {
         this.context.lineTo(toX, toY);
         this.context.stroke();
     },
+    drawSquare : function(fromX, fromY, width, height){
+        this.context.fillRect(fromX, fromY, width, height);
+        //this.context.fillRect(100, 0, 100, 200);
+        this.context.stroke();
+    },
     setColor : function(color){
         this.context.strokeStyle = color;
+    },
+    setFillColor : function(color){
+        this.context.fillStyle = color;
     },
     getPos : function(posX, posY){
         var rect = this.canvas.getBoundingClientRect();
@@ -96,7 +110,13 @@ function resize(){
     lManager.drawMap();
 }
 $(document).ready(function(){
-    lManager = new levelManager(4, 6, myGameArea, 6);
+    var numEnemies = 6;
+    var maxEnemyNumber = new Array(numEnemies);
+    for(var i = 0; i<numEnemies; i++){
+        maxEnemyNumber[i] = 3;
+    } 
+
+    lManager = new levelManager(4, 6, myGameArea, 6, maxEnemyNumber);
     resize();
     $(window).on("resize", function(){                      
         resize();

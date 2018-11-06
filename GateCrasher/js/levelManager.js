@@ -9,13 +9,24 @@ Tiene tres matrices:
 var GRAY_COLOR = "#e6e6e6";
 var RED_COLOR = "#ff0000";
 var BLUE_COLOR = "#0000ff";
-
-function levelManager(rows, cols, canvas, numEnemies){
+var TRANSPARENT_COLOR = "white";
+/***
+ * rows: (int) filas del tablero
+ * cols: (int) columnas del tablero
+ * canvas: (objecto) objeto tipo myCanvas que gestiona la interfaz
+ * numEnemies: (int) número total de tipos de enemigos del que dispone el jugador
+ * maxEnemies: (array int) lista con el número de enemigos de cada tipo que el jugador puede utilizar
+ */
+function levelManager(rows, cols, canvas, numEnemies, maxEnemies){
     this.numRows = rows;
     this.numCols = cols;
     this.canvas = canvas;    
     this.numEnemies = numEnemies;
+    this.maxEnemies = maxEnemies
+
+    
     this.selectedEnemy = -1;
+    this.enemiesColors = [GRAY_COLOR, RED_COLOR, BLUE_COLOR, RED_COLOR, BLUE_COLOR, GRAY_COLOR, RED_COLOR]; //esto cambiará a sprites
 
     this.matrix = [];
 
@@ -29,32 +40,35 @@ function levelManager(rows, cols, canvas, numEnemies){
     console.log(this.matrix);
 
     this.canvas.start();
-    this.canvas.addEnemies(this.numEnemies);
+    this.canvas.addEnemies(this.numEnemies, this.maxEnemies);
     this.canvas.resizeEnemies(this.numEnemies);
 
     this.intervalHeight = this.canvas.getHeight() / this.numRows;
     this.intervalWidth = this.canvas.getWidth() / this.numCols;
+
+    this.drawHeight = this.canvas.getDrawHeight() / this.numRows;
+    this.drawWidth = this.canvas.getDrawWidth() / this.numCols;
 
 
     console.log("Created levelManager with " + rows + " rows and " + cols + " cols");
 }
 
 levelManager.prototype.drawMap = function(){
-    this.canvas.clear();
+    //this.canvas.clear();
     this.intervalHeight = this.canvas.getHeight() / this.numRows;
     this.intervalWidth = this.canvas.getWidth() / this.numCols;
 
-    var drawHeight = this.canvas.getDrawHeight() /this.numRows;
-    var drawWidth = this.canvas.getDrawWidth() / this.numCols;
+    this.drawHeight = this.canvas.getDrawHeight() /this.numRows;
+    this.drawWidth = this.canvas.getDrawWidth() / this.numCols;
 
     this.canvas.setColor(GRAY_COLOR);
 
     for(var i = 1; i<this.numRows; i++){
-        this.canvas.drawLine(0, i*drawHeight, this.canvas.getDrawWidth(), i*drawHeight);
+        this.canvas.drawLine(0, i*this.drawHeight, this.canvas.getDrawWidth(), i*this.drawHeight);
     }
 
     for(var j = 1; j<this.numCols; j++){
-        this.canvas.drawLine(j*drawWidth, 0, j*drawWidth, this.canvas.getDrawHeight());
+        this.canvas.drawLine(j*this.drawWidth, 0, j*this.drawWidth, this.canvas.getDrawHeight());
     }
 
     this.canvas.resizeEnemies(this.numEnemies);
@@ -63,33 +77,68 @@ levelManager.prototype.drawMap = function(){
 
 
 levelManager.prototype.manageCanvasClick = function(posX, posY){
+
+    var canvasPos = this.canvas.getPos(posX, posY);
+
+    var casillaY = Math.floor(canvasPos.x / this.intervalWidth);
+    var casillaX = Math.floor(canvasPos.y / this.intervalHeight);
+
+    var casilla = {x:casillaX, y:casillaY};
+
+    var actualOccuping = this.matrix[casillaX][casillaY];
+
     if(this.selectedEnemy != -1){
-        var canvasPos = this.canvas.getPos(posX, posY);
+        //Si la celda no está ocupada por un enemigo del mismo tipo
+        if(actualOccuping != this.selectedEnemy){
+            console.log("Cambiando el enemigo " + actualOccuping + " por " + this.selectedEnemy);
+            this.matrix[casillaX][casillaY] = this.selectedEnemy;
+            if(this.maxEnemies[this.selectedEnemy]>0){
+                this.maxEnemies[this.selectedEnemy]--;
+                this.canvas.changeEnemyCount(this.selectedEnemy, this.maxEnemies[this.selectedEnemy]);
+            }
+            this.canvas.setFillColor(this.enemiesColors[this.selectedEnemy]);
+            this.canvas.drawSquare(casillaY * this.drawHeight, casillaX * this.drawWidth, this.drawWidth, this.drawHeight);
+            console.log(this.matrix);
 
-        var casillaY = Math.floor(canvasPos.x / this.intervalWidth);
-        var casillaX = Math.floor(canvasPos.y / this.intervalHeight);
+            if(actualOccuping != -1){
+                this.maxEnemies[actualOccuping]++;
+                this.canvas.changeEnemyCount(actualOccuping, this.maxEnemies[actualOccuping]);
+                this.selectedEnemy = actualOccuping;
 
-        var casilla = {x:casillaX, y:casillaY};
-
-        console.log("X: " + casillaX + ", Y: " + casillaY);
-
-        this.matrix[casillaX][casillaY] = this.selectedEnemy;
-        console.log(this.matrix);
-
-        this.selectedEnemy = -1;
+                console.log("Seleccionado enemigo: " + actualOccuping);
+            }
+            else{
+                this.selectedEnemy = -1;
+            }
+        }
+        else{
+            console.log("Celda ocupada por un enemigo del mismo tipo");
+        }
     }
     else{
         console.log("No hay enemigos seleccionados");
+        if(actualOccuping != -1){
+            console.log("Cambiando a transparente");
+            this.maxEnemies[actualOccuping]++;
+            this.canvas.setFillColor(TRANSPARENT_COLOR);
+            this.canvas.drawSquare(casillaY * this.drawHeight, casillaX * this.drawWidth, this.drawWidth, this.drawHeight);
+            this.canvas.changeEnemyCount(actualOccuping, this.maxEnemies[actualOccuping]);
+        }
     }
 }
 
 levelManager.prototype.manageEnemyClick = function(enemyId){
-    if(this.selectedEnemy != enemyId){
-        this.selectedEnemy = enemyId;
-        console.log("Seleccionado el enemigo: " + enemyId);
+    if(this.maxEnemies[enemyId]>0){
+        if(this.selectedEnemy != enemyId){
+            this.selectedEnemy = enemyId;
+            console.log("Seleccionado el enemigo: " + enemyId);
+        }
+        else{
+            this.selectedEnemy = -1;
+            console.log("Deseleccionado el enemigo: " + enemyId);
+        }
     }
     else{
-        this.selectedEnemy = -1;
-        console.log("Deseleccionado el enemigo: " + enemyId);
+        console.log("No quedan enemigos de este tipo");
     }
 }
