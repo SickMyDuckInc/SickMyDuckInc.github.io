@@ -10,12 +10,27 @@ var GRAY_COLOR = "#e6e6e6";
 var RED_COLOR = "#ff0000";
 var BLUE_COLOR = "#0000ff";
 
-function levelManager(rows, cols, canvas){
+function levelManager(rows, cols, canvas, numEnemies){
     this.numRows = rows;
     this.numCols = cols;
     this.canvas = canvas;    
+    this.numEnemies = numEnemies;
+    this.selectedEnemy = -1;
+
+    this.matrix = [];
+
+    for(var i = 0; i<this.numRows; i++){
+        this.matrix[i] = new Array(this.numCols);
+        for(var j = 0; j<this.numCols; j++){
+            this.matrix[i][j]= -1;
+        }
+    }
+
+    console.log(this.matrix);
 
     this.canvas.start();
+    this.canvas.addEnemies(this.numEnemies);
+    this.canvas.resizeEnemies(this.numEnemies);
 
     this.intervalHeight = this.canvas.getHeight() / this.numRows;
     this.intervalWidth = this.canvas.getWidth() / this.numCols;
@@ -42,19 +57,39 @@ levelManager.prototype.drawMap = function(){
         this.canvas.drawLine(j*drawWidth, 0, j*drawWidth, this.canvas.getDrawHeight());
     }
 
-    //this.canvas.clear();
-    console.log("Dibujando mapa");
+    this.canvas.resizeEnemies(this.numEnemies);
+
 }
 
 
-levelManager.prototype.manageClick = function(posX, posY){
-    var canvasPos = this.canvas.getPos(posX, posY);
+levelManager.prototype.manageCanvasClick = function(posX, posY){
+    if(this.selectedEnemy != -1){
+        var canvasPos = this.canvas.getPos(posX, posY);
 
-    var casillaY = Math.floor(canvasPos.x / this.intervalWidth);
-    var casillaX = Math.floor(canvasPos.y / this.intervalHeight);
+        var casillaY = Math.floor(canvasPos.x / this.intervalWidth);
+        var casillaX = Math.floor(canvasPos.y / this.intervalHeight);
 
-    var casilla = {x:casillaX, y:casillaY};
+        var casilla = {x:casillaX, y:casillaY};
 
-    console.log("X: " + casillaX + ", Y: " + casillaY);
+        console.log("X: " + casillaX + ", Y: " + casillaY);
 
+        this.matrix[casillaX][casillaY] = this.selectedEnemy;
+        console.log(this.matrix);
+
+        this.selectedEnemy = -1;
+    }
+    else{
+        console.log("No hay enemigos seleccionados");
+    }
+}
+
+levelManager.prototype.manageEnemyClick = function(enemyId){
+    if(this.selectedEnemy != enemyId){
+        this.selectedEnemy = enemyId;
+        console.log("Seleccionado el enemigo: " + enemyId);
+    }
+    else{
+        this.selectedEnemy = -1;
+        console.log("Deseleccionado el enemigo: " + enemyId);
+    }
 }
