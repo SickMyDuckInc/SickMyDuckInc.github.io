@@ -97,19 +97,22 @@ function resize(){
         if(!$("#enemy_selector").hasClass("responsive")){
             var offset= $("#myCanvas").offset().top;
             console.log("He saltado");
-            $("#enemy_selector").addClass("responsive");
+            $("#enemy_selector").addClass("responsive").addClass("hidden");
             $(".responsive").css("top", offset);
+            $("#responsive_menu").show();
         }
     }
     else{
         if($("#enemy_selector").hasClass("responsive")){
-            $("#enemy_selector").removeClass("responsive");
+            $("#enemy_selector").removeClass("responsive").removeClass("hidden");
+            $("#responsive_menu").hide();
         }
     }
 
     lManager.drawMap();
 }
 $(document).ready(function(){
+    $("#responsive_menu").hide();
     var numEnemies = 6;
     var maxEnemyNumber = new Array(numEnemies);
     for(var i = 0; i<numEnemies; i++){
@@ -128,5 +131,14 @@ $(document).ready(function(){
 
     $(".single_enemy").on('click', function(e){
         lManager.manageEnemyClick($(this).data("enemy"));
+    });
+
+    $("#responsive_menu").on('click', function(){
+        if($("#enemy_selector").hasClass("hidden")){
+            $("#enemy_selector").removeClass("hidden");
+        }
+        else{
+            $("#enemy_selector").addClass("hidden");
+        }
     });
 });

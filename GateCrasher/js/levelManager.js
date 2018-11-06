@@ -119,6 +119,7 @@ levelManager.prototype.manageCanvasClick = function(posX, posY){
         console.log("No hay enemigos seleccionados");
         if(actualOccuping != -1){
             console.log("Cambiando a transparente");
+            this.matrix[casillaX][casillaY] = -1;
             this.maxEnemies[actualOccuping]++;
             this.canvas.setFillColor(TRANSPARENT_COLOR);
             this.canvas.drawSquare(casillaY * this.drawHeight, casillaX * this.drawWidth, this.drawWidth, this.drawHeight);
