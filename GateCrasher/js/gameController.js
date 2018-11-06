@@ -77,6 +77,9 @@ var myGameArea = {
         var pos = {x:realX, y:realY};
         //console.log("posX: " + realX + " posY: " + realY);
         return pos;
+    },
+    hideBar : function(){
+        $("#enemy_selector.responsive").addClass("hidden");
     }
 }
 

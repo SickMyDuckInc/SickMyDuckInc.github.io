@@ -133,6 +133,7 @@ levelManager.prototype.manageEnemyClick = function(enemyId){
         if(this.selectedEnemy != enemyId){
             this.selectedEnemy = enemyId;
             console.log("Seleccionado el enemigo: " + enemyId);
+            this.canvas.hideBar();
         }
         else{
             this.selectedEnemy = -1;
