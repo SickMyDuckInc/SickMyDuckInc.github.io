@@ -84,6 +84,7 @@ var myGameArea = {
 }
 
 var lManager;
+var lCharacter;
 
 
 function resize(){    
@@ -123,7 +124,21 @@ $(document).ready(function(){
     } 
 
     lManager = new levelManager(4, 6, myGameArea, 6, maxEnemyNumber);
+
+    //PRUEBAS PARA CHARACTER
+    var rows = lManager.numRows;
+    var cols = lManager.numCols;
+    var inicio = [0,0];
+    var fin = [1, 5];
+    
+    lCharacter = new character(inicio, fin, rows, cols);
+    
     resize();
+
+    //PRUEBA PARA CHARACTER
+    lCharacter.pathfinding();
+    //
+
     $(window).on("resize", function(){                      
         resize();
     });
