@@ -5,7 +5,8 @@ function sprite(context, spriteImage) {
     this.x = 0;
     this.y = 0;
     this.speed = 1;
-    this.scale = 1;
+    this.scaleX = 1;
+    this.scaleY = 1;
     this.animations = {};
     this.isFlipped = false;
 
@@ -55,7 +56,7 @@ sprite.prototype.moveInDirection = function (dir) {
 
 sprite.prototype.draw = function () {
     if(this.currentAnimation != undefined) {
-        this.currentAnimation.anim[this.animationFrame].draw(this.context, this.x, this.y, this.scale, this.isFlipped);     
+        this.currentAnimation.anim[this.animationFrame].draw(this.context, this.x, this.y, this.scaleX, this.scaleY, this.isFlipped);     
         this.animationFrame++;   
         if(this.animationFrame >= this.currentAnimation.length) {
             this.animationFrame = 0;
@@ -70,13 +71,19 @@ sprite.prototype.draw = function () {
             flipWidth = -1;
         }
         
-        this.context.drawImage(this.image,flipWidth * this.x, this.y, flipWidth * this.width * this.scale, this.height * this.scale);
+        this.context.drawImage(this.image,flipWidth * this.x, this.y, flipWidth * this.width * this.scaleX, this.height * this.scaleY);
         this.context.restore();
     }
 }
 
 sprite.prototype.scaleSprite = function (scale) {
-    this.scale = scale;
+    this.scaleX = scale;
+    this.scaleY = scale;
+}
+
+sprite.prototype.scaleSpriteXY = function (scaleX, scaleY) {
+    this.scaleX = scaleX;
+    this.scaleY = scaleY;
 }
 
 function frame(srcImage, x, y, width, height) {
@@ -86,7 +93,7 @@ function frame(srcImage, x, y, width, height) {
     this.width = width;
     this.height = height;
 
-    this.draw = function(context, x, y, scale, isFlipped){
+    this.draw = function(context, x, y, scaleX, scaleY, isFlipped){
         context.save();
         var flipWidth = 1;
         if (isFlipped) {
@@ -94,13 +101,13 @@ function frame(srcImage, x, y, width, height) {
             flipWidth = -1;
         }
         
-        context.drawImage(this.srcImage, this.x, this.y, this.width, this.height, flipWidth * x, y, flipWidth * this.width * scale, this.height * scale);
+        context.drawImage(this.srcImage, this.x, this.y, this.width, this.height, flipWidth * x, y, flipWidth * this.width * scaleX, this.height * scaleY);
         context.restore();
         
     }
 }
 
-sprite.prototype.saveAnimation = function(image, animationName, framesNumber, width, height, imageWidth) {
+sprite.prototype.saveAnimation = function(image, animationName, framesNumber, width, height) {
     this.animations[animationName] = {};
     var animationSheet = {};
     var xIndex = 0;
