@@ -43,6 +43,12 @@
     right: 0;
 }
 
+.selector_img{
+    height: 90%;
+    display: block;
+    margin: auto;
+}
+
 #responsive_menu{
     position: absolute;
     width: 50px;

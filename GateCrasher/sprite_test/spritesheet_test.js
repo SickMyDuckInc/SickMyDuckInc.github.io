@@ -29,44 +29,7 @@ function drawGrid() {
 }
 
 function update() {
-    ctx.clearRect(0,0, 600, 600);
-    drawGrid(); 
-    if(player.x > directionPos.x) {
-        if(!isWalking) {
-            isWalking = true;
-            player.playAnimation("walk");
-        }
-        
-        if (lookingRight) {
-            lookingRight = false;
-            player.flip();
-        }
-        player.moveInDirection("LEFT");
-    } else if(player.x < directionPos.x) {
-        if(!isWalking) {
-            isWalking = true;
-            player.playAnimation("walk");
-        }        
-        if (!lookingRight) {
-            lookingRight = true;
-            player.flip();
-        }
-        player.moveInDirection("RIGHT");
-    }  
-    else {
-        if(!testingMovement) {
-            player.stopAnimation();
-            isWalking = false;
-        } 
-        if(player.y > directionPos.y) {
-            player.moveInDirection("UP");
-        } else if(player.y < directionPos.y) {
-            player.moveInDirection("DOWN");
-        } 
-        else {
-            testingMovement = true;
-        }
-    }
+    
     player.draw();
 }
 
