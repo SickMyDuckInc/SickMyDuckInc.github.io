@@ -29,13 +29,17 @@ var myGameArea = {
                     '</div>';
             this.selector.append(str);
         }
+
+        var button_str = '<button class="play_button">Play</button>';
+        this.selector.append(button_str);
     },
     resizeEnemies : function(numEnemies){
         var totalHeight = $("#enemy_selector").outerHeight();
         console.log(totalHeight);
-        var height = totalHeight / numEnemies;
+        var height = totalHeight / (numEnemies+1);
         console.log("Altura individual: " + height);
         $(".single_enemy").outerHeight(height);
+        $(".play_button").outerHeight(height-5);
     },
     changeEnemyCount : function(enemy_id, count){
         $("#enemy_" + enemy_id + " .enemy_number").text(count);
@@ -121,14 +125,14 @@ function resize(){
 }
 $(document).ready(function(){
     $("#responsive_menu").hide();
-    var numEnemies = 6;
+    var numEnemies = 4;
     var maxEnemyNumber = new Array(numEnemies);
     for(var i = 0; i<numEnemies; i++){
         maxEnemyNumber[i] = 3;
     }
     
 
-    lManager = new levelManager(4, 6, myGameArea, 6, maxEnemyNumber);
+    lManager = new levelManager(4, 6, myGameArea, numEnemies, maxEnemyNumber);
 
     //PRUEBAS PARA CHARACTER
     var rows = lManager.numRows;

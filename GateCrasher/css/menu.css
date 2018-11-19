@@ -1,3 +1,12 @@
+@font-face {
+    font-family: "Gatecrasher";
+    src: url(../res/font/gatecrasher.ttf) format("truetype");
+}
+
+body{
+    font-family: "Gatecrasher";
+}
+
 #main_container{
     max-height: 100%;
 }
@@ -33,9 +42,9 @@
     position: relative;
 }
 
-#enemy_selector .single_enemy:last-of-type{
+/* #enemy_selector .single_enemy:last-of-type{
     border: none !important;
-}
+} */
 
 .enemy_number{
     position: absolute;
@@ -57,6 +66,11 @@
     right: 0;
     background-color: darkgoldenrod;
     border: 2px solid black;
+}
+
+.play_button{
+    width:100%;
+    background-color: darkgoldenrod;
 }
 
 .hidden{

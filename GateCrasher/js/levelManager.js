@@ -26,7 +26,6 @@ function levelManager(rows, cols, canvas, numEnemies, maxEnemies){
 
     
     this.selectedEnemy = -1;
-    this.enemiesColors = [GRAY_COLOR, RED_COLOR, BLUE_COLOR, RED_COLOR, BLUE_COLOR, GRAY_COLOR, RED_COLOR]; //esto cambiará a sprites
 
     this.spawnedSprites = {};
 
