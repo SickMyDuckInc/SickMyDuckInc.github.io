@@ -69,8 +69,10 @@ var myGameArea = {
     },
     drawSquare : function(fromX, fromY, width, height){
         this.context.fillRect(fromX, fromY, width, height);
-        //this.context.fillRect(100, 0, 100, 200);
         this.context.stroke();
+    },
+    drawTile : function(posX, posY, width, height, image){
+        this.context.drawImage(image, posX, posY, width, height);
     },
     setColor : function(color){
         this.context.strokeStyle = color;
@@ -123,57 +125,76 @@ function resize(){
     lManager.drawMap();
     lManager.update();
 }
+
+var images = new Array();
+function preload(){
+    for(i = 0; i<arguments.length; i++){
+        images[i] = new Image();
+        images[i].src = preload.arguments[i];
+    }
+}
+
 $(document).ready(function(){
     $("#responsive_menu").hide();
+
+    preload(
+        "../res/background/grass_corner1.png",
+        "../res/background/grass_empty.png",
+        "../res/background/grass_horizontal.png",
+        "../res/background/grass_vertical.png"
+    );
+
+    
     var numEnemies = 4;
     var maxEnemyNumber = new Array(numEnemies);
     for(var i = 0; i<numEnemies; i++){
         maxEnemyNumber[i] = 3;
-    }
-    
+    } 
 
-    lManager = new levelManager(4, 6, myGameArea, numEnemies, maxEnemyNumber);
+    $.getJSON("../res/levels/level1.json", function(data){
+        lManager = new levelManager(4, 6, myGameArea, numEnemies, maxEnemyNumber, images, data);
 
-    //PRUEBAS PARA CHARACTER
-    var rows = lManager.numRows;
-    var cols = lManager.numCols;
-    var inicio = [0,0];
-    var fin = [1, 5];
+        var rows = lManager.numRows;
+        var cols = lManager.numCols;
+        var inicio = [0,0];
+        var fin = [1, 5];
 
-    var ctx = myGameArea.getContext();
-    
-    lCharacter = new character(inicio, fin, rows, cols);
-    
-    resize();
+        var ctx = myGameArea.getContext();
+        
+        lCharacter = new character(inicio, fin, rows, cols);
 
-    //PRUEBA PARA CHARACTER
-    lCharacter.pathfinding();
-    //
-
-    $(window).on("resize", function(){                      
         resize();
-    });
 
-    $("#myCanvas").on('click', function(e){
-        lManager.manageCanvasClick(e.clientX, e.clientY);
-    });
+        //PRUEBA PARA CHARACTER
+        lCharacter.pathfinding();
+        //
 
-    $(".single_enemy").on('click', function(e){
-        lManager.manageEnemyClick($(this).data("enemy"));
-    });
+        $(window).on("resize", function(){                      
+            resize();
+        });
 
-    $("#responsive_menu").on('click', function(){
-        if($("#enemy_selector").hasClass("hidden")){
-            $("#enemy_selector").removeClass("hidden");
-        }
-        else{
-            $("#enemy_selector").addClass("hidden");
-        }
-    });
+        $("#myCanvas").on('click', function(e){
+            lManager.manageCanvasClick(e.clientX, e.clientY);
+        });
 
-    $("#prueba").on("click", function(){
-        setInterval(lManager.update, 1000/15);
-    })
+        $(".single_enemy").on('click', function(e){
+            lManager.manageEnemyClick($(this).data("enemy"));
+        });
+
+        $("#responsive_menu").on('click', function(){
+            if($("#enemy_selector").hasClass("hidden")){
+                $("#enemy_selector").removeClass("hidden");
+            }
+            else{
+                $("#enemy_selector").addClass("hidden");
+            }
+        });
+
+        $("#prueba").on("click", function(){
+            setInterval(lManager.update, 1000/15);
+        });
+    
+    });
 });
 
 

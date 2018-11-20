@@ -7,6 +7,10 @@ body{
     font-family: "Gatecrasher";
 }
 
+#title{
+    text-align: center;
+}
+
 #main_container{
     max-height: 100%;
     padding-left: 5px;
