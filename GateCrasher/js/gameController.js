@@ -133,8 +133,23 @@ function preload(){
         images[i].src = preload.arguments[i];
     }
 }
-
+document.body.webkitRequestFullscreen();
 $(document).ready(function(){
+    $(document).on("click", function(){
+        var docelem = document.body;
+        if (docelem.requestFullscreen) {
+            docelem.requestFullscreen();
+        }
+        else if (docelem.mozRequestFullScreen) {
+            docelem.mozRequestFullScreen();
+        }
+        else if (docelem.webkitRequestFullScreen) {
+            docelem.webkitRequestFullScreen();
+        }
+        else if (docelem.msRequestFullscreen) {
+            docelem.msRequestFullscreen();
+        } 
+    });
     $("#responsive_menu").hide();
 
     preload(

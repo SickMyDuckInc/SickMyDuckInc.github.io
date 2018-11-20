@@ -12,5 +12,23 @@
         [-1, -1, -1, -1, -2, -1],
         [-1, -1, -1, -2, -2, -2],
         [-1, -1, -1, -1, -2, -1]
+    ],
+    "numEnemies": 4,
+    "enemies":[
+        {
+            "sprite":0,
+            "maxNumber":3
+        },
+        {
+            "sprite":0,
+            "maxNumber":2
+        },
+        {
+            "sprite":0,
+            "maxNumber":1
+        },{
+            "sprite":0,
+            "maxNumber":2
+        }
     ]
 }
