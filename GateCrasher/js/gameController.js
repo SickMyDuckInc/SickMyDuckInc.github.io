@@ -133,21 +133,25 @@ function preload(){
         images[i].src = preload.arguments[i];
     }
 }
+
+var fullscreen = false;
 document.body.webkitRequestFullscreen();
 $(document).ready(function(){
     $(document).on("click", function(){
-        var docelem = document.body;
-        if (docelem.requestFullscreen) {
-            docelem.requestFullscreen();
-        }
-        else if (docelem.mozRequestFullScreen) {
-            docelem.mozRequestFullScreen();
-        }
-        else if (docelem.webkitRequestFullScreen) {
-            docelem.webkitRequestFullScreen();
-        }
-        else if (docelem.msRequestFullscreen) {
-            docelem.msRequestFullscreen();
+        if(fullscreen){
+            var docelem = document.body;
+            if (docelem.requestFullscreen) {
+                docelem.requestFullscreen();
+            }
+            else if (docelem.mozRequestFullScreen) {
+                docelem.mozRequestFullScreen();
+            }
+            else if (docelem.webkitRequestFullScreen) {
+                docelem.webkitRequestFullScreen();
+            }
+            else if (docelem.msRequestFullscreen) {
+                docelem.msRequestFullscreen();
+            }
         } 
     });
     $("#responsive_menu").hide();
@@ -167,7 +171,7 @@ $(document).ready(function(){
     } 
 
     $.getJSON("res/levels/level1.json", function(data){
-        lManager = new levelManager(4, 6, myGameArea, numEnemies, maxEnemyNumber, images, data);
+        lManager = new levelManager(myGameArea, numEnemies, maxEnemyNumber, images, data);
 
         var rows = lManager.numRows;
         var cols = lManager.numCols;

@@ -19,7 +19,7 @@ var EMPTY_CELL = -1;
  * numEnemies: (int) número total de tipos de enemigos del que dispone el jugador
  * maxEnemies: (array int) lista con el número de enemigos de cada tipo que el jugador puede utilizar
  */
-function levelManager(rows, cols, canvas, numEnemies, maxEnemies, allImages, level){
+function levelManager(canvas, numEnemies, maxEnemies, allImages, level){
     this.numRows = level.rows;
     this.numCols = level.cols;
     this.canvas = canvas;    
@@ -77,7 +77,7 @@ function levelManager(rows, cols, canvas, numEnemies, maxEnemies, allImages, lev
     
     setInterval( () => this.update(), 100);
 
-    console.log("Created levelManager with " + rows + " rows and " + cols + " cols");
+    console.log("Created levelManager with " + this.rows + " rows and " + this.cols + " cols");
 }
 
 levelManager.prototype.drawMap = function(){

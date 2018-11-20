@@ -21,6 +21,7 @@ body{
     width: 100%;
     max-width: 600px;
     max-height: 400px;
+    cursor: pointer;
 }
 
 #enemy_selector{
@@ -32,6 +33,7 @@ body{
     height:400px;
     display:inline-block;
     vertical-align: top;
+    cursor:pointer;
 }
 
 #enemy_selector.responsive{
