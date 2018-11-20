@@ -10,6 +10,8 @@ var GRAY_COLOR = "#e6e6e6";
 var RED_COLOR = "#ff0000";
 var BLUE_COLOR = "#0000ff";
 var TRANSPARENT_COLOR = "white";
+var NON_WALKABLE = -2;
+var EMPTY_CELL = -1;
 /***
  * rows: (int) filas del tablero
  * cols: (int) columnas del tablero
@@ -17,12 +19,14 @@ var TRANSPARENT_COLOR = "white";
  * numEnemies: (int) número total de tipos de enemigos del que dispone el jugador
  * maxEnemies: (array int) lista con el número de enemigos de cada tipo que el jugador puede utilizar
  */
-function levelManager(rows, cols, canvas, numEnemies, maxEnemies){
-    this.numRows = rows;
-    this.numCols = cols;
+function levelManager(canvas, numEnemies, maxEnemies, allImages, level){
+    this.numRows = level.rows;
+    this.numCols = level.cols;
     this.canvas = canvas;    
     this.numEnemies = numEnemies;
     this.maxEnemies = maxEnemies;
+    this.allImages = allImages;
+    this.firstUpdate = false;
 
     
     this.selectedEnemy = -1;
@@ -36,17 +40,21 @@ function levelManager(rows, cols, canvas, numEnemies, maxEnemies){
     }
 
     //Almacena el enemigo que hay en cada casilla del mapa
-    this.matrix = [];
+    this.matrix = level.walkable;
 
     //Almacena el id del array de spawnedSprites que hay en una casilla (para poder borrarlos)
     this.spawnedSpritesMatrix = [];
 
+    this.tileMatrix = level.tileset;
+
     for(var i = 0; i<this.numRows; i++){
-        this.matrix[i] = new Array(this.numCols);
+        //this.matrix[i] = new Array(this.numCols);
         this.spawnedSpritesMatrix[i] = new Array(this.numCols);
+        //this.tileMatrix[i] = new Array(this.numCols);
         for(var j = 0; j<this.numCols; j++){
-            this.matrix[i][j]= -1;
+            //this.matrix[i][j]= -1;
             this.spawnedSpritesMatrix[i][j] = -1;
+            //this.tileMatrix[i][j] = 2;
         }
     }
 
@@ -64,38 +72,27 @@ function levelManager(rows, cols, canvas, numEnemies, maxEnemies){
 
     this.player = new sprite(ctx, "res/enemies/enemy01_stand.png", this.drawHeight, this.drawWidth, 0, 0);
     this.player.addAnimation("walk", "res/enemies/enemy01_walk.png", 4, 200, 200);
+
+    this.canvas.drawTile(0, 0, this.drawWidth, this.drawHeight, this.allImages[0]);
     
     setInterval( () => this.update(), 100);
 
-    console.log("Created levelManager with " + rows + " rows and " + cols + " cols");
+    console.log("Created levelManager with " + this.rows + " rows and " + this.cols + " cols");
 }
 
 levelManager.prototype.drawMap = function(){
-    this.canvas.clear();
+    //this.canvas.clear();
     this.intervalHeight = this.canvas.getHeight() / this.numRows;
     this.intervalWidth = this.canvas.getWidth() / this.numCols;
 
     this.drawHeight = this.canvas.getDrawHeight() /this.numRows;
-    this.drawWidth = this.canvas.getDrawWidth() / this.numCols;
-
-    
-
-    // this.canvas.setColor(GRAY_COLOR);
-
-    // for(var i = 1; i<this.numRows; i++){
-    //     this.canvas.drawLine(0, i*this.drawHeight, this.canvas.getDrawWidth(), i*this.drawHeight);
-    // }
-
-    // for(var j = 1; j<this.numCols; j++){
-    //     this.canvas.drawLine(j*this.drawWidth, 0, j*this.drawWidth, this.canvas.getDrawHeight());
-    // }
+    this.drawWidth = this.canvas.getDrawWidth() / this.numCols;    
 
     this.canvas.resizeEnemies(this.numEnemies);
 
 }
 
-levelManager.prototype.drawBasic = function(){
-    this.canvas.clear();
+levelManager.prototype.drawBasic = function(){    
     this.canvas.setColor(GRAY_COLOR);
 
     for(var i = 1; i<this.numRows; i++){
@@ -108,11 +105,37 @@ levelManager.prototype.drawBasic = function(){
 }
 
 levelManager.prototype.update = function(){
-    this.drawBasic();
-  
+    if(!this.firstUpdate){
+        this.firstUpdate = true;
+        this.canvas.clear();
+        //this.canvas.drawTile(0, 0, this.drawWidth, this.drawHeight, this.allImages[2]);
+        this.paintTile();
+        this.drawBasic();
+    
 
-    for(var element in this.spawnedSprites){
-        this.spawnedSprites[element].draw();
+        for(var element in this.spawnedSprites){
+            this.spawnedSprites[element].draw();
+        }
+    }  
+
+    if(Object.keys(this.spawnedSprites).length==0){
+        this.firstUpdate = true;
+    }
+    else{
+        this.firstUpdate = false;
+    }  
+}
+
+levelManager.prototype.paintTile = function(){
+    for(i = 0; i<this.numRows; i++){
+        for(j = 0; j<this.numCols; j++){
+            var posX = i * this.drawWidth;
+            var posY = j * this.drawHeight;
+            var index = this.tileMatrix[i][j];
+            var im = this.allImages[index];
+            
+            this.canvas.drawTile(posY, posX, this.drawWidth, this.drawHeight, im);
+        }
     }
 }
 
@@ -130,19 +153,17 @@ levelManager.prototype.manageCanvasClick = function(posX, posY){
 
     if(this.selectedEnemy != -1){
         //Si la celda no está ocupada por un enemigo del mismo tipo
-        if(actualOccuping != this.selectedEnemy){
+        if(actualOccuping != this.selectedEnemy && actualOccuping != NON_WALKABLE){
             console.log("Cambiando el enemigo " + actualOccuping + " por " + this.selectedEnemy);
             this.matrix[casillaX][casillaY] = this.selectedEnemy;
             if(this.maxEnemies[this.selectedEnemy]>0){
                 this.maxEnemies[this.selectedEnemy]--;
                 this.canvas.changeEnemyCount(this.selectedEnemy, this.maxEnemies[this.selectedEnemy]);
             }
-            //this.canvas.setFillColor(this.enemiesColors[this.selectedEnemy]);
-            //this.canvas.drawSquare(casillaY * this.drawHeight, casillaX * this.drawWidth, this.drawWidth, this.drawHeight);
             this.spawnSprite(casillaX, casillaY);
             console.log(this.matrix);
 
-            if(actualOccuping != -1){
+            if(actualOccuping != EMPTY_CELL){
                 this.maxEnemies[actualOccuping]++;
                 this.canvas.changeEnemyCount(actualOccuping, this.maxEnemies[actualOccuping]);
                 this.selectedEnemy = actualOccuping;
@@ -152,6 +173,9 @@ levelManager.prototype.manageCanvasClick = function(posX, posY){
             else{
                 this.selectedEnemy = -1;
             }
+        }
+        else if(actualOccuping == NON_WALKABLE){
+            console.log("En esta celda no se pueden colocar objetos");
         }
         else{
             console.log("Celda ocupada por un enemigo del mismo tipo");
@@ -163,11 +187,8 @@ levelManager.prototype.manageCanvasClick = function(posX, posY){
             console.log("Cambiando a transparente");
             this.matrix[casillaX][casillaY] = -1;
             this.maxEnemies[actualOccuping]++;
-            //this.canvas.setFillColor(TRANSPARENT_COLOR);
-            //this.canvas.drawSquare(casillaY * this.drawHeight, casillaX * this.drawWidth, this.drawWidth, this.drawHeight);
             var index = this.spawnedSpritesMatrix[casillaX][casillaY];
             console.log(index);
-            //this.spawnedSprites.splice(index, 1);
             delete this.spawnedSprites["x:" + casillaX + "y:" + casillaY];
             console.log(this.spawnedSprites);
             this.canvas.changeEnemyCount(actualOccuping, this.maxEnemies[actualOccuping]);
@@ -193,10 +214,6 @@ levelManager.prototype.manageEnemyClick = function(enemyId){
 }
 
 levelManager.prototype.spawnSprite = function(casillaX, casillaY){
-    // var sprite = new sprite(ctx, "js/enemy01_stand.png", this.drawHeight, this.drawWidth);
-    // sprite.addAnimation("walk", "js/enemy01_walk.png", 4, 200, 200, casillaX * this.drawWidth, casillaY * this.drawHeight);
-    // sprite.playAnimation("walk");
-    // this.spawnedSprites.push(sprite);
 
     var player2 = new sprite(ctx, "res/enemies/enemy01_stand.png", this.drawHeight, this.drawWidth, casillaY * this.drawHeight, casillaX * this.drawWidth);
     player2.addAnimation("walk", "res/enemies/enemy01_walk.png", 4, 200, 200);
