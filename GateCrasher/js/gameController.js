@@ -138,10 +138,10 @@ $(document).ready(function(){
     $("#responsive_menu").hide();
 
     preload(
-        "../res/background/grass_corner1.png",
-        "../res/background/grass_empty.png",
-        "../res/background/grass_horizontal.png",
-        "../res/background/grass_vertical.png"
+        "res/background/grass_corner1.png",
+        "res/background/grass_empty.png",
+        "res/background/grass_horizontal.png",
+        "res/background/grass_vertical.png"
     );
 
     
@@ -151,7 +151,7 @@ $(document).ready(function(){
         maxEnemyNumber[i] = 3;
     } 
 
-    $.getJSON("../res/levels/level1.json", function(data){
+    $.getJSON("res/levels/level1.json", function(data){
         lManager = new levelManager(4, 6, myGameArea, numEnemies, maxEnemyNumber, images, data);
 
         var rows = lManager.numRows;
