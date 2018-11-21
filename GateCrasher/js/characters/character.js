@@ -8,41 +8,41 @@ Todas las diferencias entre los tipos de personaje principal deben estar definid
  //velocidades 5 y 8
 //canvas size 400*600
 
-function character(inicio, end, rows, cols){
+function character(inicio, end, rows, cols, matrix){
     this.init = inicio;
     this.end = end;
     this.currentTile = inicio;
 
-    this.matrix = [];
+    this.matrix = matrix;
     //tipe GridNode {x = fila, y = columna, weight}
-    this.path;
+    this.path = null;
     
     var canvas_cols = cols;
     var canvas_rows = rows;
 
-    for(var i = 0; i<canvas_rows; i++){
-        this.matrix[i] = new Array(canvas_cols);
-        for(var j = 0; j<canvas_cols; j++){
-            this.matrix[i][j]= -1;
-        }
-    }
+    // for(var i = 0; i<canvas_rows; i++){
+    //     this.matrix[i] = new Array(canvas_cols);
+    //     for(var j = 0; j<canvas_cols; j++){
+    //         this.matrix[i][j]= -1;
+    //     }
+    // }
 
-    for(var i = 0; i<canvas_rows; i++){
-        for(var j = 0; j<canvas_cols; j++){
-            if(i == canvas_rows-1){
-                this.matrix[i][j] = 1;
-            }
-            else if(j == canvas_cols-1 || canvas_cols-2 == j){
-                this.matrix[i][j] = 1;
-            }
-            else if(j == 0 || i == 0){
-                this.matrix[i][j] = 1;
-            }
-            else{
-                this.matrix[i][j] = 0;
-            }
-        }
-    }
+    // for(var i = 0; i<canvas_rows; i++){
+    //     for(var j = 0; j<canvas_cols; j++){
+    //         if(i == canvas_rows-1){
+    //             this.matrix[i][j] = 1;
+    //         }
+    //         else if(j == canvas_cols-1 || canvas_cols-2 == j){
+    //             this.matrix[i][j] = 1;
+    //         }
+    //         else if(j == 0 || i == 0){
+    //             this.matrix[i][j] = 1;
+    //         }
+    //         else{
+    //             this.matrix[i][j] = 0;
+    //         }
+    //     }
+    // }
  
     console.log("Created character");
     console.log(this.matrix);
@@ -62,9 +62,11 @@ character.prototype.pathfinding = function(){
 
     console.log("Resultado ---------------------------------------- ");
     var gridnode;
+    var processedPath = new Array();
     for(var i = 0; i<this.path.length;i++){
         gridnode = this.path[i];
-        console.log("gridnode x = " + gridnode.x + " y = " + gridnode.y + " weight = " + gridnode.weight);
+        processedPath[i] = [gridnode.x, gridnode.y];
+        //console.log("gridnode x = " + gridnode.x + " y = " + gridnode.y + " weight = " + gridnode.weight);
     }
-    //console.log(result);
+    return processedPath;
 }

@@ -38,5 +38,12 @@
             "sprite":"enemy01",
             "maxNumber":2
         }
+    ],
+    "characters":[
+        {
+            "sprite":"enemy01",
+            "initialPos": [7, 0],
+            "goal": [0, 11]
+        }
     ]
 }

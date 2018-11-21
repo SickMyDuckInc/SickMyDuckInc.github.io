@@ -31,12 +31,12 @@ var myGameArea = {
         for(var i = 0; i<numEnemies; i++){
             var str = '<div id="enemy_'+ i +'" data-enemy="'+ i +'" class="single_enemy">'+
                         '<div class="enemy_number">'+ maxEnemyCount[i]+'</div>'+
-                        '<img src="'+ enemiesSprites[i] +'" class="selector_img"/>' +
+                        '<img src="'+ enemiesSprites[i] + '_stand.png" class="selector_img"/>' +
                     '</div>';
             this.selector.append(str);
         }
 
-        var button_str = '<button class="play_button">Play</button>';
+        var button_str = '<button id="play_button">Play</button>';
         this.selector.append(button_str);
     },
     resizeEnemies : function(numEnemies){
@@ -45,7 +45,7 @@ var myGameArea = {
         var height = totalHeight / (numEnemies+1);
         console.log("Altura individual: " + height);
         $(".single_enemy").outerHeight(height);
-        $(".play_button").outerHeight(height-5);
+        $("#play_button").outerHeight(height-5);
     },
     changeEnemyCount : function(enemy_id, count){
         $("#enemy_" + enemy_id + " .enemy_number").text(count);
@@ -136,15 +136,44 @@ function resize(){
 }
 
 var images = new Array();
+
 function preload(){
+    var remaining = arguments.length;
+    var img;
     for(i = 0; i<arguments.length; i++){
         images[i] = new Image();
+        images[i].onload = function(){
+            --remaining;
+            if(remaining<=0){
+                startGame();
+            }
+        };
+
         images[i].src = preload.arguments[i];
     }
 }
 
+function startGame(){
+    $.getJSON("res/levels/level2.json", function(data){
+        lManager = new levelManager(myGameArea, images, data);
+
+        var rows = lManager.numRows;
+        var cols = lManager.numCols;
+        var inicio = [0,0];
+        var fin = [1, 5];
+
+        var ctx = myGameArea.getContext();
+        
+        //lCharacter = new character(inicio, fin, rows, cols);
+
+        resize();
+
+        //PRUEBA PARA CHARACTER
+        //lCharacter.pathfinding();
+    });
+}
+
 var fullscreen = false;
-document.body.webkitRequestFullscreen();
 $(document).ready(function(){
     $(document).on("click", function(){
         if(fullscreen){
@@ -189,60 +218,41 @@ $(document).ready(function(){
     var maxEnemyNumber = new Array(numEnemies);
     for(var i = 0; i<numEnemies; i++){
         maxEnemyNumber[i] = 3;
-    } 
+    }
 
-    $.getJSON("res/levels/level2.json", function(data){
-        lManager = new levelManager(myGameArea, images, data);
-
-        var rows = lManager.numRows;
-        var cols = lManager.numCols;
-        var inicio = [0,0];
-        var fin = [1, 5];
-
-        var ctx = myGameArea.getContext();
-        
-        lCharacter = new character(inicio, fin, rows, cols);
-
+    $(window).on("resize", function(){                      
         resize();
-
-        //PRUEBA PARA CHARACTER
-        lCharacter.pathfinding();
-        //
-
-        $(window).on("resize", function(){                      
-            resize();
-        });
-
-        $("#myCanvas").on('click', function(e){
-            lManager.manageCanvasClick(e.clientX, e.clientY);
-        });
-
-        $("#backgroundCanvas").on('click', function(){
-            console.log("background");
-        });
-
-        $(".single_enemy").on('click', function(e){
-            lManager.manageEnemyClick($(this).data("enemy"));
-        });
-
-        $("#responsive_menu").on('click', function(){
-            if($("#enemy_selector").hasClass("hidden")){
-                $("#enemy_selector").removeClass("hidden");
-            }
-            else{
-                $("#enemy_selector").addClass("hidden");
-            }
-        });
-
-        $("#prueba").on("click", function(){
-            setInterval(lManager.update, 1000/15);
-        });
-    
     });
+
+    $("#myCanvas").on('click', function(e){
+        lManager.manageCanvasClick(e.clientX, e.clientY);
+    });
+
+    $("#backgroundCanvas").on('click', function(){
+        console.log("background");
+    });
+
+    $(document).on('click', ".single_enemy", function(e){
+        console.log("qie coño");
+        lManager.manageEnemyClick($(this).data("enemy"));
+    });
+
+    $("#responsive_menu").on('click', function(){
+        if($("#enemy_selector").hasClass("hidden")){
+            $("#enemy_selector").removeClass("hidden");
+        }
+        else{
+            $("#enemy_selector").addClass("hidden");
+        }
+    });
+
+    $("#prueba").on("click", function(){
+        setInterval(lManager.update, 1000/15);
+    });
+
+    $(document).on("click", "#play_button", function(){
+        lManager.startGame();
+    });
+
 });
 
-
-var canvas = document.getElementById("myCanvas");
-var ctx = canvas.getContext("2d");
-
-var updateRate = 15;

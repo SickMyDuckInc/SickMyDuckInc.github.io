@@ -33,15 +33,17 @@ function levelManager(canvas, allImages, level){
 
     this.spawnedSprites = {};
 
-    //HAY QUE RECIBIRLO POR JSON
     this.enemiesSprites = [this.numEnemies];
     for(var i = 0; i<this.numEnemies; i++){
-        this.enemiesSprites[i] = "res/enemies/"+ level.enemies[i].sprite +"_stand.png";
+        this.enemiesSprites[i] = "res/enemies/"+ level.enemies[i].sprite;
         this.maxEnemies[i] = level.enemies[i].maxNumber;
     }
 
+    this.characters = level.characters;
+
     //Almacena el enemigo que hay en cada casilla del mapa
     this.matrix = level.walkable;
+    this.walkable = [];
 
     //Almacena el id del array de spawnedSprites que hay en una casilla (para poder borrarlos)
     this.spawnedSpritesMatrix = [];
@@ -50,12 +52,18 @@ function levelManager(canvas, allImages, level){
 
     for(var i = 0; i<this.numRows; i++){
         this.spawnedSpritesMatrix[i] = new Array(this.numCols);
+        this.walkable[i] = new Array(this.numCols);
         for(var j = 0; j<this.numCols; j++){
             this.spawnedSpritesMatrix[i][j] = -1;
+            this.walkable[i][j] = this.matrix[i][j] + 2;
         }
     }
 
+
+    console.log("Enemies Matrix: ");
     console.log(this.matrix);
+    console.log("Walkable Matrix: ");
+    console.log(this.walkable);
 
     this.canvas.start();
     this.canvas.addEnemies(this.numEnemies, this.maxEnemies, this.enemiesSprites);
@@ -72,11 +80,10 @@ function levelManager(canvas, allImages, level){
     
     setInterval( () => this.update(), 100);
 
-    console.log("Created levelManager with " + this.rows + " rows and " + this.cols + " cols");
+    console.log("Created levelManager with " + this.numRows + " rows and " + this.numCols + " cols");
 }
 
 levelManager.prototype.drawMap = function(){
-    //this.canvas.clear();
     this.intervalHeight = this.canvas.getHeight() / this.numRows;
     this.intervalWidth = this.canvas.getWidth() / this.numCols;
 
@@ -86,6 +93,7 @@ levelManager.prototype.drawMap = function(){
     this.canvas.resizeEnemies(this.numEnemies);
     this.paintTile();
     this.drawBasic();
+    this.spawnHeroes();
 
 }
 
@@ -104,11 +112,7 @@ levelManager.prototype.drawBasic = function(){
 levelManager.prototype.update = function(){
     if(!this.firstUpdate){
         this.firstUpdate = true;
-        this.canvas.clear();
-        //this.canvas.drawTile(0, 0, this.drawWidth, this.drawHeight, this.allImages[2]);
-        //this.paintTile();
-        //this.drawBasic();
-    
+        this.canvas.clear();    
 
         for(var element in this.spawnedSprites){
             this.spawnedSprites[element].draw();
@@ -143,6 +147,8 @@ levelManager.prototype.manageCanvasClick = function(posX, posY){
 
     var casillaY = Math.floor(canvasPos.x / this.intervalWidth);
     var casillaX = Math.floor(canvasPos.y / this.intervalHeight);
+
+    console.log("Click en la casilla: " + casillaX + ", " + casillaY);
 
     var casilla = {x:casillaX, y:casillaY};
 
@@ -212,9 +218,32 @@ levelManager.prototype.manageEnemyClick = function(enemyId){
 
 levelManager.prototype.spawnSprite = function(casillaX, casillaY){
 
-    var player2 = new sprite(ctx, "res/enemies/enemy01_stand.png", this.drawHeight, this.drawWidth, casillaY * this.drawHeight, casillaX * this.drawWidth);
-    player2.addAnimation("walk", "res/enemies/enemy01_walk.png", 4, 200, 200);
-    player2.playAnimation("walk");
-    this.spawnedSprites["x:" + casillaX + "y:" + casillaY] = player2;
+    var player = new sprite(this.canvas.getContext(), this.enemiesSprites[this.selectedEnemy] +"_stand.png", this.drawHeight, this.drawWidth, casillaY * this.drawHeight, casillaX * this.drawWidth);
+    player.addAnimation("walk",  this.enemiesSprites[this.selectedEnemy] +"_walk.png", 4, 200, 200);
+    player.playAnimation("walk");
+    this.spawnedSprites["x:" + casillaX + "y:" + casillaY] = player;
     console.log("Sprites: " + this.spawnedSprites + ", matrix: " + this.spawnedSpritesMatrix);
+}
+
+levelManager.prototype.spawnHeroes = function(){
+    for(i = 0; i<this.characters.length; i++){
+        var pos = this.characters[i].initialPos;
+        var player = new sprite(this.canvas.getContext(), "res/enemies/" +this.characters[i].sprite +"_stand.png", this.drawHeight, this.drawWidth, pos[1] * this.drawHeight, pos[0] * this.drawWidth);
+        player.addAnimation("walk", "res/enemies/" + this.characters[i].sprite +"_walk.png", 4, 200, 200);
+        player.playAnimation("walk");
+        player.flip();
+        this.spawnedSprites["x:" + pos[0] + "y:" + pos[1]] = player;
+        this.matrix[pos[0]][pos[1]] = NON_WALKABLE;
+    }
+}
+
+levelManager.prototype.startGame = function(){
+    console.log("Empezando juego");
+    var paths = new Array();
+    for(i = 0; i<this.characters.length; i++){
+        console.log("Calculando pathfinding del heroe " + i);        
+        var myCharacter = new character(this.characters[i].initialPos, this.characters[i].goal, this.numRows, this.numCols, this.walkable);
+        paths[i] = myCharacter.pathfinding();
+        console.log(paths[i]);
+    }
 }
