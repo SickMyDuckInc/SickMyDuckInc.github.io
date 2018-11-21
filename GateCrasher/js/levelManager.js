@@ -100,7 +100,6 @@ levelManager.prototype.drawBasic = function(){
 }
 
 levelManager.prototype.update = function(){
-    console.log("Hola");
     if(!this.firstUpdate){
         this.firstUpdate = true;
         this.canvas.clear();

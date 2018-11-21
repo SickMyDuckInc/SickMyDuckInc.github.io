@@ -13,11 +13,15 @@ var context;
 
 var myGameArea = {
     canvas : document.getElementById("myCanvas"),
+    background : document.getElementById("backgroundCanvas"),
     selector: document.getElementById("enemy_selector"),
     start : function() {
         this.canvas = document.getElementById("myCanvas");
         this.selector = $("#enemy_selector");
         this.context = this.canvas.getContext("2d");
+        this.contexts = Array();
+        this.contexts[0] = this.canvas.getContext("2d");
+        this.contexts[1] = this.background.getContext("2d");
         this.frameNo = 0;
         this.context.fillStyle = RED_COLOR;
     },
