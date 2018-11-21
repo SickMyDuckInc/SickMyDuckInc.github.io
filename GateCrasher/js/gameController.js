@@ -14,6 +14,7 @@ var context;
 var myGameArea = {
     canvas : document.getElementById("myCanvas"),
     background : document.getElementById("backgroundCanvas"),
+    lineCanvas : document.getElementById("lineCanvas"),
     selector: document.getElementById("enemy_selector"),
     start : function() {
         this.canvas = document.getElementById("myCanvas");
@@ -22,6 +23,7 @@ var myGameArea = {
         this.contexts = Array();
         this.contexts[0] = this.canvas.getContext("2d");
         this.contexts[1] = this.background.getContext("2d");
+        this.contexts[2] = this.lineCanvas.getContext("2d");
         this.frameNo = 0;
         this.context.fillStyle = RED_COLOR;
     },
@@ -67,19 +69,19 @@ var myGameArea = {
         return this.context;
     },
     drawLine : function(fromX, fromY, toX, toY){
-        this.context.moveTo(fromX, fromY);
-        this.context.lineTo(toX, toY);
-        this.context.stroke();
+        this.contexts[2].moveTo(fromX, fromY);
+        this.contexts[2].lineTo(toX, toY);
+        this.contexts[2].stroke();
     },
     drawSquare : function(fromX, fromY, width, height){
         this.context.fillRect(fromX, fromY, width, height);
         this.context.stroke();
     },
     drawTile : function(posX, posY, width, height, image){
-        this.context.drawImage(image, posX, posY, width, height);
+        this.contexts[1].drawImage(image, posX, posY, width, height);
     },
     setColor : function(color){
-        this.context.strokeStyle = color;
+        this.contexts[2].strokeStyle = color;
     },
     setFillColor : function(color){
         this.context.fillStyle = color;
@@ -106,7 +108,7 @@ function resize(){
     var outerWidth = $("#myCanvas").outerWidth();
     $("#enemy_selector").outerHeight(outerHeight);
 
-    $("#canvas_container").outerHeight(outerHeight);
+    $(".canvas_responsive").outerHeight(outerHeight);
     $("#canvas_container").outerWidth(outerWidth);
 
     var windowWidth = $(window).width();

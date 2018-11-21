@@ -84,6 +84,8 @@ levelManager.prototype.drawMap = function(){
     this.drawWidth = this.canvas.getDrawWidth() / this.numCols;    
 
     this.canvas.resizeEnemies(this.numEnemies);
+    this.paintTile();
+    this.drawBasic();
 
 }
 
@@ -104,8 +106,8 @@ levelManager.prototype.update = function(){
         this.firstUpdate = true;
         this.canvas.clear();
         //this.canvas.drawTile(0, 0, this.drawWidth, this.drawHeight, this.allImages[2]);
-        this.paintTile();
-        this.drawBasic();
+        //this.paintTile();
+        //this.drawBasic();
     
 
         for(var element in this.spawnedSprites){
