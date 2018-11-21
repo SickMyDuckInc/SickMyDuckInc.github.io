@@ -7,6 +7,20 @@ body{
     font-family: "Gatecrasher";
 }
 
+canvas{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#canvas_container{
+    position: relative;
+    display: inline-block;
+    width: 600px;
+    height: 400px;
+
+}
+
 #title{
     text-align: center;
 }

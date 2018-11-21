@@ -102,6 +102,9 @@ function resize(){
     var outerWidth = $("#myCanvas").outerWidth();
     $("#enemy_selector").outerHeight(outerHeight);
 
+    $("#canvas_container").outerHeight(outerHeight);
+    $("#canvas_container").outerWidth(outerWidth);
+
     var windowWidth = $(window).width();
 
     var totalWidth = 25 + outerWidth + $("#enemy_selector").outerWidth();
@@ -157,10 +160,22 @@ $(document).ready(function(){
     $("#responsive_menu").hide();
 
     preload(
+        "res/background/snow_horizontal.png",
+        "res/background/snow_vertical.png",
+        "res/background/snow_corner1.png",
+        "res/background/snow_corner2.png",
+        "res/background/snow_corner3.png",
+        "res/background/snow_corner4.png",
+        "res/background/snow_intersection.png",
+        "res/background/snow_end.png",
+        "res/background/snow_empty.png",
+        "res/background/snow_intersection2.png",
         "res/background/grass_corner1.png",
         "res/background/grass_empty.png",
         "res/background/grass_horizontal.png",
-        "res/background/grass_vertical.png"
+        "res/background/grass_vertical.png",
+        "res/enemies/enemy01_stand.png",
+        "res/enemies/enemy01_walk.png"
     );
 
     
@@ -171,7 +186,7 @@ $(document).ready(function(){
     } 
 
     $.getJSON("res/levels/level1.json", function(data){
-        lManager = new levelManager(myGameArea, numEnemies, maxEnemyNumber, images, data);
+        lManager = new levelManager(myGameArea, images, data);
 
         var rows = lManager.numRows;
         var cols = lManager.numCols;

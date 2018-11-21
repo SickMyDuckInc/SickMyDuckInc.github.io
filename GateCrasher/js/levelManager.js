@@ -19,12 +19,12 @@ var EMPTY_CELL = -1;
  * numEnemies: (int) número total de tipos de enemigos del que dispone el jugador
  * maxEnemies: (array int) lista con el número de enemigos de cada tipo que el jugador puede utilizar
  */
-function levelManager(canvas, numEnemies, maxEnemies, allImages, level){
+function levelManager(canvas, allImages, level){
     this.numRows = level.rows;
     this.numCols = level.cols;
     this.canvas = canvas;    
-    this.numEnemies = numEnemies;
-    this.maxEnemies = maxEnemies;
+    this.numEnemies = level.numEnemies;
+    this.maxEnemies = new Array(this.numEnemies);
     this.allImages = allImages;
     this.firstUpdate = false;
 
@@ -34,9 +34,10 @@ function levelManager(canvas, numEnemies, maxEnemies, allImages, level){
     this.spawnedSprites = {};
 
     //HAY QUE RECIBIRLO POR JSON
-    this.enemiesSprites = [numEnemies];
+    this.enemiesSprites = [this.numEnemies];
     for(var i = 0; i<this.numEnemies; i++){
-        this.enemiesSprites[i] = "res/enemies/enemy01_stand.png";
+        this.enemiesSprites[i] = "res/enemies/"+ level.enemies[i].sprite +"_stand.png";
+        this.maxEnemies[i] = level.enemies[i].maxNumber;
     }
 
     //Almacena el enemigo que hay en cada casilla del mapa
@@ -48,13 +49,9 @@ function levelManager(canvas, numEnemies, maxEnemies, allImages, level){
     this.tileMatrix = level.tileset;
 
     for(var i = 0; i<this.numRows; i++){
-        //this.matrix[i] = new Array(this.numCols);
         this.spawnedSpritesMatrix[i] = new Array(this.numCols);
-        //this.tileMatrix[i] = new Array(this.numCols);
         for(var j = 0; j<this.numCols; j++){
-            //this.matrix[i][j]= -1;
             this.spawnedSpritesMatrix[i][j] = -1;
-            //this.tileMatrix[i][j] = 2;
         }
     }
 
@@ -70,8 +67,6 @@ function levelManager(canvas, numEnemies, maxEnemies, allImages, level){
     this.drawHeight = this.canvas.getDrawHeight() / this.numRows;
     this.drawWidth = this.canvas.getDrawWidth() / this.numCols;
 
-    this.player = new sprite(ctx, "res/enemies/enemy01_stand.png", this.drawHeight, this.drawWidth, 0, 0);
-    this.player.addAnimation("walk", "res/enemies/enemy01_walk.png", 4, 200, 200);
 
     this.canvas.drawTile(0, 0, this.drawWidth, this.drawHeight, this.allImages[0]);
     
@@ -105,6 +100,7 @@ levelManager.prototype.drawBasic = function(){
 }
 
 levelManager.prototype.update = function(){
+    console.log("Hola");
     if(!this.firstUpdate){
         this.firstUpdate = true;
         this.canvas.clear();
