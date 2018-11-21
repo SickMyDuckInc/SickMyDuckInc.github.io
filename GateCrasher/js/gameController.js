@@ -185,7 +185,7 @@ $(document).ready(function(){
         maxEnemyNumber[i] = 3;
     } 
 
-    $.getJSON("res/levels/level1.json", function(data){
+    $.getJSON("res/levels/level2.json", function(data){
         lManager = new levelManager(myGameArea, images, data);
 
         var rows = lManager.numRows;
@@ -209,6 +209,10 @@ $(document).ready(function(){
 
         $("#myCanvas").on('click', function(e){
             lManager.manageCanvasClick(e.clientX, e.clientY);
+        });
+
+        $("#backgroundCanvas").on('click', function(){
+            console.log("background");
         });
 
         $(".single_enemy").on('click', function(e){

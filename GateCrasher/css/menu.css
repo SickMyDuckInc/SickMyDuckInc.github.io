@@ -36,6 +36,11 @@ canvas{
     max-width: 600px;
     max-height: 400px;
     cursor: pointer;
+    z-index: 2;
+}
+
+#backgroundCanvas{
+    z-index: 1;
 }
 
 #enemy_selector{
