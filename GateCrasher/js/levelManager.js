@@ -32,6 +32,7 @@ function levelManager(canvas, allImages, level){
     this.selectedEnemy = -1;
 
     this.spawnedSprites = {};
+    this.spawnedHeroes = Array();
 
     this.enemiesSprites = [this.numEnemies];
     for(var i = 0; i<this.numEnemies; i++){
@@ -233,6 +234,7 @@ levelManager.prototype.spawnHeroes = function(){
         player.playAnimation("walk");
         player.flip();
         this.spawnedSprites["x:" + pos[0] + "y:" + pos[1]] = player;
+        this.spawnedHeroes[i] = player;
         this.matrix[pos[0]][pos[1]] = NON_WALKABLE;
     }
 }
@@ -242,8 +244,19 @@ levelManager.prototype.startGame = function(){
     var paths = new Array();
     for(i = 0; i<this.characters.length; i++){
         console.log("Calculando pathfinding del heroe " + i);        
-        var myCharacter = new character(this.characters[i].initialPos, this.characters[i].goal, this.numRows, this.numCols, this.walkable);
-        paths[i] = myCharacter.pathfinding();
-        console.log(paths[i]);
+        var myCharacter = new character(this.characters[i].initialPos, this.characters[i].goal, this.numRows, this.numCols, this.walkable, this.spawnedHeroes[i]);
+        paths[i] = {};
+        paths[i].path = myCharacter.pathfinding();
+        paths[i].character = myCharacter;
+        console.log(paths[i].path);
+    }
+
+    var actions = Array();
+    for(i = 0; i<paths[0].path.length; i++){
+        var this_action = {
+            action : "walk",
+            character : paths[0].character,
+            data : paths[0].path[i]
+        };
     }
 }
