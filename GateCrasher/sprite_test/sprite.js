@@ -113,7 +113,7 @@ sprite.prototype.saveAnimation = function(image, animationName, framesNumber, wi
     var xIndex = 0;
     var yIndex = 0;
     for(var i = 0; i < framesNumber; i++) {
-        if(xIndex * width > image.width) {
+        if(xIndex * width >= image.width) {
             yIndex++;
             xIndex = 0;
         }
