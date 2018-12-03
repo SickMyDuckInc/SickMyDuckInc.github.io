@@ -1,9 +1,9 @@
-function sprite(context, spriteImage) {
+function sprite(context, spriteImage, height, width, posX, posY) {
     this.context = context;
     this.width;
     this.height;
-    this.x = 0;
-    this.y = 0;
+    this.x = posX;
+    this.y = posY;
     this.speed = 1;
     this.scaleX = 1;
     this.scaleY = 1;
@@ -12,8 +12,11 @@ function sprite(context, spriteImage) {
 
     this.image = new Image();
     this.image.src = spriteImage;
-    this.width = this.image.width;
-    this.height = this.image.height;
+    this.width = width;
+    this.height = height;
+    this.draw();
+
+    //setInterval(this.draw, 1000/15);
 }
 
 sprite.prototype.moveTo = function (x, y) {
@@ -72,7 +75,7 @@ sprite.prototype.draw = function () {
         }
         
         this.context.drawImage(this.image,flipWidth * this.x, this.y, flipWidth * this.width * this.scaleX, this.height * this.scaleY);
-        this.context.restore();
+        //this.context.restore();
     }
 }
 
@@ -86,12 +89,14 @@ sprite.prototype.scaleSpriteXY = function (scaleX, scaleY) {
     this.scaleY = scaleY;
 }
 
-function frame(srcImage, x, y, width, height) {
+function frame(srcImage, x, y, width, height, spriteWidth, spriteHeight) {
     this.srcImage = srcImage;
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
+    this.spriteWidth = spriteWidth;
+    this.spriteHeight = spriteHeight;
 
     this.draw = function(context, x, y, scaleX, scaleY, isFlipped){
         context.save();
@@ -101,7 +106,7 @@ function frame(srcImage, x, y, width, height) {
             flipWidth = -1;
         }
         
-        context.drawImage(this.srcImage, this.x, this.y, this.width, this.height, flipWidth * x, y, flipWidth * this.width * scaleX, this.height * scaleY);
+        context.drawImage(this.srcImage, this.x, this.y, this.width, this.height, flipWidth * x, y, flipWidth * this.spriteWidth * scaleX, this.spriteHeight * scaleY);
         context.restore();
         
     }
@@ -117,7 +122,7 @@ sprite.prototype.saveAnimation = function(image, animationName, framesNumber, wi
             yIndex++;
             xIndex = 0;
         }
-        animationSheet[i] = new frame(image, xIndex * width, yIndex * height, width, height);
+        animationSheet[i] = new frame(image, xIndex * width, yIndex * height, width, height, this.width, this.height);
         xIndex++;
     }
     this.animations[animationName] = {anim : animationSheet, length : framesNumber};
@@ -147,4 +152,9 @@ sprite.prototype.stopAnimation = function () {
 
 sprite.prototype.flip = function () {
     this.isFlipped = !this.isFlipped;
+}
+
+
+sprite.prototype.update = function(){
+    this.prototype.draw();
 }
