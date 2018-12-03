@@ -48,6 +48,33 @@ function character(inicio, end, rows, cols){
     console.log(this.matrix);
 }
 
+character.prototype.executeMovement = function(time){
+    var posx = gridnode[i].y;
+    var posy = gridnode[y].x;
+
+    this.Move(posx,posy);
+}
+
+character.prototype.walk()=  function(){
+
+}
+
+character.prototype.fight() = function(){
+
+}
+
+character.prototype.executeAction = function(){
+    var posx = gridnode[i].y;
+    var posy = gridnode[y].x;
+
+    if(ThereIsEnemy(posx,posy)){
+        this.fight();
+    }
+    else{
+        this.walk();
+    }
+}
+
 character.prototype.pathfinding = function(){
 
     console.log("Created pathfinding");
