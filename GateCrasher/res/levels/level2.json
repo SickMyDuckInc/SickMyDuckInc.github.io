@@ -24,7 +24,7 @@
     "numEnemies": 4,
     "enemies":[
         {
-            "sprite":"enemy01",
+            "sprite":"angel",
             "type": 1,
             "maxNumber":3
         },
@@ -38,7 +38,7 @@
             "type": 3,
             "maxNumber":1
         },{
-            "sprite":"enemy01",
+            "sprite":"trap",
             "type": 4,
             "maxNumber":2
         }
