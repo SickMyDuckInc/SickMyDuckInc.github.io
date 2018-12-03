@@ -8,15 +8,9 @@ Todas las diferencias entre los tipos de enemigo deben estar definidas como vari
 (por ejemplo, el sprite que llevan), y recibirlas por medio del constructor.
  */
 
-function enemy( rows, cols, sprite, indexEnemy){
-    this.init = inicio;
-    this.end = end;
-    this.currentTile = inicio;
-
-    this.matrix = matrix;
+function enemy(rows, cols, sprite, indexEnemy){
     this.sprite = sprite;
     //tipe GridNode {x = fila, y = columna, weight}
-    this.path = null;
 
     this.autoAttack = false;
     this.indexEnemy = indexEnemy;
@@ -53,7 +47,7 @@ enemy.prototype.takeDamage = function(){
     this.life -= this.damage;
 }
 
-enemy.prototype.checkAttack= function(col, row){
+enemy.prototype.checkAttack = function(col, row){
     if(col == this.cols){
         var fila = this.row -row;
         //dirección arriba
