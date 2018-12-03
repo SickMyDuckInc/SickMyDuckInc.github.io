@@ -8,9 +8,11 @@ Todas las diferencias entre los tipos de enemigo deben estar definidas como vari
 (por ejemplo, el sprite que llevan), y recibirlas por medio del constructor.
  */
 
-function enemy(rows, cols, sprite, indexEnemy){
+function enemy( rows, cols, sprite, indexEnemy){
+
     this.sprite = sprite;
     //tipe GridNode {x = fila, y = columna, weight}
+    this.path = null;
 
     this.autoAttack = false;
     this.indexEnemy = indexEnemy;
@@ -20,13 +22,43 @@ function enemy(rows, cols, sprite, indexEnemy){
 
     switch(indexEnemy){
         case 0:
-            this.sprite.addAnimation("attack", "res/enemies/turret_attack.png", 4, 200, 200);
+        //torreta
+            this.sprite.addAnimation("attack", "res/goodies/turret_idle.png", 4, 200, 200);
             this.autoAttack = true;
             this.life = 10;
             this.shoot = true;
             this.damage = 1;
+            this.range = 10;
+            break;
+        case 1:
+        //melee
+            this.sprite.addAnimation("attack", "res/goodies/turret_idle.png", 4, 200, 200);
+            this.autoAttack = false;
+            this.life = 10;
+            this.shoot = false;
+            this.damage = 3;
+            this.range = 1;
+            break;
+        case 2:
+        //trampa
+            this.sprite.addAnimation("attack","res/goodies/turret_idle.png",4,200,200);
+            this.autoAttack = false;
+            this.life = 0;
+            this.shoot = false;
+            this.damage = 0;
+            this.range = 0;
+            this.stun = 2;
+            break;
+        case 3:
+        //otro
+            this.sprite.addAnimation("attack","res/goodies/turret_idle.png");
+            this.autoAttack = false;
+            this.life = 10;
+            this.shoot = false;
+            this.damage = 2;
             this.range = 2;
             break;
+
     }
 }
 
@@ -43,11 +75,11 @@ enemy.prototype.executeAction = function(){
     this.fight();
 }
 
-enemy.prototype.takeDamage = function(){
-    this.life -= this.damage;
+enemy.prototype.takeDamage = function(dmg){
+    this.life -= dmg;
 }
 
-enemy.prototype.checkAttack = function(col, row){
+enemy.prototype.checkAttack= function(col, row){
     if(col == this.cols){
         var fila = this.row -row;
         //dirección arriba
