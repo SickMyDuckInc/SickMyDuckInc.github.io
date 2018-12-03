@@ -17,6 +17,7 @@ function character(inicio, end, rows, cols, matrix, sprite){
     this.sprite = sprite;
     //tipe GridNode {x = fila, y = columna, weight}
     this.path = null;
+    this.life = 100;
     
     var canvas_cols = cols;
     var canvas_rows = rows;
