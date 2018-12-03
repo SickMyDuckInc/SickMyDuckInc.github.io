@@ -131,7 +131,7 @@ function resize(){
         }
     }
 
-    lManager.drawMap();
+    //lManager.drawMap();
     lManager.update();
 }
 
@@ -162,6 +162,20 @@ function startGame(){
         var inicio = [0,0];
         var fin = [1, 5];
 
+       
+        var enemies =[  new enemy(0,0, new sprite(myGameArea.getContext(), "/res/enemies/enemy01_stand.png", 10, 10, 10, 10),0),
+        new enemy(1,1, new sprite(myGameArea.getContext(), "/res/enemies/enemy01_stand.png", 10, 10, 10, 10),1),
+        new enemy(2,2, new sprite(myGameArea.getContext(), "/res/enemies/enemy01_stand.png", 10, 10, 10, 10),2),
+        new enemy(3,3, new sprite(myGameArea.getContext(), "/res/enemies/enemy01_stand.png", 10, 10, 10, 10),3)];
+        enemies[3].sprite.addAnimation("walk",  "/res/enemies/enemy01_walk.png", 4, 200, 200);
+        enemies[0].sprite.addAnimation("walk",  "/res/enemies/enemy01_walk.png", 4, 200, 200);
+        enemies[1].sprite.addAnimation("walk",  "/res/enemies/enemy01_walk.png", 4, 200, 200);
+        enemies[2].sprite.addAnimation("walk",  "/res/enemies/enemy01_walk.png", 4, 200, 200);
+        enemies[0].sprite.playAnimation("walk");
+        enemies[1].sprite.playAnimation("walk");
+        enemies[2].sprite.playAnimation("walk");
+        enemies[3].sprite.playAnimation("walk");
+        lManager = new playManager(null,null,enemies,null,myGameArea);
         var ctx = myGameArea.getContext();
         
         //lCharacter = new character(inicio, fin, rows, cols);
@@ -210,13 +224,7 @@ $(document).ready(function(){
         "res/background/grass_horizontal.png",
         "res/background/grass_vertical.png",
         "res/enemies/enemy01_stand.png",
-        "res/enemies/enemy01_idle.png",
-        "res/enemies/enemy01_walk.png",
-        "res/goodies/enemy01_stand.png",
-        "res/goodies/enemy01_idle.png",
-        "res/goodies/turret_idle.png",
-        "res/goodies/turret_stand.png"
-
+        "res/enemies/enemy01_walk.png"
     );
 
     

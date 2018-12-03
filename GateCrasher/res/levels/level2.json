@@ -29,7 +29,7 @@
             "maxNumber":3
         },
         {
-            "sprite":"enemy01",
+            "sprite":"turret",
             "type": 2,
             "maxNumber":2
         },
