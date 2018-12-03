@@ -28,6 +28,9 @@ function playManager(actions, levelManager, allEnemies, character, canvas){
 
 
     this.updateInterval = setInterval(() => this.update(), 100);
+    this.moveInterval;
+
+    this.calculateNext(actions[0]);
 
 }
 
@@ -39,6 +42,30 @@ playManager.prototype.update = function(){
     }
 
     this.character.sprite.draw();
+}
+
+playManager.prototype.calculateNext = function(turnActions){
+    for(i = 0; i<turnActions.length; i++){
+        var thisAction = turnActions[i];
+        if(thisAction.character = this.character){
+            switch(thisAction.action){
+                case 'walk':                
+                    var posX = thisAction.data.target[0] * this.levelManager.drawWidth;
+                    var posY = thisAction.data.target[1] * this.levelManager.drawHeight;
+                    thisAction.character.setNextTile({x : posY, y : posX});
+                    thisAction.character.calculateWalk();
+                    this.moveInterval = setInterval(() => this.moveUpdate(), 100);
+                    console.log("Character walking to: " + thisAction.data.target + ", position: " + posX + ", " + posY);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+}
+
+playManager.prototype.moveUpdate = function(){
+    this.character.walk();
 }
 
 //Constructior de la clase, 

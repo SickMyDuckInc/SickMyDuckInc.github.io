@@ -210,7 +210,12 @@ $(document).ready(function(){
         "res/background/grass_horizontal.png",
         "res/background/grass_vertical.png",
         "res/enemies/enemy01_stand.png",
-        "res/enemies/enemy01_walk.png"
+        "res/enemies/enemy01_walk.png",
+        "res/goodies/enemy01_stand.png",
+        "res/goodies/enemy01_idle.png",
+        "res/goodies/turret_idle.png",
+        "res/goodies/turret_stand.png"
+
     );
 
     
