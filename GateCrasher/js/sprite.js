@@ -112,28 +112,30 @@ function frame(srcImage, x, y, width, height, spriteWidth, spriteHeight) {
     }
 }
 
-sprite.prototype.saveAnimation = function(image, animationName, framesNumber, width, height) {
+sprite.prototype.saveAnimation = function(image, animationName, framesNumber, width, height, multiplier = 1) {
     this.animations[animationName] = {};
     var animationSheet = {};
     var xIndex = 0;
     var yIndex = 0;
-    for(var i = 0; i < framesNumber; i++) {
+    for(var i = 0; i < framesNumber* multiplier; i= i + multiplier) {
         if(xIndex * width >= image.width) {
             yIndex++;
             xIndex = 0;
         }
-        animationSheet[i] = new frame(image, xIndex * width, yIndex * height, width, height, this.width, this.height);
+        for(j = 0; j<multiplier; j++){
+            animationSheet[i+j] = new frame(image, xIndex * width, yIndex * height, width, height, this.width, this.height);
+        }
         xIndex++;
     }
-    this.animations[animationName] = {anim : animationSheet, length : framesNumber};
+    this.animations[animationName] = {anim : animationSheet, length : framesNumber * multiplier};
 }
 
-sprite.prototype.addAnimation = function (animationName, imageUri, framesNumber, width, height) {
+sprite.prototype.addAnimation = function (animationName, imageUri, framesNumber, width, height, multiplier = 1) {
     
     var imageSheet = new Image();
     imageSheet.src = imageUri;
 
-    imageSheet.onload = this.saveAnimation(imageSheet, animationName, framesNumber, width, height);
+    imageSheet.onload = this.saveAnimation(imageSheet, animationName, framesNumber, width, height, multiplier);
 }
 
 sprite.prototype.playAnimation = function (animationName) {

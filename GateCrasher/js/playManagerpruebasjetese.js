@@ -25,13 +25,9 @@ function playManager(actions, levelManager, allEnemies, character, canvas){
     this.allEnemies = allEnemies;
     this.character = character;
     this.canvas = canvas;
-    this.actualAction = 0;
 
 
     this.updateInterval = setInterval(() => this.update(), 100);
-    this.moveInterval;
-
-    this.calculateNext(actions[this.actualAction]);
 
 }
 
@@ -42,36 +38,9 @@ playManager.prototype.update = function(){
         this.allEnemies[element].sprite.draw();
     }
 
-    this.character.sprite.draw();
+    //this.character.sprite.draw();
 }
 
-playManager.prototype.calculateNext = function(turnActions){
-    for(i = 0; i<turnActions.length; i++){
-        var thisAction = turnActions[i];
-        if(thisAction.character = this.character){
-            switch(thisAction.action){
-                case 'walk':                
-                    var posX = thisAction.data.target[0] * this.levelManager.drawWidth;
-                    var posY = thisAction.data.target[1] * this.levelManager.drawHeight;
-                    thisAction.character.setNextTile({x : posY, y : posX});
-                    thisAction.character.calculateWalk();
-                    clearInterval(this.moveInterval);                    
-                    this.moveInterval = setInterval(() => this.moveUpdate(), 100);
-                    console.log("Character walking to: " + thisAction.data.target + ", position: " + posX + ", " + posY);
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
-}
-
-playManager.prototype.moveUpdate = function(){
-    if(this.character.walk()){
-        this.actualAction++;
-        this.calculateNext(this.actions[this.actualAction]);
-    }
-}
 
 //Constructior de la clase, 
 // function playManager(matrixMovement,listAction, listCharacters, myGameArea, col, rows){
