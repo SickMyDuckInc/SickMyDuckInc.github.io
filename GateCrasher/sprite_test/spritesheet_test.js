@@ -2,10 +2,11 @@ var canvas = document.getElementById("spriteCanvas");
 var ctx = canvas.getContext("2d");
 
 var updateRate = 15;
+
 var temp = setInterval(update, 1000 / updateRate);
 
 var player = new sprite(ctx, "enemy01_stand.png");
-player.addAnimation("walk", "enemy01_walk.png", 4, 200, 200);
+player.addAnimation("walk", "enemy01_idle.png", 7, 200, 200);
 player.scaleSprite(0.5);
 player.setSpeed(10);
 
@@ -29,7 +30,8 @@ function drawGrid() {
 }
 
 function update() {
-    
+    ctx.clearRect(0,0,600,600);
+    drawGrid();
     player.draw();
 }
 
