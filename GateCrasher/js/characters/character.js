@@ -11,12 +11,15 @@ Todas las diferencias entre los tipos de personaje principal deben estar definid
 function character(inicio, end, rows, cols, matrix, sprite){
     this.init = inicio;
     this.end = end;
-    this.currentTile = inicio;
+    this.currentTile = {x :sprite.x, y : sprite.y};
+    this.nextTile;
+    this.interval = 10;
 
     this.matrix = matrix;
     this.sprite = sprite;
     //tipe GridNode {x = fila, y = columna, weight}
     this.path = null;
+    this.life = 100;
     
     var canvas_cols = cols;
     var canvas_rows = rows;
@@ -32,11 +35,38 @@ character.prototype.executeMovement = function(time){
     this.Move(posx,posy);
 }
 
-character.prototype.walk()=  function(){
-
+character.prototype.getActualPos = function(){
+    return currentTile;
 }
 
-character.prototype.fight() = function(){
+character.prototype.getNextPos = function(){
+    return nextTile;
+}
+
+character.prototype.setNextTile = function(pos){
+    this.nextTile = pos;
+}
+
+character.prototype.calculateWalk = function(){
+    this.diffX = this.nextTile.x - this.currentTile.x;
+    this.diffY = this.nextTile.y - this.currentTile.y;
+    if(this.diffX != 0){
+        this.diffX = this.diffX / this.interval;
+    }
+    if(this.diffY != 0){
+        this.diffY = this.diffY / this.interval;
+    }
+
+    console.log("Calculated walk. DiffX: " + this.diffX + ", diffY: " + this.diffY);
+}
+
+character.prototype.walk =  function(){
+    var moveX = this.sprite.x + this.diffX;
+    var moveY = this.sprite.y + this.diffY;
+    this.sprite.moveTo(moveX, moveY);
+}
+
+character.prototype.fight = function(){
 
 }
 

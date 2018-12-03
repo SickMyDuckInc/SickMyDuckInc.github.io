@@ -25,17 +25,21 @@
     "enemies":[
         {
             "sprite":"enemy01",
+            "type": 1,
             "maxNumber":3
         },
         {
             "sprite":"enemy01",
+            "type": 2,
             "maxNumber":2
         },
         {
             "sprite":"enemy01",
+            "type": 3,
             "maxNumber":1
         },{
             "sprite":"enemy01",
+            "type": 4,
             "maxNumber":2
         }
     ],

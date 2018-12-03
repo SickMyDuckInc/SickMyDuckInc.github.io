@@ -25,8 +25,10 @@ function levelManager(canvas, allImages, level){
     this.canvas = canvas;    
     this.numEnemies = level.numEnemies;
     this.maxEnemies = new Array(this.numEnemies);
+    this.enemiesTypes = new Array(this.numEnemies);
     this.allImages = allImages;
     this.firstUpdate = false;
+    this.doUpdate = true;
 
     
     this.selectedEnemy = -1;
@@ -36,8 +38,9 @@ function levelManager(canvas, allImages, level){
 
     this.enemiesSprites = [this.numEnemies];
     for(var i = 0; i<this.numEnemies; i++){
-        this.enemiesSprites[i] = "res/enemies/"+ level.enemies[i].sprite;
+        this.enemiesSprites[i] = "res/goodies/"+ level.enemies[i].sprite;
         this.maxEnemies[i] = level.enemies[i].maxNumber;
+        this.enemiesTypes[i] = level.enemies[i].type;
     }
 
     this.characters = level.characters;
@@ -79,7 +82,7 @@ function levelManager(canvas, allImages, level){
 
     this.canvas.drawTile(0, 0, this.drawWidth, this.drawHeight, this.allImages[0]);
     
-    setInterval( () => this.update(), 100);
+    this.updateInterval = setInterval( () => this.update(), 100);
 
     console.log("Created levelManager with " + this.numRows + " rows and " + this.numCols + " cols");
 }
@@ -116,7 +119,7 @@ levelManager.prototype.update = function(){
         this.canvas.clear();    
 
         for(var element in this.spawnedSprites){
-            this.spawnedSprites[element].draw();
+            this.spawnedSprites[element].sprite.draw();
         }
     }  
 
@@ -125,7 +128,7 @@ levelManager.prototype.update = function(){
     }
     else{
         this.firstUpdate = false;
-    }  
+    } 
 }
 
 levelManager.prototype.paintTile = function(){
@@ -187,7 +190,7 @@ levelManager.prototype.manageCanvasClick = function(posX, posY){
     }
     else{
         console.log("No hay enemigos seleccionados");
-        if(actualOccuping != -1){
+        if(actualOccuping > -1){
             console.log("Cambiando a transparente");
             this.matrix[casillaX][casillaY] = -1;
             this.maxEnemies[actualOccuping]++;
@@ -220,10 +223,18 @@ levelManager.prototype.manageEnemyClick = function(enemyId){
 levelManager.prototype.spawnSprite = function(casillaX, casillaY){
 
     var player = new sprite(this.canvas.getContext(), this.enemiesSprites[this.selectedEnemy] +"_stand.png", this.drawHeight, this.drawWidth, casillaY * this.drawHeight, casillaX * this.drawWidth);
-    player.addAnimation("walk",  this.enemiesSprites[this.selectedEnemy] +"_walk.png", 4, 200, 200);
+    player.addAnimation("walk",  this.enemiesSprites[this.selectedEnemy] +"_idle.png", 4, 200, 200);
     player.playAnimation("walk");
-    this.spawnedSprites["x:" + casillaX + "y:" + casillaY] = player;
-    console.log("Sprites: " + this.spawnedSprites + ", matrix: " + this.spawnedSpritesMatrix);
+    var spriteToSpawn = {
+        sprite : player,
+        type : this.enemiesTypes[this.selectedEnemy],
+        isEnemy : true,
+        posX : casillaX,
+        posY : casillaY
+    }
+    this.spawnedSprites["x:" + casillaX + "y:" + casillaY] = spriteToSpawn;
+    console.log("Sprites: " + this.spawnedSprites + ", matrix: ");
+    console.log(this.matrix);
 }
 
 levelManager.prototype.spawnHeroes = function(){
@@ -233,7 +244,11 @@ levelManager.prototype.spawnHeroes = function(){
         player.addAnimation("walk", "res/enemies/" + this.characters[i].sprite +"_walk.png", 4, 200, 200);
         player.playAnimation("walk");
         player.flip();
-        this.spawnedSprites["x:" + pos[0] + "y:" + pos[1]] = player;
+        var spriteToAdd = {
+            sprite : player,
+            isEnemy: false
+        }
+        this.spawnedSprites["x:" + pos[0] + "y:" + pos[1]] = spriteToAdd;
         this.spawnedHeroes[i] = player;
         this.matrix[pos[0]][pos[1]] = NON_WALKABLE;
     }
@@ -251,12 +266,44 @@ levelManager.prototype.startGame = function(){
         console.log(paths[i].path);
     }
 
+    var turnos = Array();
     var actions = Array();
-    for(i = 0; i<paths[0].path.length; i++){
-        var this_action = {
-            action : "walk",
-            character : paths[0].character,
-            data : paths[0].path[i]
-        };
+    var pathToUse = paths[0].path;
+    var characterToUse = paths[0].character;
+
+    var allEnemies = new Array();
+    for(var en in this.enemiesSprites){
+        if(en.isEnemy){
+            //crear enemigo mandando el sprite, el tipo, la posicion
+        }
     }
+
+    for(i = 0; i<pathToUse.length; i++){
+        actions = Array();
+        var characterCanMove = true;   
+        //Si hay alguna trampa
+        if(characterCanMove){     
+            var this_action = {
+                action : "walk",
+                character : characterToUse,
+                data : {
+                    target : pathToUse[i]
+                }
+            };
+            actions.push(this_action);
+        }
+
+        for(var actualEnemy in allEnemies){
+            //checkAtack
+            //si puede atacar añadimos el ataque
+        }
+        turnos.push(actions);
+    }
+
+    this.spawnedSprites = Array();
+    //this.canvas.clear();
+    clearInterval(this.updateInterval);
+
+    var pM = new playManager(turnos, this, allEnemies, characterToUse, this.canvas);
+
 }
