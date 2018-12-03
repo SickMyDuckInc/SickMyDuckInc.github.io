@@ -49,6 +49,7 @@ character.prototype.setNextTile = function(pos){
 }
 
 character.prototype.calculateWalk = function(){
+    this.sprite.playAnimation("walk");
     this.diffX = this.nextTile.x - this.currentTile.x;
     this.diffY = this.nextTile.y - this.currentTile.y;
     if(this.diffX != 0){
