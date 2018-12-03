@@ -8,7 +8,7 @@ Todas las diferencias entre los tipos de enemigo deben estar definidas como vari
 (por ejemplo, el sprite que llevan), y recibirlas por medio del constructor.
  */
 
-function enemy( rows, cols, sprite, indexEnemy){
+function enemy( rows, cols, sprite, indexEnemy, canvas){
 
     this.sprite = sprite;
     //tipe GridNode {x = fila, y = columna, weight}
@@ -20,13 +20,17 @@ function enemy( rows, cols, sprite, indexEnemy){
     this.cols = cols;
     this.rows = rows;
 
+    this.canvas = canvas;
+
     switch(indexEnemy){
         case 0:
         //torreta
-            this.sprite.addAnimation("attack", "res/goodies/turret_idle.png", 4, 200, 200);
+            this.sprite.addAnimation("attack", "res/goodies/turret_attack.png", 4, 200, 200);
             this.autoAttack = true;
             this.life = 10;
             this.shoot = true;
+            this.spriteShoot = "bullet";
+            this.shoots = []; 
             this.damage = 1;
             this.range = 10;
             break;
@@ -63,11 +67,11 @@ function enemy( rows, cols, sprite, indexEnemy){
 }
 
 
-enemy.prototype.fight = function(){
+enemy.prototype.fight = function(bullets){
     this.sprite.playAnimation("attack");
     
     if(this.shoot){
-
+        bullets.push(new bullet(this.direc,this.spriteShoot,this.cols,this.rows,1,this.canvas)); 
     }
 }
 
