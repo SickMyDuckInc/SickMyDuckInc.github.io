@@ -39,7 +39,7 @@ playManager.prototype.update = function(){
     this.canvas.clear();    
 
     for(var element in this.allEnemies){
-        this.allEnemies.sprite.draw();
+        this.allEnemies[element].sprite.draw();
     }
 
     this.character.sprite.draw();

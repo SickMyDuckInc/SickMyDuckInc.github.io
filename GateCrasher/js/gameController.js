@@ -99,6 +99,16 @@ var myGameArea = {
     }
 }
 
+var anim_multipliers = {
+    "turret":{
+        idle : 3
+    },
+    "enemy01":{
+        idle : 2,
+        walk : 1,
+    }
+}
+
 var lManager;
 var lCharacter;
 
