@@ -11,7 +11,10 @@ Todas las diferencias entre los tipos de personaje principal deben estar definid
 function character(inicio, end, rows, cols, matrix, sprite){
     this.init = inicio;
     this.end = end;
-    this.currentTile = inicio;
+    this.currentTile = {x :sprite.x, y : sprite.y};
+    this.nextTile;
+    this.interval = 10;
+    this.isFlipped = false;
 
     this.matrix = matrix;
     this.sprite = sprite;
@@ -33,11 +36,56 @@ character.prototype.executeMovement = function(time){
     this.Move(posx,posy);
 }
 
-character.prototype.walk()=  function(){
-
+character.prototype.getActualPos = function(){
+    return currentTile;
 }
 
-character.prototype.fight() = function(){
+character.prototype.getNextPos = function(){
+    return nextTile;
+}
+
+character.prototype.setNextTile = function(pos){
+    this.nextTile = pos;
+}
+
+character.prototype.calculateWalk = function(){
+    this.sprite.playAnimation("walk");
+    this.diffX = this.nextTile.x - this.currentTile.x;
+    this.diffY = this.nextTile.y - this.currentTile.y;
+    if(this.diffX != 0){
+        this.diffX = this.diffX / this.interval;
+        if(this.diffX<0 && !this.isFlipped){
+            this.isFlipped = true;
+            this.sprite.flip();
+        }
+        else if(this.diffX>0 && this.isFlipped){
+            this.isFlipped = false;
+            this.sprite.flip();
+        }
+    }
+    if(this.diffY != 0){
+        this.diffY = this.diffY / this.interval;
+    }
+
+    console.log("Calculated walk. DiffX: " + this.diffX + ", diffY: " + this.diffY);
+}
+
+character.prototype.walk =  function(){
+    var ret = false;
+    if(this.nextTile.x != this.sprite.x || this.nextTile.y != this.sprite.y){
+        var moveX = this.sprite.x + this.diffX;
+        var moveY = this.sprite.y + this.diffY;
+        this.sprite.moveTo(moveX, moveY);
+    }
+    else{
+        console.log("Ya he llegado");
+        this.currentTile = this.nextTile;
+        ret = true;
+    }
+    return ret;
+}
+
+character.prototype.fight = function(){
 
 }
 

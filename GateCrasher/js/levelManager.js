@@ -38,7 +38,7 @@ function levelManager(canvas, allImages, level){
 
     this.enemiesSprites = [this.numEnemies];
     for(var i = 0; i<this.numEnemies; i++){
-        this.enemiesSprites[i] = "res/enemies/"+ level.enemies[i].sprite;
+        this.enemiesSprites[i] = "res/goodies/"+ level.enemies[i].sprite;
         this.maxEnemies[i] = level.enemies[i].maxNumber;
         this.enemiesTypes[i] = level.enemies[i].type;
     }
@@ -223,7 +223,7 @@ levelManager.prototype.manageEnemyClick = function(enemyId){
 levelManager.prototype.spawnSprite = function(casillaX, casillaY){
 
     var player = new sprite(this.canvas.getContext(), this.enemiesSprites[this.selectedEnemy] +"_stand.png", this.drawHeight, this.drawWidth, casillaY * this.drawHeight, casillaX * this.drawWidth);
-    player.addAnimation("walk",  this.enemiesSprites[this.selectedEnemy] +"_walk.png", 4, 200, 200);
+    player.addAnimation("walk",  this.enemiesSprites[this.selectedEnemy] +"_idle.png", 4, 200, 200);
     player.playAnimation("walk");
     var spriteToSpawn = {
         sprite : player,
@@ -241,8 +241,9 @@ levelManager.prototype.spawnHeroes = function(){
     for(i = 0; i<this.characters.length; i++){
         var pos = this.characters[i].initialPos;
         var player = new sprite(this.canvas.getContext(), "res/enemies/" +this.characters[i].sprite +"_stand.png", this.drawHeight, this.drawWidth, pos[1] * this.drawHeight, pos[0] * this.drawWidth);
+        player.addAnimation("idle", "res/enemies/" + this.characters[i].sprite +"_idle.png", 4, 200, 200);
         player.addAnimation("walk", "res/enemies/" + this.characters[i].sprite +"_walk.png", 4, 200, 200);
-        player.playAnimation("walk");
+        player.playAnimation("idle");
         player.flip();
         var spriteToAdd = {
             sprite : player,
@@ -278,15 +279,17 @@ levelManager.prototype.startGame = function(){
         }
     }
 
-    for(i = 0; i<pathToUse; i++){
-        actions = array();
+    for(i = 0; i<pathToUse.length; i++){
+        actions = Array();
         var characterCanMove = true;   
         //Si hay alguna trampa
         if(characterCanMove){     
             var this_action = {
                 action : "walk",
                 character : characterToUse,
-                data : pathToUse[i]
+                data : {
+                    target : pathToUse[i]
+                }
             };
             actions.push(this_action);
         }
