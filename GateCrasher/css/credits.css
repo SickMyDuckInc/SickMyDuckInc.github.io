@@ -5,9 +5,9 @@
 
 body{
     font-family: "Gatecrasher";
-    
 }
-.btn-menu {
+
+.btn-credits {
     -webkit-appearance: button;
     -moz-appearance: button;
     appearance: button;
@@ -22,9 +22,4 @@ body{
     text-align: center;
     min-height: 10vh;
     margin:70px;
-}
-
-
-.hidden{
-    display: none;
 }

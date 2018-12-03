@@ -99,6 +99,38 @@ var myGameArea = {
     }
 }
 
+var anim_multipliers = {
+    "turret":{
+        idle : 3
+    },
+    "enemy01":{
+        idle : 2,
+        walk : 1,
+    },
+    "angel":{
+        idle: 1
+    },
+    "trap":{
+        idle: 1
+    }
+}
+
+var anim_frames = {
+    "turret":{
+        idle : 4
+    },
+    "enemy01":{
+        idle : 4,
+        walk : 4,
+    },
+    "angel":{
+        idle: 5
+    },
+    "trap":{
+        idle: 1
+    }
+}
+
 var lManager;
 var lCharacter;
 
@@ -215,7 +247,15 @@ $(document).ready(function(){
         "res/goodies/enemy01_stand.png",
         "res/goodies/enemy01_idle.png",
         "res/goodies/turret_idle.png",
-        "res/goodies/turret_stand.png"
+        "res/goodies/turret_stand.png",
+        "res/goodies/angel_stand.png",
+        "res/goodies/angel_idle.png",
+        "res/goodies/bullet.png",
+        "res/goodies/bullet_anim.png",
+        "res/goodies/trap_stand.png",
+        "res/goodies/trap_closed.png",
+        "res/goodies/trap_idle.png",
+        "res/goodies/trap_attack.png"
 
     );
 

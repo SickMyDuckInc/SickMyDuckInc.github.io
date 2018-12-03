@@ -7,7 +7,7 @@ body{
     font-family: "Gatecrasher";
     
 }
-.btn-menu {
+.btn-config {
     -webkit-appearance: button;
     -moz-appearance: button;
     appearance: button;
@@ -24,6 +24,19 @@ body{
     margin:70px;
 }
 
+.btn-sound{
+    margin: 5px;
+
+}
+#sound_container{
+   
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 10vh;
+    margin:70px;
+}
 
 .hidden{
     display: none;
