@@ -9,11 +9,7 @@ Todas las diferencias entre los tipos de enemigo deben estar definidas como vari
  */
 
 function enemy( rows, cols, sprite, indexEnemy){
-    this.init = inicio;
-    this.end = end;
-    this.currentTile = inicio;
 
-    this.matrix = matrix;
     this.sprite = sprite;
     //tipe GridNode {x = fila, y = columna, weight}
     this.path = null;
@@ -26,13 +22,43 @@ function enemy( rows, cols, sprite, indexEnemy){
 
     switch(indexEnemy){
         case 0:
-            this.sprite.addAnimation("attack", "res/enemies/turret_attack.png", 4, 200, 200);
+        //torreta
+            this.sprite.addAnimation("attack", "res/goodies/turret_idle.png", 4, 200, 200);
             this.autoAttack = true;
             this.life = 10;
             this.shoot = true;
             this.damage = 1;
+            this.range = 10;
+            break;
+        case 1:
+        //melee
+            this.sprite.addAnimation("attack", "res/goodies/turret_idle.png", 4, 200, 200);
+            this.autoAttack = false;
+            this.life = 10;
+            this.shoot = false;
+            this.damage = 3;
+            this.range = 1;
+            break;
+        case 2:
+        //trampa
+            this.sprite.addAnimation("attack","res/goodies/turret_idle.png",4,200,200);
+            this.autoAttack = false;
+            this.life = 0;
+            this.shoot = false;
+            this.damage = 0;
+            this.range = 0;
+            this.stun = 2;
+            break;
+        case 3:
+        //otro
+            this.sprite.addAnimation("attack","res/goodies/turret_idle.png");
+            this.autoAttack = false;
+            this.life = 10;
+            this.shoot = false;
+            this.damage = 2;
             this.range = 2;
             break;
+
     }
 }
 
@@ -49,8 +75,8 @@ enemy.prototype.executeAction = function(){
     this.fight();
 }
 
-enemy.prototype.takeDamage = function(){
-    this.life -= this.damage;
+enemy.prototype.takeDamage = function(dmg){
+    this.life -= dmg;
 }
 
 enemy.prototype.checkAttack= function(col, row){
