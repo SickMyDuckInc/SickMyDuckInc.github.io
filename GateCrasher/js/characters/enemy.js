@@ -24,6 +24,7 @@ function enemy( rows, cols, sprite, indexEnemy, canvas,character){
     this.character = character;
     this.dir = "LEFT";
     this.distance = 0;
+    this.canBeAttacked = true;
 
     switch(indexEnemy){
         case 0:
@@ -56,23 +57,40 @@ function enemy( rows, cols, sprite, indexEnemy, canvas,character){
         case 2:
         //trampa
             this.sprite.addAnimation("attack","res/goodies/trap_attack.png",anim_frames["trap"].attack,200,200);
+            this.sprite.addAnimation("closed","res/goodies/trap_closed.png",anim_frames["trap"].closed,200,200);
+            //this.sprite.playAnimation("closed");
             this.autoAttack = false;
-            this.life = 0;
+            this.life = 1000;
             this.shoot = false;
             this.damage = 0;
             this.range = 0;
             this.stun = 2;
-            this.countAttack = 100;
+            this.countAttack = 100;            
+            this.canBeAttacked = false;
             this.count = 0;
+            this.activated = false;
+            this.fight = function(playMan){
+                if(!this.activated){
+                    this.activated = true;
+                    console.log("Trampa activada");
+                    playMan.setNext(this);
+                }
+                //playMan.characterCanMove = false;
+                // setInterval(()=> playMan.moveAndStun(), 100);
+            }
+            this.executeClose = function(){
+                this.sprite.playAnimation("attack", false, "closed");
+            }
             break;
         case 3:
         //angel melee
-            this.sprite.addAnimation("attack","res/goodies/angel_idle.png",anim_frames["angel"].attack,200,200);
+            this.sprite.addAnimation("attack","res/goodies/angel_attack.png",anim_frames["angel"].attack,200,200);
             this.autoAttack = false;
             this.life = 50;
             this.shoot = false;
             this.damage = 20;
-            this.range = 1;
+            this.range = 0;
+            this.melee = true;
             this.countAttack = 0;
             this.count = 0;
             break;
@@ -80,10 +98,11 @@ function enemy( rows, cols, sprite, indexEnemy, canvas,character){
         //tank
             this.sprite.addAnimation("attack","res/goodies/tank_attack.png",anim_frames["tank"].attack,200,200)
             this.autoAttack = false;
-            this.life = 50;
+            this.life = 100;
             this.shoot = false;
-            this.damage = 20;
-            this.range = 1;
+            this.damage = 5;
+            this.range = 0;
+            this.melee = true;
             this.countAttack = 0;
             this.count = 0;
             break;
@@ -93,19 +112,16 @@ function enemy( rows, cols, sprite, indexEnemy, canvas,character){
 
 
 enemy.prototype.fight = function(playMan){
-
-    if(this.dir == "LEFT" && this.character.sprite.x > this.sprite.x){
-        this.sprite.flip();
-        this.dir = "RIGHT";
-    }
-    else if(this.dir == "RIGHT" && this.character.sprite.x < this.sprite.x){
-        this.sprite.flip();
-        this.dir = "LEFT";
-    }
+    console.log("Basic fight");
+    
     if(this.count == 0 ){
-    this.sprite.playAnimation("attack", false, "idle");
+    
         if(this.shoot){
+            this.sprite.playAnimation("attack", false, "idle");
             playMan.addBullet(new bullet(this.dir,this.spriteShoot,this.cols,this.rows,1,this.canvas,this.character,this,this.spriteShoot)); 
+        }
+        else{
+            this.sprite.playAnimation("attack", false, "idle", this.executeFightEnd, this);
         }
         this.count = this.countAttack;
     }
@@ -114,6 +130,11 @@ enemy.prototype.fight = function(playMan){
     }
 }
 
+enemy.prototype.executeFightEnd = function(){    
+    this.character.takeDamage(this.damage);
+    //this.enemyTarget.sprite.setRedTint();
+    console.log("executedEnd");
+}
 enemy.prototype.executeAction = function(playMan){
     this.fight(playMan);
 }
@@ -142,4 +163,37 @@ enemy.prototype.checkAttack= function(col, row){
     
     return false;
     
+}
+
+enemy.prototype.Neighbour= function(Enemies){
+    for(var item in Enemies){
+        if(Enemies[item].cols == (this.cols -1)){
+            this.leftNeighbour = Enemies[item];
+        }
+        if(Enemies[item].cols == (this.cols+1)){
+            this.rightNeighbour = Enemies[item];
+        }
+    }
+}
+
+enemy.prototype.checkEnemyAttack = function(){
+    if(this.dir == "LEFT" && this.leftNeighbour!= undefined && !this.leftNeighbour.isDead()){
+        this.sprite.playAnimation("attack", false, "idle");
+        this.leftNeighbour.takeDamage(this.damage);
+    }
+    else if(this.dir == "RIGHT" && this.rightNeighbour!= undefined && !this.leftNeighbour.isDead()){
+        this.sprite.playAnimation("attack", false, "idle");
+        this.rightNeighbour.takeDamage(this.damage);
+    }
+}
+
+enemy.prototype.update = function(){
+    if(this.dir == "LEFT" && this.character.sprite.x > this.sprite.x){
+        this.sprite.flip();
+        this.dir = "RIGHT";
+    }
+    else if(this.dir == "RIGHT" && this.character.sprite.x < this.sprite.x){
+        this.sprite.flip();
+        this.dir = "LEFT";
+    }
 }

@@ -17,6 +17,7 @@ row: número de filas
 
 //Parámetro que determina el tiempo que tarda un personaje en avanzar a la siguiente casilla del mapa
 var PLAY_SPEED =  10;
+var BULLET_SPEED = 5;
 
 function playManager(actions, levelManager, allEnemies, character, canvas){
 
@@ -28,6 +29,7 @@ function playManager(actions, levelManager, allEnemies, character, canvas){
     this.actualAction = 0;
     this.allBullets = Array();
     this.characterCanMove = true;
+    this.characterStunned = false;
     this.targetEnemy;
 
 
@@ -40,6 +42,13 @@ function playManager(actions, levelManager, allEnemies, character, canvas){
 
 playManager.prototype.update = function(){
     this.canvas.clear();    
+
+    if(!this.character.isDead()){
+        this.character.sprite.draw();
+    }
+    else{
+        console.log("HE MUERTO");
+    }
 
     for(var element in this.allEnemies){
         if(!this.allEnemies[element].isDead()){
@@ -58,12 +67,6 @@ playManager.prototype.update = function(){
             this.allBullets[element].checkCollision(this.allEnemies);
         }
     }
-    if(!this.character.isDead()){
-        this.character.sprite.draw();
-    }
-    else{
-        console.log("HE MUERTO");
-    }
 }
 
 playManager.prototype.calculateNext = function(turnActions){
@@ -76,7 +79,7 @@ playManager.prototype.calculateNext = function(turnActions){
                     if(thisAction.data.enemy.isDead()){
                         this.characterCanMove = true;
                     }
-                    else{           
+                    else if(!this.characterStunned){           
                         this.targetEnemy = thisAction.data.enemy;
                         this.playerAttack();
                         console.log("ataco");
@@ -88,8 +91,8 @@ playManager.prototype.calculateNext = function(turnActions){
                     var posX = thisAction.data.target[0] * this.levelManager.drawWidth;
                     var posY = thisAction.data.target[1] * this.levelManager.drawHeight;
                     thisAction.character.setNextTile({x : posY, y : posX});
-                    clearInterval(this.moveInterval);
-                    if(this.characterCanMove){                          
+                    if(this.characterCanMove && !this.characterStunned){                           
+                        clearInterval(this.moveInterval);                       
                         thisAction.character.calculateWalk(true);                  
                         this.moveInterval = setInterval(() => this.moveUpdate(), 100);
                         console.log("Character walking to: " + thisAction.data.target + ", position: " + posX + ", " + posY);
@@ -110,9 +113,21 @@ playManager.prototype.calculateNext = function(turnActions){
                     thisAction.character.executeAction(this);
                 }
                 break;
+            case 'checkEnemyAttack':
+                thisAction.character.checkEnemyAttack();
+                break;
            } 
         }
     }
+}
+
+playManager.prototype.setNext = function(trap){
+    //this.actualAction++;
+    clearInterval(this.moveInterval);
+    this.characterCanMove = false;
+    this.characterStunned = true;
+    this.calculateNext(this.actions[this.actualAction]);
+    this.moveInterval = setInterval(() => this.moveAndStun(trap), 100);
 }
 
 playManager.prototype.moveUpdate = function(){
@@ -124,6 +139,16 @@ playManager.prototype.moveUpdate = function(){
         else{
             this.calculateNext(this.actions[this.actualAction]);
         }
+    }
+}
+
+playManager.prototype.moveAndStun = function(trap){
+    if(this.character.walk()){
+        this.character.characterCanMove = false;
+        clearInterval(this.moveInterval);
+        this.actualAction++;
+        trap.executeClose();
+        this.moveInterval = setInterval(() => this.calculateNext(this.actions[this.actualAction]), 100 * PLAY_SPEED);
     }
 }
 
@@ -139,7 +164,7 @@ playManager.prototype.playerAttack = function(){
         //this.calculateNext(this.actions[this.actualAction]);
     }
     else{
-        mult = 10;
+        mult = PLAY_SPEED;
     }
     
     setTimeout(()=> this.calculateNext(this.actions[this.actualAction]), 100*mult);

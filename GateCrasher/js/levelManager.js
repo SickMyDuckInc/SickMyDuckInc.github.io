@@ -231,9 +231,7 @@ levelManager.prototype.spawnSprite = function(casillaX, casillaY){
     var player = new sprite(this.canvas.getContext(), this.enemiesSprites[this.selectedEnemy] +"_stand.png", this.drawHeight, this.drawWidth, casillaY * this.drawHeight, casillaX * this.drawWidth);
     var lastIndexOf = this.enemiesSprites[this.selectedEnemy].lastIndexOf("/");
     var substr = this.enemiesSprites[this.selectedEnemy].substr(lastIndexOf + 1);
-    console.log("Substr:" + substr);
     player.addAnimation("idle",  this.enemiesSprites[this.selectedEnemy] +"_idle.png", anim_frames[substr].idle, 200, 200, anim_multipliers[substr].idle);
-    player.addAnimation("hurt",  this.enemiesSprites[this.selectedEnemy] +"_red.png", anim_frames[substr].hurt, 200, 200, anim_multipliers[substr].hurt);
     player.playAnimation("idle");
     var spriteToSpawn = {
         sprite : player,
@@ -293,6 +291,10 @@ levelManager.prototype.startGame = function(){
         }
     }
 
+    for(var en in allEnemies){
+        allEnemies[en].Neighbour(allEnemies);
+    }
+
     var this_action;
     for(i = 0; i<pathToUse.length; i++){
         actions = Array();
@@ -300,7 +302,7 @@ levelManager.prototype.startGame = function(){
         for(var actualEnemyIndex in allEnemies){
             var actualEnemy = allEnemies[actualEnemyIndex];
 
-            if((pathToUse[i][0] == actualEnemy.rows) && (pathToUse[i][1] == actualEnemy.cols)){
+            if(actualEnemy.canBeAttacked && (pathToUse[i][0] == actualEnemy.rows) && (pathToUse[i][1] == actualEnemy.cols)){
                 console.log("Adyacente en " + pathToUse[i][0] + ", " + pathToUse[i][1]);
                 this_action = {
                     action : "attack",
@@ -330,6 +332,14 @@ levelManager.prototype.startGame = function(){
                     data:{
                         //meter aqui variables que se necesiten para la funcion attack
                     }
+                }
+                actions.push(this_action);
+            }
+
+            if(actualEnemy.melee){
+                this_action = {
+                    action : "checkEnemyAttack",
+                    character : actualEnemy
                 }
                 actions.push(this_action);
             }

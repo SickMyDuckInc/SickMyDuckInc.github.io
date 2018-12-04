@@ -23,6 +23,8 @@ function enemy( rows, cols, sprite, indexEnemy, canvas,character){
     this.canvas = canvas;
     this.character = character;
     this.dir = "LEFT";
+    this.distance = 0;
+    this.canBeAttacked = true;
 
     switch(indexEnemy){
         case 0:
@@ -41,61 +43,96 @@ function enemy( rows, cols, sprite, indexEnemy, canvas,character){
             break;
         case 1:
         //angel de distancia
-            this.sprite.addAnimation("attack", "res/goodies/turret_attack.png", anim_frames["turret"].attack, 4, 200, 200);
+            this.sprite.addAnimation("attack", "res/goodies/trumpet_attack.png", anim_frames["trumpet"].attack, 200, 200);
             this.autoAttack = false;
             this.life = 50;
-            this.shoot = false;
-            this.spriteShoot = "bullet";
+            this.shoot = true;
+            this.spriteShoot = "ball";
             this.shoots = []; 
             this.damage = 60;
-            this.range = 4;
+            this.range = 2;
             this.countAttack = 4;
             this.count = 0;
             break;
         case 2:
         //trampa
             this.sprite.addAnimation("attack","res/goodies/trap_attack.png",anim_frames["trap"].attack,200,200);
+            this.sprite.addAnimation("closed","res/goodies/trap_closed.png",anim_frames["trap"].closed,200,200);
+            //this.sprite.playAnimation("closed");
             this.autoAttack = false;
-            this.life = 0;
+            this.life = 1000;
             this.shoot = false;
             this.damage = 0;
             this.range = 0;
             this.stun = 2;
-            this.countAttack = 100;
+            this.countAttack = 100;            
+            this.canBeAttacked = false;
             this.count = 0;
+            this.activated = false;
+            this.fight = function(playMan){
+                if(!this.activated){
+                    this.activated = true;
+                    console.log("Trampa activada");
+                    playMan.setNext(this);
+                }
+                //playMan.characterCanMove = false;
+                // setInterval(()=> playMan.moveAndStun(), 100);
+            }
+            this.executeClose = function(){
+                this.sprite.playAnimation("attack", false, "closed");
+            }
             break;
         case 3:
         //angel melee
-            this.sprite.addAnimation("attack","res/goodies/angel_idle.png",anim_frames["angel"].attack,200,200);
+            this.sprite.addAnimation("attack","res/goodies/angel_attack.png",anim_frames["angel"].attack,200,200);
             this.autoAttack = false;
             this.life = 50;
             this.shoot = false;
             this.damage = 20;
+<<<<<<< HEAD
+            this.range = 0;
+=======
             this.range = 1;
+            this.melee = true;
+>>>>>>> 24ca4f2543a1a531d6335ea551878c8e8aca8920
             this.countAttack = 0;
             this.count = 0;
             break;
         case 4:
         //tank
-            this.sprite.addAnimation("attack","res/goodies/tank.png")
+            this.sprite.addAnimation("attack","res/goodies/tank_attack.png",anim_frames["tank"].attack,200,200)
+            this.autoAttack = false;
+            this.life = 100;
+            this.shoot = false;
+            this.damage = 5;
+            this.range = 0;
+            this.melee = true;
+            this.countAttack = 0;
+            this.count = 0;
+            break;
 
     }
 }
 
 
 enemy.prototype.fight = function(playMan){
-    if(this.dir == "left" && this.character.col > this.cols){
+    console.log("Basic fight");
+    if(this.dir == "LEFT" && this.character.sprite.x > this.sprite.x){
         this.sprite.flip();
-        this.dir = "right";
+        this.dir = "RIGHT";
     }
-    else if(this.dir == "right" && this.character.col < this.cols){
+    else if(this.dir == "RIGHT" && this.character.sprite.x < this.sprite.x){
         this.sprite.flip();
-        this.dir = "left";
+        this.dir = "LEFT";
     }
     if(this.count == 0 ){
-    this.sprite.playAnimation("attack", false, "idle");
+    
         if(this.shoot){
+            this.sprite.playAnimation("attack", false, "idle");
             playMan.addBullet(new bullet(this.dir,this.spriteShoot,this.cols,this.rows,1,this.canvas,this.character,this,this.spriteShoot)); 
+        }
+        else{
+            this.sprite.playAnimation("attack", false, "idle", this.executeFightEnd, this);
         }
         this.count = this.countAttack;
     }
@@ -104,16 +141,17 @@ enemy.prototype.fight = function(playMan){
     }
 }
 
+enemy.prototype.executeFightEnd = function(){    
+    this.character.takeDamage(this.damage);
+    //this.enemyTarget.sprite.setRedTint();
+    console.log("executedEnd");
+}
 enemy.prototype.executeAction = function(playMan){
     this.fight(playMan);
 }
 
 enemy.prototype.takeDamage = function(dmg){
-<<<<<<< HEAD
-=======
-    console.log("Life: " + this.life);
     this.sprite.setRedTint();
->>>>>>> 3de9ed1741b428334d0086dcdc77affd6a5cf7df
     this.life -= dmg;
     console.log("Life: " + this.life);
 }
@@ -123,37 +161,39 @@ enemy.prototype.isDead = function(){
 }
 
 enemy.prototype.checkAttack= function(col, row){
-    if(col == this.cols){
-        var fila = this.row -row;
+    
+    if(col == this.rows){
+        var fila = Math.abs(this.cols -row);
         //dirección arriba
-        if(fila >0){
-            this.direc = 1;
-        }
-        //dirección abajo
-        else{
-            this.direc = -1;
-        }
+        
 
-        if(Math.abs(fila)<= this.range){
+        if(fila<= this.range){
             return true;
         }
     }
-    else if(row == this.rows){
-        var fila = this.cols -col;
-        //dirección derecha
-        if(fila >0){
-            this.direc = 2;
-        }
-        //dirección izquierda
-        else{
-            this.direc = -2;
-        }
+    
+    return false;
+    
+}
 
-        if(Math.abs(fila)<= this.range){
-            return true;
+enemy.prototype.Neighbour= function(Enemies){
+    for(var item in Enemies){
+        if(Enemies[i].cols == this.cols -1){
+            this.leftNeighbour = Enemies[i];
+        }
+        if(Enemies[i].cols == this.cols+1){
+            this.rightNeighbour = Enemies[i];
         }
     }
-    else{
-        return false;
+}
+
+enemy.prototype.checkEnemyAttack = function(){
+    if(this.dir == "LEFT" && this.leftNeighbour!= undefined && !this.leftNeighbour.isDead){
+        this.sprite.playAnimation("attack", false, "idle");
+        this.leftNeighbour.takeDamage(this.damage);
+    }
+    else if(this.dir == "RIGHT" && this.leftNeighbour!= undefined && !this.leftNeighbour.isDead){
+        this.sprite.playAnimation("attack", false, "idle");
+        this.rightNeighbour.takeDamage(this.damage);
     }
 }
