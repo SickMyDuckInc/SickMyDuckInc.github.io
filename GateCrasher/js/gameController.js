@@ -112,6 +112,9 @@ var myGameArea = {
     },
     removeSelected : function(){
         $("#responsive_menu img").attr("src","/res/goodies/empty.png");
+    },
+    addSelected : function(){
+
     }
 }
 
@@ -193,9 +196,9 @@ var lManager;
 var lCharacter;
 
 function resize(){
-    if($(window).width() >600){
+    var aspect_ratio = 400/600;
+    if($(window).width() >800){
         console.log("hola");
-        var aspect_ratio = 400/600;
         var window_width = $(window).width() - 200;
         var window_height = $(window).height() - 50;
         var relative_height = aspect_ratio * window_width;
@@ -203,14 +206,50 @@ function resize(){
             $(".canvas_responsive").outerWidth($(window).width()-200);
             $("#canvas_container").outerWidth($(window).width()-200);
             $("#enemy_selector").outerHeight(relative_height);
-            var enemy_width = relative_height/5;
-            $("#enemy_selector").outerWidth(enemy_width);
+            $(".canvas_responsive").outerHeight(relative_height);
+            $("#canvas_container").outerHeight(relative_height);
         }
+        else{
+            var relative_width = window_height / aspect_ratio;           
+            $(".canvas_responsive").outerWidth(relative_width);
+            $("#canvas_container").outerWidth(relative_width);
+            $(".canvas_responsive").outerHeight(window_height);
+            $("#canvas_container").outerHeight(window_height);            
+            $("#enemy_selector").outerHeight(window_height);
+        }
+        
+        var enemy_width = relative_height/5;
+        $("#enemy_selector").outerWidth(enemy_width);
+        $("#enemy_selector").removeClass("responsive").removeClass("hidden");
+        $("#responsive_menu").hide();
     }
     else if(true){
-        var window_width = $(window).width();
-        $(".canvas_responsive").outerWidth(windowWidth);
-        $("#canvas_container").outerWidth(windowWidth);
+        console.log("adios");
+        var window_width = $(window).width() - 10;
+        window_height = $(window).height() -25;
+        var relative_height = window_width * aspect_ratio;
+        if(relative_height<window_height){
+            $(".canvas_responsive").outerWidth(window_width);
+            $("#canvas_container").outerWidth(window_width);
+            $(".canvas_responsive").outerHeight(relative_height);
+            $("#canvas_containter").outerHeight(relative_height);            
+            $("#enemy_selector").outerHeight(relative_height);
+        }
+        else{
+            console.log("entro al else");
+            var relative_width = window_height / aspect_ratio;            
+            $(".canvas_responsive").outerWidth(relative_width);
+            $("#canvas_container").outerWidth(relative_width);
+            $(".canvas_responsive").outerHeight(window_height);
+            $("#canvas_container").outerHeight(window_height);            
+            $("#enemy_selector").outerHeight(window_height);
+        }
+        var offset= $("#myCanvas").offset().top;
+        console.log("He saltado");
+        $("#enemy_selector").addClass("responsive").addClass("hidden");
+        $("#enemy_selector").outerHeight($(".canvas_responsive").outerHeight());
+        $(".responsive").css("top", offset);
+        $("#responsive_menu").show();
     }
     else{    
         $("#myCanvas").outerHeight($(window).height()-$("#myCanvas").offset().top- Math.abs($("#myCanvas").outerHeight(true) - $("#myCanvas").outerHeight() -10));
@@ -223,7 +262,7 @@ function resize(){
         $(".canvas_responsive").outerHeight(outerHeight);
         $("#canvas_container").outerWidth(outerWidth);
     }
-
+/*
     var windowWidth = $(window).width();
 
     var totalWidth = 25 + outerWidth + $("#enemy_selector").outerWidth();
@@ -242,7 +281,7 @@ function resize(){
             $("#enemy_selector").removeClass("responsive").removeClass("hidden");
             $("#responsive_menu").hide();
         }
-    }
+    }*/
 
     lManager.drawMap();
     lManager.update();
@@ -267,7 +306,7 @@ function preload(){
 }
 
 function startGame(){
-    $.getJSON("res/levels/level3.json", function(data){
+    $.getJSON("res/levels/level2.json", function(data){
         lManager = new levelManager(myGameArea, images, data);
 
         var rows = lManager.numRows;
@@ -308,6 +347,7 @@ $(document).ready(function(){
     $("#responsive_menu").hide();
 
     preload(
+        //Pasillos
         "res/background/heaven_horizontal.png", // 0
         "res/background/heaven_vertical.png", // 1
         "res/background/heaven_corner1.png", // 2
@@ -320,6 +360,7 @@ $(document).ready(function(){
         "res/background/heaven_intersectionder.png", // 9
         "res/background/heaven_intersectionizq.png", // 10
         "res/background/heaven_intersectionup.png", // 11
+        //Nubes
         "res/background/cloud_puzzle1.png", // 12
         "res/background/cloud_puzzle2.png", // 13
         "res/background/cloud_puzzle3.png", // 14
@@ -332,6 +373,7 @@ $(document).ready(function(){
         "res/background/cloud_big5.png", // 21
         "res/background/cloud_big6.png", // 22
         "res/background/heaven_intersection.png", // 23
+        //Bordes
         "res/background/tiles/m00.png", // 24
         "res/background/tiles/m01.png", // 25
         "res/background/tiles/m02.png", // 26
@@ -341,7 +383,19 @@ $(document).ready(function(){
         "res/background/tiles/m20.png", // 30
         "res/background/tiles/m21.png", // 31
         "res/background/tiles/m22.png", // 32
-     
+        //Nubes de dentro
+        "res/background/tiles/intern1.png", // 33
+        "res/background/tiles/intern2.png", // 34
+        "res/background/tiles/intern3.png", // 35
+        "res/background/tiles/intern4.png", // 36
+        "res/background/tiles/intern5.png", // 37
+        //Finales de los caminos
+        "res/background/heaven_endleft.png", // 38
+        "res/background/heaven_endup.png", // 39
+        "res/background/heaven_enddown.png", // 40
+        "res/background/heaven_endright.png", // 41
+        
+        //Sprites de enemigos y aliados
         "res/enemies/enemy01_stand.png",
         "res/enemies/enemy01_idle.png",
         "res/enemies/enemy01_attack.png",
@@ -386,6 +440,11 @@ $(document).ready(function(){
     }
 
     $(window).on("resize", function(){                      
+        resize();
+    });
+
+    $( window ).on( "orientationchange", function( event ) {
+        console.log("Tilted");
         resize();
     });
 

@@ -4,7 +4,7 @@
 }
 
 body{
-    font-family: "Gatecrasher";
+    font-family: "Gatecrasher" !important;
 }
 
 canvas{
@@ -57,6 +57,7 @@ canvas{
     width: 100px;
     margin-left: 20px;
     max-height: 100%;
+    max-width: 20%;
     height:400px;
     display:inline-block;
     vertical-align: top;
@@ -101,7 +102,9 @@ canvas{
 }
 
 .selector_img{
-    height: 90%;
+    max-width: 100%;
+    max-height: 100%;
+    height: auto;
     display: block;
     margin: auto;
 }
@@ -120,6 +123,7 @@ canvas{
 #play_button{
     width:100%;
     background-color: darkgoldenrod;
+    font-family: 'Gatecrasher';
 }
 
 .hidden{
