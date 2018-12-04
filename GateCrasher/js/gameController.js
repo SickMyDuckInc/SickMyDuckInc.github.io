@@ -126,7 +126,8 @@ var anim_multipliers = {
     },
     "angel":{
         idle: 1,
-        hurt : 2
+        hurt : 2,
+        die: 1
     },
     "trap":{
         idle: 1,
@@ -137,18 +138,15 @@ var anim_multipliers = {
     "trumpet":{
         idle: 1,
         attack: 1,
-        hurt : 2
+        hurt : 2,
+        die : 1
     },
     "tank":{
         idle: 1,
         attack: 1,
-        hurt : 2
-    },
-    "tank":{
-        idle: 1,
-        attack: 1,
-        hurt : 2
-    },
+        hurt : 2,
+        die : 1
+    }
 }
 
 var anim_frames = {
@@ -163,10 +161,6 @@ var anim_frames = {
         attack : 4,
         hurt : 1
     },
-    "angel":{
-        idle: 5,
-        hurt : 1
-    },
     "trap":{
         idle: 1,
         attack: 5,
@@ -175,17 +169,20 @@ var anim_frames = {
     "trumpet":{
         idle: 5,
         attack: 5,
-        hurt : 1
+        hurt : 1,
+        die : 5
     },
     "tank":{
         idle: 5,
         attack: 5,
-        hurt : 1
+        hurt : 1,
+        die: 5
     },
     "angel":{
         idle: 5,
         attack: 5,
-        hurt : 1
+        hurt : 1,
+        die : 5
     },
 }
 
@@ -325,14 +322,16 @@ $(document).ready(function(){
         "res/goodies/trumpet_idle.png",
         "res/goodies/trumpet_attack.png",
         "res/goodies/trumpet_red.png",
+        "res/goodies/trumpet_dead.png",
         "res/goodies/tank_stand.png",
         "res/goodies/tank_idle.png",
         "res/goodies/tank_attack.png",
-        "res/goodies/tank_red.png",
+        "res/goodies/tank_dead.png",
         "res/goodies/angel_stand.png",
         "res/goodies/angel_idle.png",
         "res/goodies/angel_attack.png",
         "res/goodies/angel_stand.png",
+        "res/goodies/angel_dead.png",
         "res/goodies/bullet.png",
         "res/goodies/bullet_anim.png",
         "res/goodies/ball.png",

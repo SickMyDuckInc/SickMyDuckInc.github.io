@@ -51,7 +51,7 @@ playManager.prototype.update = function(){
     }
 
     for(var element in this.allEnemies){
-        if(!this.allEnemies[element].isDead()){
+        if(this.allEnemies[element].draw){
             this.allEnemies[element].sprite.draw();
         }
     }
@@ -157,6 +157,7 @@ playManager.prototype.moveAndStun = function(trap){
         this.actualAction++;
         trap.executeClose();
         setTimeout(()=> this.releaseTrap(trap), 200*PLAY_SPEED);
+        this.calculateNext(this.actions[this.actualAction]);
         this.moveInterval = setInterval(() => this.calculateNext(this.actions[this.actualAction]), 100 * PLAY_SPEED);
     }
 }

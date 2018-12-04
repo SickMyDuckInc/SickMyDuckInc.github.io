@@ -314,6 +314,15 @@ levelManager.prototype.startGame = function(){
                 actions.push(this_action);
             }
 
+            if( i == 0){
+                var checkPathX = characterToUse.init[0];
+                var checkPathY = characterToUse.init[1];
+            }
+            else{
+                var checkPathX = pathToUse[i-1][0];
+                var checkPathY = pathToUse[i-1][0];
+            }
+
             if(actualEnemy.autoAttack){
                 console.log("Added autoattack");
                 this_action = {
@@ -325,7 +334,7 @@ levelManager.prototype.startGame = function(){
                 }
                 actions.push(this_action);
             }
-            else if(actualEnemy.checkAttack(pathToUse[i][0], pathToUse[i][1])){
+            else if(actualEnemy.checkAttack(checkPathX, checkPathY)){
                 this_action = {
                     action : "attack",
                     character : actualEnemy,
