@@ -5,13 +5,19 @@ function bullet(direction, type, col, rows, vel, canvas){
     this.rows = rows;
     this.vel = vel;
     this.canvas = canvas;
-    this.bulletSprite = new sprite(this.canvas.getContext(), this.enemiesSprites[this.selectedEnemy] +"_stand.png", 1, 1, col * 1, rows * 1);
-    console.log("Sprites: " + this.spawnedSprites + ", matrix: " + this.spawnedSpritesMatrix);
+    this.bulletSprite = new sprite(this.canvas.getContext(), "res/goodies/bullet.png", 100, 100, 50, 100);
+    this.bulletSprite.addAnimation("move",  "res/goodies/bullet_anim.png", 2, 200, 200);
+    this.bulletSprite.playAnimation("move");
+
+    this.updateInterval = setInterval(() => this.update(), 100);
 }
 
-bullet.prototype.executeMovement = function(time){
-    var posx = gridnode[i].y;
-    var posy = gridnode[y].x;
+bullet.prototype.update = function(){
+        
 
-    this.Move(posx,posy);
+    
+    //this.bulletSprite.draw();
+    
+
+    //this.character.sprite.draw();
 }

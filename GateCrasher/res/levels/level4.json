@@ -43,7 +43,7 @@
         {
             "sprite":"enemy01",
             "initialPos": [7, 2],
-            "goal": [0, 9]
+            "goal": [0, 10]
         }
     ]
 }

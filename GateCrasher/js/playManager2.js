@@ -25,10 +25,11 @@ function playManager(actions, levelManager, allEnemies, character, canvas){
     this.allEnemies = allEnemies;
     this.character = character;
     this.canvas = canvas;
+    this.allBullets = [];
 
-
+    this.allEnemies[0].checkAttack(1,1);
+    this.allEnemies[0].fight(this.allBullets);
     this.updateInterval = setInterval(() => this.update(), 100);
-
 }
 
 playManager.prototype.update = function(){
@@ -37,10 +38,15 @@ playManager.prototype.update = function(){
     for(var element in this.allEnemies){
         this.allEnemies[element].sprite.draw();
     }
-
+    for(var element in this.allBullets){
+        this.allBullets[element].bulletSprite.draw();
+        this.allBullets[element].bulletSprite.moveInDirection("LEFT");
+    }
     //this.character.sprite.draw();
 }
-
+playManager.prototype.addBullet = function(bullet){
+    this.allBullets.push(bullet);
+}
 
 //Constructior de la clase, 
 // function playManager(matrixMovement,listAction, listCharacters, myGameArea, col, rows){
