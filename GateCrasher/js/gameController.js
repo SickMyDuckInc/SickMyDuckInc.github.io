@@ -137,6 +137,11 @@ var anim_multipliers = {
         attack: 1,
         hurt : 2
     },
+    "tank":{
+        idle: 1,
+        attack: 1,
+        hurt : 2
+    },
 }
 
 var anim_frames = {
@@ -160,6 +165,11 @@ var anim_frames = {
         hurt : 1
     },
     "trumpet":{
+        idle: 5,
+        attack: 5,
+        hurt : 1
+    },
+    "tank":{
         idle: 5,
         attack: 5,
         hurt : 1
@@ -291,6 +301,10 @@ $(document).ready(function(){
         "res/goodies/trumpet_idle.png",
         "res/goodies/trumpet_attack.png",
         "res/goodies/trumpet_red.png",
+        "res/goodies/tank_stand.png",
+        "res/goodies/tank_idle.png",
+        "res/goodies/tank_attack.png",
+        "res/goodies/tank_red.png",
         "res/goodies/angel_stand.png",
         "res/goodies/angel_idle.png",
         "res/goodies/bullet.png",

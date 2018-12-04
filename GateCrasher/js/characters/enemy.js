@@ -78,7 +78,15 @@ function enemy( rows, cols, sprite, indexEnemy, canvas,character){
             break;
         case 4:
         //tank
-            this.sprite.addAnimation("attack","res/goodies/tank.png")
+            this.sprite.addAnimation("attack","res/goodies/tank_attack.png",anim_frames["tank"].attack,200,200)
+            this.autoAttack = false;
+            this.life = 50;
+            this.shoot = false;
+            this.damage = 20;
+            this.range = 1;
+            this.countAttack = 0;
+            this.count = 0;
+            break;
 
     }
 }

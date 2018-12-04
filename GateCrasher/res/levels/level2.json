@@ -24,8 +24,8 @@
     "numEnemies": 4,
     "enemies":[
         {
-            "sprite":"angel",
-            "type": 3,
+            "sprite":"tank",
+            "type": 4,
             "maxNumber":3
         },
         {
@@ -39,7 +39,7 @@
             "maxNumber":1
         },{
             "sprite":"trap",
-            "type": 4,
+            "type": 2,
             "maxNumber":2
         }
     ],
