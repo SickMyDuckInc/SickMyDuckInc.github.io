@@ -62,7 +62,7 @@ canvas{
     vertical-align: top;
     cursor:pointer;
 }
-/* @media (min-width : 1000px){
+@media (min-width : 1000px){
     .canvas_responsive{
         max-width: 1200px;
         max-height: 800px;
@@ -74,7 +74,7 @@ canvas{
     #enemy_selector{
         height: 800px;
     }
-} */
+}
 
 #enemy_selector.responsive{
     position: fixed;
