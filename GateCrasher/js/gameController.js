@@ -112,6 +112,9 @@ var myGameArea = {
     },
     removeSelected : function(){
         $("#responsive_menu img").attr("src","/res/goodies/empty.png");
+    },
+    addSelected : function(){
+
     }
 }
 
@@ -303,7 +306,7 @@ function preload(){
 }
 
 function startGame(){
-    $.getJSON("res/levels/level3.json", function(data){
+    $.getJSON("res/levels/level2.json", function(data){
         lManager = new levelManager(myGameArea, images, data);
 
         var rows = lManager.numRows;
@@ -344,6 +347,7 @@ $(document).ready(function(){
     $("#responsive_menu").hide();
 
     preload(
+        //Pasillos
         "res/background/heaven_horizontal.png", // 0
         "res/background/heaven_vertical.png", // 1
         "res/background/heaven_corner1.png", // 2
@@ -356,6 +360,7 @@ $(document).ready(function(){
         "res/background/heaven_intersectionder.png", // 9
         "res/background/heaven_intersectionizq.png", // 10
         "res/background/heaven_intersectionup.png", // 11
+        //Nubes
         "res/background/cloud_puzzle1.png", // 12
         "res/background/cloud_puzzle2.png", // 13
         "res/background/cloud_puzzle3.png", // 14
@@ -368,6 +373,7 @@ $(document).ready(function(){
         "res/background/cloud_big5.png", // 21
         "res/background/cloud_big6.png", // 22
         "res/background/heaven_intersection.png", // 23
+        //Bordes
         "res/background/tiles/m00.png", // 24
         "res/background/tiles/m01.png", // 25
         "res/background/tiles/m02.png", // 26
@@ -377,7 +383,19 @@ $(document).ready(function(){
         "res/background/tiles/m20.png", // 30
         "res/background/tiles/m21.png", // 31
         "res/background/tiles/m22.png", // 32
-     
+        //Nubes de dentro
+        "res/background/tiles/intern1.png", // 33
+        "res/background/tiles/intern2.png", // 34
+        "res/background/tiles/intern3.png", // 35
+        "res/background/tiles/intern4.png", // 36
+        "res/background/tiles/intern5.png", // 37
+        //Finales de los caminos
+        "res/background/heaven_endleft.png", // 38
+        "res/background/heaven_endup.png", // 39
+        "res/background/heaven_enddown.png", // 40
+        "res/background/heaven_endright.png", // 41
+        
+        //Sprites de enemigos y aliados
         "res/enemies/enemy01_stand.png",
         "res/enemies/enemy01_idle.png",
         "res/enemies/enemy01_attack.png",
