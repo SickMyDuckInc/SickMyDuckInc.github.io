@@ -5,11 +5,24 @@
 
 body{
     font-family: "Gatecrasher";
-    
+    overflow: hidden;
+}
+
+#game-title{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: auto;
+    width: auto;
 }
 
 #mainmenu_container{
     max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center; 
 }
 
 .btn-menu {
@@ -26,7 +39,9 @@ body{
     align-items: center;
     text-align: center;
     min-height: 10vh;
-    margin:70px;
+    width: 30%;
+    height: auto;
+    margin:20px;
 }
 
 
