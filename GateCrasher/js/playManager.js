@@ -54,7 +54,7 @@ playManager.prototype.update = function(){
         }
         else{
             this.allBullets[element].bulletSprite.draw();
-            this.allBullets[element].bulletSprite.moveInDirection("LEFT");
+            this.allBullets[element].bulletSprite.moveInDirection(this.allBullets[element].direction);
             this.allBullets[element].checkCollision(this.allEnemies);
         }
     }
@@ -102,7 +102,9 @@ playManager.prototype.calculateNext = function(turnActions){
         else{
            switch(thisAction.action){
                 case 'attack':
-                thisAction.character.executeAction(this);
+                if(!thisAction.character.isDead()){
+                    thisAction.character.executeAction(this);
+                }
                 break;
            } 
         }
@@ -112,7 +114,12 @@ playManager.prototype.calculateNext = function(turnActions){
 playManager.prototype.moveUpdate = function(){
     if(this.character.walk()){
         this.actualAction++;
-        this.calculateNext(this.actions[this.actualAction]);
+        if(this.actualAction>= this.actions.length){
+            console.log("HE GANADO");
+        }
+        else{
+            this.calculateNext(this.actions[this.actualAction]);
+        }
     }
 }
 

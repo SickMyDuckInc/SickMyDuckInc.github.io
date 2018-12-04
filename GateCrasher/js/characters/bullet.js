@@ -29,6 +29,7 @@ bullet.prototype.checkCollision = function(allEnemies){
             this.bulletSprite.x < allEnemies[element].cols*this.canvas.getDrawHeightDivided()+this.canvas.getDrawHeightDivided() &&  
             this.bulletSprite.x > allEnemies[element].cols*this.canvas.getDrawHeightDivided()-this.canvas.getDrawHeightDivided()){
                 this.collisioned = true;
+                allEnemies[element].takeDamage(this.parent.damage);
             }
         }
     }
@@ -39,6 +40,7 @@ bullet.prototype.checkCollision = function(allEnemies){
     this.bulletSprite.x < this.character.sprite.x+this.canvas.getDrawHeightDivided() &&  
     this.bulletSprite.x > this.character.sprite.x-this.canvas.getDrawHeightDivided()){
         this.collisioned = true;
+        this.character.takeDamage(this.parent.damage);
     }
     
     //this.canvas.getDrawHeight()-this.canvas.getDrawHeightDivided() 
