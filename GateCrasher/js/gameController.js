@@ -68,6 +68,18 @@ var myGameArea = {
     getContext : function(){
         return this.context;
     },
+    getDrawHeightDivided : function(){
+        return this.drawHeight;
+    },
+    getDrawWidthDivided : function(){
+        return this.drawWidth;
+    },
+    setDrawWidth : function(w){
+        this.drawWidth = w;
+    },
+    setDrawHeight : function(h){
+        this.drawHeight = h;
+    },
     drawLine : function(fromX, fromY, toX, toY){
         this.contexts[2].moveTo(fromX, fromY);
         this.contexts[2].lineTo(toX, toY);
@@ -101,7 +113,8 @@ var myGameArea = {
 
 var anim_multipliers = {
     "turret":{
-        idle : 3
+        idle : 3,
+        attack : 1
     },
     "enemy01":{
         idle : 2,
@@ -249,6 +262,7 @@ $(document).ready(function(){
         "res/goodies/enemy01_idle.png",
         "res/goodies/turret_idle.png",
         "res/goodies/turret_stand.png",
+        "res/goodies/turret_attack.png",
         "res/goodies/angel_stand.png",
         "res/goodies/angel_idle.png",
         "res/goodies/bullet.png",
