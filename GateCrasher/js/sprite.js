@@ -26,7 +26,7 @@ function sprite(context, spriteImage, height, width, posX, posY, visible = true)
 }
 
 sprite.prototype.setVisible = function(){
-    this.visible = true;
+    this.isVisible = true;
 }
 
 sprite.prototype.moveTo = function (x, y) {
