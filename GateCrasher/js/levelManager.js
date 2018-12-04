@@ -279,7 +279,7 @@ levelManager.prototype.startGame = function(){
     for(var en in this.spawnedSprites){
         if(this.spawnedSprites[en].isEnemy){
             var enemyLevel = this.spawnedSprites[en];
-            var enemyToAdd = new enemy(enemyLevel.posX, enemyLevel.posY, enemyLevel.sprite, enemyLevel.type);
+            var enemyToAdd = new enemy(enemyLevel.posX, enemyLevel.posY, enemyLevel.sprite, enemyLevel.type, characterToUse);
             allEnemies.push(enemyToAdd);
         }
     }

@@ -26,6 +26,7 @@ function playManager(actions, levelManager, allEnemies, character, canvas){
     this.character = character;
     this.canvas = canvas;
     this.actualAction = 0;
+    this.bullets = Array();
 
 
     this.updateInterval = setInterval(() => this.update(), 100);
@@ -40,6 +41,17 @@ playManager.prototype.update = function(){
 
     for(var element in this.allEnemies){
         this.allEnemies[element].sprite.draw();
+    }
+
+    
+    for(var element in this.allBullets){
+        if(this.allBullets[element].collisioned){
+            this.allBullets.splice(element, 1);
+        }
+        else{
+            this.allBullets[element].bulletSprite.draw();
+            this.allBullets[element].bulletSprite.moveInDirection("LEFT");
+        }
     }
 
     this.character.sprite.draw();
@@ -66,7 +78,7 @@ playManager.prototype.calculateNext = function(turnActions){
         else{
            switch(thisAction.action){
                 case 'attack':
-                thisAction.character.executeAction();
+                thisAction.character.executeAction(this);
                 break;
            } 
         }
@@ -78,6 +90,10 @@ playManager.prototype.moveUpdate = function(){
         this.actualAction++;
         this.calculateNext(this.actions[this.actualAction]);
     }
+}
+
+playManager.prototype.addBullet = function(bullet){
+    this.bullets.push(bullet);
 }
 
 //Constructior de la clase, 
