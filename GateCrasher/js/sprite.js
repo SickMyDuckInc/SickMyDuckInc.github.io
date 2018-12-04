@@ -8,7 +8,9 @@ function sprite(context, spriteImage, height, width, posX, posY, visible = true)
     this.scaleX = 1;
     this.scaleY = 1;
     this.animations = {};
+
     this.isFlipped = false;
+    
     this.repeat = true;
     this.isVisible = visible;
 

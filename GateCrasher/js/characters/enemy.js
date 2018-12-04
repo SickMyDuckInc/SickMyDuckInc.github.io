@@ -84,13 +84,13 @@ function enemy( rows, cols, sprite, indexEnemy, canvas,character){
 
 
 enemy.prototype.fight = function(playMan){
-    if(this.dir == "left" && this.character.col > this.cols){
+    if(this.dir == "LEFT" && this.character.sprite.x > this.sprite.x){
         this.sprite.flip();
-        this.dir = "right";
+        this.dir = "RIGHT";
     }
-    else if(this.dir == "right" && this.character.col < this.cols){
+    else if(this.dir == "RIGHT" && this.character.sprite.x < this.sprite.x){
         this.sprite.flip();
-        this.dir = "left";
+        this.dir = "LEFT";
     }
     if(this.count == 0 ){
     this.sprite.playAnimation("attack", false, "idle");

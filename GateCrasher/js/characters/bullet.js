@@ -8,7 +8,10 @@ function bullet(direction, type, col, rows, vel, canvas,character, parent,name){
     this.collisioned = false;
     this.parent =parent;
     this.character = character;
-    this.bulletSprite = new sprite(this.canvas.getContext(), "res/goodies/"+name+".png", this.canvas.getDrawHeightDivided(), this.canvas.getDrawWidthDivided(),col*this.canvas.getDrawHeightDivided(),rows*this.canvas.getDrawWidthDivided());
+    this.bulletSprite = new sprite(this.canvas.getContext(), "res/goodies/"+name+".png", this.canvas.getDrawHeightDivided(), this.canvas.getDrawWidthDivided(),col*this.canvas.getDrawHeightDivided(),rows*this.canvas.getDrawWidthDivided(),false);
+    if(direction == "RIGHT")
+        this.bulletSprite.flip();
+    this.bulletSprite.setVisible();
     this.bulletSprite.addAnimation("move",  "res/goodies/"+name+"_anim.png", 2, 200, 200);
     this.bulletSprite.setSpeed(PLAY_SPEED/2);
 
