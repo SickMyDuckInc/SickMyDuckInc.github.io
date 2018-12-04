@@ -233,6 +233,7 @@ levelManager.prototype.spawnSprite = function(casillaX, casillaY){
     var substr = this.enemiesSprites[this.selectedEnemy].substr(lastIndexOf + 1);
     console.log("Substr:" + substr);
     player.addAnimation("idle",  this.enemiesSprites[this.selectedEnemy] +"_idle.png", anim_frames[substr].idle, 200, 200, anim_multipliers[substr].idle);
+    player.addAnimation("hurt",  this.enemiesSprites[this.selectedEnemy] +"_red.png", anim_frames[substr].hurt, 200, 200, anim_multipliers[substr].hurt);
     player.playAnimation("idle");
     var spriteToSpawn = {
         sprite : player,
@@ -253,6 +254,7 @@ levelManager.prototype.spawnHeroes = function(){
         player.addAnimation("idle", "res/enemies/" + this.characters[i].sprite +"_idle.png", anim_frames[this.characters[i].sprite].idle, 200, 200, anim_multipliers[this.characters[i].sprite].idle);
         player.addAnimation("walk", "res/enemies/" + this.characters[i].sprite +"_walk.png", anim_frames[this.characters[i].sprite].walk, 200, 200,  anim_multipliers[this.characters[i].sprite].walk);
         player.addAnimation("attack", "res/enemies/" + this.characters[i].sprite +"_attack.png", anim_frames[this.characters[i].sprite].attack, 200, 200,  anim_multipliers[this.characters[i].sprite].attack);
+        player.addAnimation("hurt", "res/enemies/" + this.characters[i].sprite +"_red.png", anim_frames[this.characters[i].sprite].hurt, 200, 200,  anim_multipliers[this.characters[i].sprite].hurt);
         player.playAnimation("idle");
         player.flip();
         var spriteToAdd = {
@@ -350,6 +352,8 @@ levelManager.prototype.startGame = function(){
     //this.canvas.clear();
     clearInterval(this.updateInterval);
 
+    this.canvas.clearLines();
+    this.canvas.hideBar();
     var pM = new playManager(turnos, this, allEnemies, characterToUse, this.canvas);
 
 }

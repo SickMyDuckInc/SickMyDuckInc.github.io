@@ -41,9 +41,7 @@ var myGameArea = {
     },
     resizeEnemies : function(numEnemies){
         var totalHeight = $("#enemy_selector").outerHeight();
-        console.log(totalHeight);
         var height = totalHeight / (numEnemies+1);
-        console.log("Altura individual: " + height);
         $(".single_enemy").outerHeight(height);
         $("#play_button").outerHeight(height-5);
     },
@@ -85,6 +83,9 @@ var myGameArea = {
         this.contexts[2].lineTo(toX, toY);
         this.contexts[2].stroke();
     },
+    clearLines : function(){
+        this.contexts[2].clearRect(0, 0, this.canvas.width, this.canvas.height);
+    },
     drawSquare : function(fromX, fromY, width, height){
         this.context.fillRect(fromX, fromY, width, height);
         this.context.stroke();
@@ -114,18 +115,22 @@ var myGameArea = {
 var anim_multipliers = {
     "turret":{
         idle : 3,
-        attack : 1
+        attack : 1,
+        hurt : 2
     },
     "enemy01":{
         idle : 2,
         walk : 1,
         attack: 1,
+        hurt : 2
     },
     "angel":{
-        idle: 1
+        idle: 1,
+        hurt : 2
     },
     "trap":{
-        idle: 1
+        idle: 1,
+        hurt : 2
     }
 }
 
@@ -133,17 +138,21 @@ var anim_frames = {
     "turret":{
         idle : 4,
         attack : 4,
+        hurt : 1,
     },
     "enemy01":{
         idle : 4,
         walk : 4,
-        attack : 4
+        attack : 4,
+        hurt : 1
     },
     "angel":{
-        idle: 5
+        idle: 5,
+        hurt : 1
     },
     "trap":{
-        idle: 1
+        idle: 1,
+        hurt : 1
     }
 }
 
@@ -243,8 +252,8 @@ $(document).ready(function(){
     $("#responsive_menu").hide();
 
     preload(
-        "res/background/snow_horizontal.png",
-        "res/background/snow_vertical.png",
+        "res/background/heaven_horizontal.png",
+        "res/background/heaven_vertical.png",
         "res/background/snow_corner1.png",
         "res/background/snow_corner2.png",
         "res/background/snow_corner3.png",
@@ -261,11 +270,13 @@ $(document).ready(function(){
         "res/enemies/enemy01_idle.png",
         "res/enemies/enemy01_attack.png",
         "res/enemies/enemy01_walk.png",
+        "res/enemies/enemy01_red.png",
         "res/goodies/enemy01_stand.png",
         "res/goodies/enemy01_idle.png",
         "res/goodies/turret_idle.png",
         "res/goodies/turret_stand.png",
         "res/goodies/turret_attack.png",
+        "res/goodies/turret_red.png",
         "res/goodies/angel_stand.png",
         "res/goodies/angel_idle.png",
         "res/goodies/bullet.png",
@@ -293,15 +304,13 @@ $(document).ready(function(){
     });
 
     $("#backgroundCanvas").on('click', function(){
-        console.log("background");
     });
 
     $(document).on('click', ".single_enemy", function(e){
-        console.log("qie coño");
         lManager.manageEnemyClick($(this).data("enemy"));
     });
 
-    $("#responsive_menu").on('click', function(){
+    $("#responsive_menu, #play_button").on('click', function(){
         if($("#enemy_selector").hasClass("hidden")){
             $("#enemy_selector").removeClass("hidden");
         }
