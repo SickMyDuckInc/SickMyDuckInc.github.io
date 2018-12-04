@@ -25,7 +25,7 @@
     "enemies":[
         {
             "sprite":"angel",
-            "type": 1,
+            "type": 3,
             "maxNumber":3
         },
         {
@@ -34,8 +34,8 @@
             "maxNumber":2
         },
         {
-            "sprite":"enemy01",
-            "type": 3,
+            "sprite":"trumpet",
+            "type": 1,
             "maxNumber":1
         },{
             "sprite":"trap",
