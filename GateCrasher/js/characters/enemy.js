@@ -182,11 +182,11 @@ enemy.prototype.Neighbour= function(Enemies){
 }
 
 enemy.prototype.checkEnemyAttack = function(){
-    if(this.dir == "LEFT" && this.leftNeighbour!= undefined && !this.leftNeighbour.isDead() &&this.Neighbour.canBeAttacked){
+    if(this.dir == "LEFT" && this.leftNeighbour!= undefined && !this.leftNeighbour.isDead() &&this.leftNeighbour.canBeAttacked){
         this.sprite.playAnimation("attack", false, "idle");
         this.leftNeighbour.takeDamage(this.damage);
     }
-    else if(this.dir == "RIGHT" && this.rightNeighbour!= undefined && !this.leftNeighbour.isDead()&&this.Neighbour.canBeAttacked){
+    else if(this.dir == "RIGHT" && this.rightNeighbour!= undefined && !this.rightNeighbour.isDead()&&this.rightNeighbour.canBeAttacked){
         this.sprite.playAnimation("attack", false, "idle");
         this.rightNeighbour.takeDamage(this.damage);
     }
