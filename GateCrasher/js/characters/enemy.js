@@ -80,6 +80,13 @@ function enemy( rows, cols, sprite, indexEnemy, canvas,character){
             }
             this.executeClose = function(){
                 this.sprite.playAnimation("attack", false, "closed");
+
+            }
+
+            this.release = function(playMan){
+                playMan.characterCanMove = true;
+                playMan.characterStunnned = false;
+                this.life = 0;
             }
             break;
         case 3:

@@ -90,9 +90,9 @@ playManager.prototype.calculateNext = function(turnActions){
                 case 'walk':                
                     var posX = thisAction.data.target[0] * this.levelManager.drawWidth;
                     var posY = thisAction.data.target[1] * this.levelManager.drawHeight;
-                    thisAction.character.setNextTile({x : posY, y : posX});
-                    if(this.characterCanMove && !this.characterStunned){                           
-                        clearInterval(this.moveInterval);                       
+                    thisAction.character.setNextTile({x : posY, y : posX});                          
+                    clearInterval(this.moveInterval);        
+                    if(this.characterCanMove && !this.characterStunned){                
                         thisAction.character.calculateWalk(true);                  
                         this.moveInterval = setInterval(() => this.moveUpdate(), 100);
                         console.log("Character walking to: " + thisAction.data.target + ", position: " + posX + ", " + posY);
@@ -148,8 +148,13 @@ playManager.prototype.moveAndStun = function(trap){
         clearInterval(this.moveInterval);
         this.actualAction++;
         trap.executeClose();
+        setTimeout(()=> this.releaseTrap(trap), 100*PLAY_SPEED);
         this.moveInterval = setInterval(() => this.calculateNext(this.actions[this.actualAction]), 100 * PLAY_SPEED);
     }
+}
+
+playManager.prototype.releaseTrap = function(trap){
+
 }
 
 playManager.prototype.addBullet = function(bullet){
