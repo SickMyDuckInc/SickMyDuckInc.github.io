@@ -83,9 +83,7 @@ function enemy( rows, cols, sprite, indexEnemy, canvas,character){
 
             }
 
-            this.release = function(playMan){
-                playMan.characterCanMove = true;
-                playMan.characterStunnned = false;
+            this.release = function(){
                 this.life = 0;
             }
             break;
@@ -142,6 +140,11 @@ enemy.prototype.executeFightEnd = function(){
     //this.enemyTarget.sprite.setRedTint();
     console.log("executedEnd");
 }
+enemy.prototype.executeFightEndEnemy = function(){    
+    this.target.takeDamage(this.damage);
+    //this.enemyTarget.sprite.setRedTint();
+    console.log("executedEnd");
+}
 enemy.prototype.executeAction = function(playMan){
     this.fight(playMan);
 }
@@ -185,12 +188,12 @@ enemy.prototype.Neighbour= function(Enemies){
 
 enemy.prototype.checkEnemyAttack = function(){
     if(this.dir == "LEFT" && this.leftNeighbour!= undefined && !this.leftNeighbour.isDead() &&this.leftNeighbour.canBeAttacked){
-        this.sprite.playAnimation("attack", false, "idle");
-        this.leftNeighbour.takeDamage(this.damage);
+        this.target = this.leftNeighbour;
+        this.sprite.playAnimation("attack", false, "idle",this.executeFightEndEnemy,this);
     }
     else if(this.dir == "RIGHT" && this.rightNeighbour!= undefined && !this.rightNeighbour.isDead()&&this.rightNeighbour.canBeAttacked){
-        this.sprite.playAnimation("attack", false, "idle");
-        this.rightNeighbour.takeDamage(this.damage);
+        this.target = this.rightNeighbour;
+        this.sprite.playAnimation("attack", false, "idle",this.executeFightEndEnemy,this);
     }
 }
 
