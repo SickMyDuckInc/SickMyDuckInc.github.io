@@ -21,7 +21,7 @@
         [-2, -2, -1, -1, -1, -1, -1, -1, -1, -1, -1, -2],
         [-2, -2, -1, -2, -2, -2, -2, -2, -2, -2, -2, -2]
     ],
-    "numEnemies": 3,
+    "numEnemies": 4,
     "enemies":[
         {
             "sprite":"turret",
@@ -36,6 +36,10 @@
         {
             "sprite":"trumpet",
             "type": 1,
+            "maxNumber":1
+        },
+            {"sprite":"angel",
+            "type": 2,
             "maxNumber":1
         }
     ],

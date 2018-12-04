@@ -25,6 +25,7 @@ function enemy( rows, cols, sprite, indexEnemy, canvas,character){
     this.dir = "LEFT";
     this.distance = 0;
     this.canBeAttacked = true;
+    this.draw = true;
 
     switch(indexEnemy){
         case 0:
@@ -35,7 +36,7 @@ function enemy( rows, cols, sprite, indexEnemy, canvas,character){
             this.shoot = true;
             this.spriteShoot = "bullet";
             this.shoots = []; 
-            this.damage = 5;
+            this.damage = 4;
             this.range = 15;
             this.countAttack = 0;
             this.count = 0;
@@ -44,12 +45,14 @@ function enemy( rows, cols, sprite, indexEnemy, canvas,character){
         case 1:
         //angel de distancia
             this.sprite.addAnimation("attack", "res/goodies/trumpet_attack.png", anim_frames["trumpet"].attack, 200, 200);
+            this.sprite.addAnimation("die", "res/goodies/trumpet_dead.png", anim_frames["trumpet"].die, 500, 500);
+            this.hasDeadAnimation = true;
             this.autoAttack = false;
             this.life = 50;
             this.shoot = true;
             this.spriteShoot = "ball";
             this.shoots = []; 
-            this.damage = 60;
+            this.damage = 30;
             this.range = 2;
             this.countAttack = 4;
             this.count = 0;
@@ -80,28 +83,38 @@ function enemy( rows, cols, sprite, indexEnemy, canvas,character){
             }
             this.executeClose = function(){
                 this.sprite.playAnimation("attack", false, "closed");
+
+            }
+
+            this.release = function(){
+                this.life = 0;
+                this.draw = false;
             }
             break;
         case 3:
         //angel melee
             this.sprite.addAnimation("attack","res/goodies/angel_attack.png",anim_frames["angel"].attack,200,200);
+            this.sprite.addAnimation("die", "res/goodies/angel_dead.png", anim_frames["angel"].die, 500, 500);
+            this.hasDeadAnimation = true;
             this.autoAttack = false;
             this.life = 50;
             this.shoot = false;
             this.damage = 20;
-            this.range = 0;
+            this.range = 1;
             this.melee = true;
             this.countAttack = 0;
             this.count = 0;
             break;
         case 4:
         //tank
-            this.sprite.addAnimation("attack","res/goodies/tank_attack.png",anim_frames["tank"].attack,200,200)
+            this.sprite.addAnimation("attack","res/goodies/tank_attack.png",anim_frames["tank"].attack,200,200);
+            this.sprite.addAnimation("die", "res/goodies/tank_dead.png", anim_frames["tank"].die, 500, 500);
+            this.hasDeadAnimation = true;
             this.autoAttack = false;
             this.life = 100;
             this.shoot = false;
             this.damage = 5;
-            this.range = 0;
+            this.range = 1;
             this.melee = true;
             this.countAttack = 0;
             this.count = 0;
@@ -135,14 +148,34 @@ enemy.prototype.executeFightEnd = function(){
     //this.enemyTarget.sprite.setRedTint();
     console.log("executedEnd");
 }
+enemy.prototype.executeFightEndEnemy = function(){    
+    this.target.takeDamage(this.damage);
+    //this.enemyTarget.sprite.setRedTint();
+    console.log("executedEnd");
+}
 enemy.prototype.executeAction = function(playMan){
     this.fight(playMan);
 }
 
 enemy.prototype.takeDamage = function(dmg){
-    this.sprite.setRedTint();
     this.life -= dmg;
+    if(this.life<=0){
+        if(!this.hasDeadAnimation){            
+            this.sprite.setRedTint();
+            this.draw = false;
+        }
+        else{
+            this.sprite.playAnimation("die", false, "idle", this.kill, this);
+        }
+    }
+    else{
+        this.sprite.setRedTint();
+    }
     console.log("Life: " + this.life);
+}
+
+enemy.prototype.kill = function(){
+    this.draw = false;
 }
 
 enemy.prototype.isDead = function(){
@@ -177,13 +210,13 @@ enemy.prototype.Neighbour= function(Enemies){
 }
 
 enemy.prototype.checkEnemyAttack = function(){
-    if(this.dir == "LEFT" && this.leftNeighbour!= undefined && !this.leftNeighbour.isDead()){
-        this.sprite.playAnimation("attack", false, "idle");
-        this.leftNeighbour.takeDamage(this.damage);
+    if(this.dir == "LEFT" && this.leftNeighbour!= undefined && !this.leftNeighbour.isDead() &&this.leftNeighbour.canBeAttacked){
+        this.target = this.leftNeighbour;
+        this.sprite.playAnimation("attack", false, "idle",this.executeFightEndEnemy,this);
     }
-    else if(this.dir == "RIGHT" && this.rightNeighbour!= undefined && !this.leftNeighbour.isDead()){
-        this.sprite.playAnimation("attack", false, "idle");
-        this.rightNeighbour.takeDamage(this.damage);
+    else if(this.dir == "RIGHT" && this.rightNeighbour!= undefined && !this.rightNeighbour.isDead()&&this.rightNeighbour.canBeAttacked){
+        this.target = this.rightNeighbour;
+        this.sprite.playAnimation("attack", false, "idle",this.executeFightEndEnemy,this);
     }
 }
 
