@@ -23,8 +23,8 @@ function character(inicio, end, rows, cols, matrix, sprite){
     this.life = 100;
     this.damage = 25;
     
-    var canvas_cols = cols;
-    var canvas_rows = rows;
+    this.cols = cols;
+    this.rows = rows;
  
     console.log("Created character");
     console.log(this.matrix);
@@ -97,6 +97,7 @@ character.prototype.fight = function(enemyTarget){
     var moveY = this.currentTile.y;
     this.sprite.moveTo(moveX, moveY);
     enemyTarget.takeDamage(this.damage);
+    enemyTarget.sprite.setRedTint();
 }
 
 character.prototype.pathfinding = function(){

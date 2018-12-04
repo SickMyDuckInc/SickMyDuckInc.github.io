@@ -114,18 +114,22 @@ var myGameArea = {
 var anim_multipliers = {
     "turret":{
         idle : 3,
-        attack : 1
+        attack : 1,
+        hurt : 2
     },
     "enemy01":{
         idle : 2,
         walk : 1,
         attack: 1,
+        hurt : 2
     },
     "angel":{
-        idle: 1
+        idle: 1,
+        hurt : 2
     },
     "trap":{
-        idle: 1
+        idle: 1,
+        hurt : 2
     }
 }
 
@@ -133,17 +137,21 @@ var anim_frames = {
     "turret":{
         idle : 4,
         attack : 4,
+        hurt : 1,
     },
     "enemy01":{
         idle : 4,
         walk : 4,
-        attack : 4
+        attack : 4,
+        hurt : 1
     },
     "angel":{
-        idle: 5
+        idle: 5,
+        hurt : 1
     },
     "trap":{
-        idle: 1
+        idle: 1,
+        hurt : 1
     }
 }
 
@@ -261,11 +269,13 @@ $(document).ready(function(){
         "res/enemies/enemy01_idle.png",
         "res/enemies/enemy01_attack.png",
         "res/enemies/enemy01_walk.png",
+        "res/enemies/enemy01_red.png",
         "res/goodies/enemy01_stand.png",
         "res/goodies/enemy01_idle.png",
         "res/goodies/turret_idle.png",
         "res/goodies/turret_stand.png",
         "res/goodies/turret_attack.png",
+        "res/goodies/turret_red.png",
         "res/goodies/angel_stand.png",
         "res/goodies/angel_idle.png",
         "res/goodies/bullet.png",
