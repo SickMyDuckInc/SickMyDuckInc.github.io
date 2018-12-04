@@ -98,11 +98,12 @@ enemy.prototype.executeAction = function(playMan){
 }
 
 enemy.prototype.takeDamage = function(dmg){
+    console.log("Life: " + this.life);
     this.life -= dmg;
 }
 
 enemy.prototype.isDead = function(){
-    return life<=0;
+    return this.life<=0;
 }
 
 enemy.prototype.checkAttack= function(col, row){

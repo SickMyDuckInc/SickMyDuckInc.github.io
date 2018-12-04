@@ -21,6 +21,7 @@ function character(inicio, end, rows, cols, matrix, sprite){
     //tipe GridNode {x = fila, y = columna, weight}
     this.path = null;
     this.life = 100;
+    this.damage = 50;
     
     var canvas_cols = cols;
     var canvas_rows = rows;
@@ -85,8 +86,8 @@ character.prototype.walk =  function(){
     return ret;
 }
 
-character.prototype.fight = function(){
-
+character.prototype.fight = function(enemyTarget){
+    enemyTarget.takeDamage(this.damage);
 }
 
 character.prototype.executeAction = function(){
