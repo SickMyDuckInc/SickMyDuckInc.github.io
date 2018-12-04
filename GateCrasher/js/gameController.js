@@ -119,6 +119,7 @@ var anim_multipliers = {
     "enemy01":{
         idle : 2,
         walk : 1,
+        attack: 1,
     },
     "angel":{
         idle: 1
@@ -136,6 +137,7 @@ var anim_frames = {
     "enemy01":{
         idle : 4,
         walk : 4,
+        attack : 4
     },
     "angel":{
         idle: 5
@@ -257,6 +259,7 @@ $(document).ready(function(){
         "res/background/grass_vertical.png",
         "res/enemies/enemy01_stand.png",
         "res/enemies/enemy01_idle.png",
+        "res/enemies/enemy01_attack.png",
         "res/enemies/enemy01_walk.png",
         "res/goodies/enemy01_stand.png",
         "res/goodies/enemy01_idle.png",

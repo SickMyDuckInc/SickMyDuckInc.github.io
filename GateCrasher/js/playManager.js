@@ -28,6 +28,7 @@ function playManager(actions, levelManager, allEnemies, character, canvas){
     this.actualAction = 0;
     this.allBullets = Array();
     this.characterCanMove = true;
+    this.targetEnemy;
 
 
     this.updateInterval = setInterval(() => this.update(), 100);
@@ -41,7 +42,9 @@ playManager.prototype.update = function(){
     this.canvas.clear();    
 
     for(var element in this.allEnemies){
-        this.allEnemies[element].sprite.draw();
+        if(!this.allEnemies[element].isDead()){
+            this.allEnemies[element].sprite.draw();
+        }
     }
 
     
@@ -64,11 +67,13 @@ playManager.prototype.calculateNext = function(turnActions){
         if(thisAction.character == this.character){
             switch(thisAction.action){
                 case 'attack':
+                this.characterCanMove = true;
                     if(thisAction.data.enemy.isDead()){
                         this.characterCanMove = true;
                     }
-                    else{
-                        this.playerAttack(thisAction.data.enemy);
+                    else{           
+                        this.targetEnemy = thisAction.data.enemy;
+                        this.playerAttack();
                         console.log("ataco");
                         this.characterCanMove = false;
                     }
@@ -83,6 +88,9 @@ playManager.prototype.calculateNext = function(turnActions){
                     if(this.characterCanMove){                    
                         this.moveInterval = setInterval(() => this.moveUpdate(), 100);
                         console.log("Character walking to: " + thisAction.data.target + ", position: " + posX + ", " + posY);
+                    }
+                    else{
+                        console.log("Cant move");
                     }
                     break;
                 default:
@@ -110,8 +118,18 @@ playManager.prototype.addBullet = function(bullet){
     this.allBullets.push(bullet);
 }
 
-playManager.prototype.playerAttack = function(targetEnemy){
-    setTimeout(()=>this.calculateNext(this.actions[this.actualAction]), 100*10);
+playManager.prototype.playerAttack = function(){    
+    this.character.fight(this.targetEnemy);
+    var mult = 0;
+    if(this.targetEnemy.isDead()){
+        this.characterCanMove = true;
+        //this.calculateNext(this.actions[this.actualAction]);
+    }
+    else{
+        mult = 10;
+    }
+    
+    setTimeout(()=> this.calculateNext(this.actions[this.actualAction]), 100*mult);
 }
 
 //Constructior de la clase, 
