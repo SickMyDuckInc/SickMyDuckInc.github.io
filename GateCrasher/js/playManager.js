@@ -27,6 +27,7 @@ function playManager(actions, levelManager, allEnemies, character, canvas){
     this.canvas = canvas;
     this.actualAction = 0;
     this.allBullets = Array();
+    this.characterCanMove = true;
 
 
     this.updateInterval = setInterval(() => this.update(), 100);
@@ -62,14 +63,27 @@ playManager.prototype.calculateNext = function(turnActions){
         var thisAction = turnActions[i];
         if(thisAction.character == this.character){
             switch(thisAction.action){
+                case 'attack':
+                    if(thisAction.data.enemy.isDead()){
+                        this.characterCanMove = true;
+                    }
+                    else{
+                        this.playerAttack(thisAction.data.enemy);
+                        console.log("ataco");
+                        this.characterCanMove = false;
+                    }
+
+                    break;
                 case 'walk':                
                     var posX = thisAction.data.target[0] * this.levelManager.drawWidth;
                     var posY = thisAction.data.target[1] * this.levelManager.drawHeight;
                     thisAction.character.setNextTile({x : posY, y : posX});
                     thisAction.character.calculateWalk();
-                    clearInterval(this.moveInterval);                    
-                    this.moveInterval = setInterval(() => this.moveUpdate(), 100);
-                    console.log("Character walking to: " + thisAction.data.target + ", position: " + posX + ", " + posY);
+                    clearInterval(this.moveInterval);
+                    if(this.characterCanMove){                    
+                        this.moveInterval = setInterval(() => this.moveUpdate(), 100);
+                        console.log("Character walking to: " + thisAction.data.target + ", position: " + posX + ", " + posY);
+                    }
                     break;
                 default:
                     break;
@@ -94,6 +108,10 @@ playManager.prototype.moveUpdate = function(){
 
 playManager.prototype.addBullet = function(bullet){
     this.allBullets.push(bullet);
+}
+
+playManager.prototype.playerAttack = function(targetEnemy){
+    setTimeout(()=>this.calculateNext(this.actions[this.actualAction]), 100*10);
 }
 
 //Constructior de la clase, 
