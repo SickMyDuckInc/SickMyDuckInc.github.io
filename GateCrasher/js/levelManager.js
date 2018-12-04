@@ -297,8 +297,16 @@ levelManager.prototype.startGame = function(){
         for(var actualEnemyIndex in allEnemies){
             var actualEnemy = allEnemies[actualEnemyIndex];
 
-            if((pathToUse[0] == actualEnemy.rows) && (pathToUse[1] == actualEnemy.cols)){
-                console.log("Adyacente en " + pathToUse[0] + ", " + pathToUse[0]);
+            if((pathToUse[i][0] == actualEnemy.rows) && (pathToUse[i][1] == actualEnemy.cols)){
+                console.log("Adyacente en " + pathToUse[i][0] + ", " + pathToUse[i][1]);
+                this_action = {
+                    action : "attack",
+                    character : characterToUse,
+                    data:{
+                        enemy : actualEnemy
+                    }
+                }
+                actions.push(this_action);
             }
 
             if(actualEnemy.autoAttack){
@@ -312,7 +320,7 @@ levelManager.prototype.startGame = function(){
                 }
                 actions.push(this_action);
             }
-            else if(actualEnemy.checkAttack(pathToUse[i].x, pathToUse[i].y)){
+            else if(actualEnemy.checkAttack(pathToUse[i][0], pathToUse[i][1])){
                 this_action = {
                     action : "attack",
                     character : actualEnemy,
