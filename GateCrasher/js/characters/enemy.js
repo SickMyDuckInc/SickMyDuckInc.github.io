@@ -25,7 +25,7 @@ function enemy( rows, cols, sprite, indexEnemy, canvas){
     switch(indexEnemy){
         case 0:
         //torreta
-            this.sprite.addAnimation("attack", "res/goodies/turret_attack.png", 4, 200, 200);
+            this.sprite.addAnimation("attack", "res/goodies/turret_attack.png", anim_frames["turret"].attack, 200, 200);
             this.autoAttack = true;
             this.life = 10;
             this.shoot = true;

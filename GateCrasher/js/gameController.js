@@ -117,7 +117,8 @@ var anim_multipliers = {
 
 var anim_frames = {
     "turret":{
-        idle : 4
+        idle : 4,
+        attack : 4,
     },
     "enemy01":{
         idle : 4,
