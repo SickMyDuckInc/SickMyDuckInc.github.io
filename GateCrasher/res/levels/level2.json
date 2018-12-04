@@ -34,8 +34,8 @@
             "maxNumber":2
         },
         {
-            "sprite":"trumpet",
-            "type": 1,
+            "sprite":"turret",
+            "type": 0,
             "maxNumber":1
         },{
             "sprite":"trap",

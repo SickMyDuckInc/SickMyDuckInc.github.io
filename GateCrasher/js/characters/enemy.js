@@ -25,6 +25,7 @@ function enemy( rows, cols, sprite, indexEnemy, canvas,character){
     this.dir = "LEFT";
     this.distance = 0;
     this.canBeAttacked = true;
+    this.draw = true;
 
     switch(indexEnemy){
         case 0:
@@ -44,6 +45,8 @@ function enemy( rows, cols, sprite, indexEnemy, canvas,character){
         case 1:
         //angel de distancia
             this.sprite.addAnimation("attack", "res/goodies/trumpet_attack.png", anim_frames["trumpet"].attack, 200, 200);
+            this.sprite.addAnimation("die", "res/goodies/trumpet_dead.png", anim_frames["trumpet"].die, 500, 500);
+            this.hasDeadAnimation = true;
             this.autoAttack = false;
             this.life = 50;
             this.shoot = true;
@@ -85,28 +88,33 @@ function enemy( rows, cols, sprite, indexEnemy, canvas,character){
 
             this.release = function(){
                 this.life = 0;
+                this.draw = false;
             }
             break;
         case 3:
         //angel melee
             this.sprite.addAnimation("attack","res/goodies/angel_attack.png",anim_frames["angel"].attack,200,200);
+            this.sprite.addAnimation("die", "res/goodies/angel_dead.png", anim_frames["angel"].die, 500, 500);
+            this.hasDeadAnimation = true;
             this.autoAttack = false;
             this.life = 50;
             this.shoot = false;
             this.damage = 10;
-            this.range = 0;
+            this.range = 1;
             this.melee = true;
             this.countAttack = 0;
             this.count = 0;
             break;
         case 4:
         //tank
-            this.sprite.addAnimation("attack","res/goodies/tank_attack.png",anim_frames["tank"].attack,200,200)
+            this.sprite.addAnimation("attack","res/goodies/tank_attack.png",anim_frames["tank"].attack,200,200);
+            this.sprite.addAnimation("die", "res/goodies/tank_dead.png", anim_frames["tank"].die, 500, 500);
+            this.hasDeadAnimation = true;
             this.autoAttack = false;
             this.life = 100;
             this.shoot = false;
             this.damage = 5;
-            this.range = 0;
+            this.range = 1;
             this.melee = true;
             this.countAttack = 0;
             this.count = 0;
@@ -150,9 +158,24 @@ enemy.prototype.executeAction = function(playMan){
 }
 
 enemy.prototype.takeDamage = function(dmg){
-    this.sprite.setRedTint();
     this.life -= dmg;
+    if(this.life<=0){
+        if(!this.hasDeadAnimation){            
+            this.sprite.setRedTint();
+            this.draw = false;
+        }
+        else{
+            this.sprite.playAnimation("die", false, "idle", this.kill, this);
+        }
+    }
+    else{
+        this.sprite.setRedTint();
+    }
     console.log("Life: " + this.life);
+}
+
+enemy.prototype.kill = function(){
+    this.draw = false;
 }
 
 enemy.prototype.isDead = function(){

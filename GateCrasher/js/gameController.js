@@ -109,6 +109,12 @@ var myGameArea = {
     },
     hideBar : function(){
         $("#enemy_selector.responsive").addClass("hidden");
+    },
+    removeSelected : function(){
+        $("#responsive_menu img").attr("src","/res/goodies/empty.png");
+    },
+    addSelected : function(){
+
     }
 }
 
@@ -126,7 +132,8 @@ var anim_multipliers = {
     },
     "angel":{
         idle: 1,
-        hurt : 2
+        hurt : 2,
+        die: 1
     },
     "trap":{
         idle: 1,
@@ -137,18 +144,15 @@ var anim_multipliers = {
     "trumpet":{
         idle: 1,
         attack: 1,
-        hurt : 2
+        hurt : 2,
+        die : 1
     },
     "tank":{
         idle: 1,
         attack: 1,
-        hurt : 2
-    },
-    "tank":{
-        idle: 1,
-        attack: 1,
-        hurt : 2
-    },
+        hurt : 2,
+        die : 1
+    }
 }
 
 var anim_frames = {
@@ -163,10 +167,6 @@ var anim_frames = {
         attack : 4,
         hurt : 1
     },
-    "angel":{
-        idle: 5,
-        hurt : 1
-    },
     "trap":{
         idle: 1,
         attack: 5,
@@ -175,32 +175,67 @@ var anim_frames = {
     "trumpet":{
         idle: 5,
         attack: 5,
-        hurt : 1
+        hurt : 1,
+        die : 5
     },
     "tank":{
         idle: 5,
         attack: 5,
-        hurt : 1
+        hurt : 1,
+        die: 5
     },
     "angel":{
         idle: 5,
         attack: 5,
-        hurt : 1
+        hurt : 1,
+        die : 5
     },
 }
 
 var lManager;
 var lCharacter;
 
-function resize(){    
-    $("#myCanvas").outerHeight($(window).height()-$("#myCanvas").offset().top- Math.abs($("#myCanvas").outerHeight(true) - $("#myCanvas").outerHeight() -10));
-    var outerHeight = $("#myCanvas").outerHeight();
-    var outerWidth = $("#myCanvas").outerWidth();
-    $("#enemy_selector").outerHeight(outerHeight);
+function resize(){
+    if($(window).width() >800){
+        console.log("hola");
+        var aspect_ratio = 400/600;
+        var window_width = $(window).width() - 200;
+        var window_height = $(window).height() - 50;
+        var relative_height = aspect_ratio * window_width;
+        if(relative_height<window_height){
+            $(".canvas_responsive").outerWidth($(window).width()-200);
+            $("#canvas_container").outerWidth($(window).width()-200);
+            $("#enemy_selector").outerHeight(relative_height);
+            var enemy_width = relative_height/5;
+            $("#enemy_selector").outerWidth(enemy_width);
+            $("#enemy_selector").removeClass("responsive").removeClass("hidden");
+            $("#responsive_menu").hide();
+        }
+    }
+    else if(true){
+        console.log("adios");
+        var window_width = $(window).width() - 10;
+        $(".canvas_responsive").outerWidth(window_width);
+        $("#canvas_container").outerWidth(window_width);
+        var offset= $("#myCanvas").offset().top;
+        console.log("He saltado");
+        $("#enemy_selector").addClass("responsive").addClass("hidden");
+        $("#enemy_selector").outerHeight($(".canvas_responsive").outerHeight());
+        $(".responsive").css("top", offset);
+        $("#responsive_menu").show();
+    }
+    else{    
+        $("#myCanvas").outerHeight($(window).height()-$("#myCanvas").offset().top- Math.abs($("#myCanvas").outerHeight(true) - $("#myCanvas").outerHeight() -10));
+        $("#myCanvas").outerWidth($(window).width()-$("#myCanvas").offset().left- Math.abs($("#myCanvas").outerWidth(true) - $("#myCanvas").outerWidth() -10));
+        var outerHeight = $("#myCanvas").outerHeight();
+        var outerWidth = $("#myCanvas").outerWidth();
+        console.log($(window).width());
+        $("#enemy_selector").outerHeight(outerHeight);
 
-    $(".canvas_responsive").outerHeight(outerHeight);
-    $("#canvas_container").outerWidth(outerWidth);
-
+        $(".canvas_responsive").outerHeight(outerHeight);
+        $("#canvas_container").outerWidth(outerWidth);
+    }
+/*
     var windowWidth = $(window).width();
 
     var totalWidth = 25 + outerWidth + $("#enemy_selector").outerWidth();
@@ -219,7 +254,7 @@ function resize(){
             $("#enemy_selector").removeClass("responsive").removeClass("hidden");
             $("#responsive_menu").hide();
         }
-    }
+    }*/
 
     lManager.drawMap();
     lManager.update();
@@ -244,7 +279,7 @@ function preload(){
 }
 
 function startGame(){
-    $.getJSON("res/levels/level3.json", function(data){
+    $.getJSON("res/levels/level2.json", function(data){
         lManager = new levelManager(myGameArea, images, data);
 
         var rows = lManager.numRows;
@@ -349,14 +384,16 @@ $(document).ready(function(){
         "res/goodies/trumpet_idle.png",
         "res/goodies/trumpet_attack.png",
         "res/goodies/trumpet_red.png",
+        "res/goodies/trumpet_dead.png",
         "res/goodies/tank_stand.png",
         "res/goodies/tank_idle.png",
         "res/goodies/tank_attack.png",
-        "res/goodies/tank_red.png",
+        "res/goodies/tank_dead.png",
         "res/goodies/angel_stand.png",
         "res/goodies/angel_idle.png",
         "res/goodies/angel_attack.png",
         "res/goodies/angel_stand.png",
+        "res/goodies/angel_dead.png",
         "res/goodies/bullet.png",
         "res/goodies/bullet_anim.png",
         "res/goodies/ball.png",
@@ -388,6 +425,8 @@ $(document).ready(function(){
 
     $(document).on('click', ".single_enemy", function(e){
         lManager.manageEnemyClick($(this).data("enemy"));
+        var img = $(this).find("img").attr('src');
+        $("#responsive_menu img").attr("src",img);
     });
 
     $("#responsive_menu, #play_button").on('click', function(){

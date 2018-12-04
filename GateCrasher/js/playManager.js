@@ -51,7 +51,7 @@ playManager.prototype.update = function(){
     }
 
     for(var element in this.allEnemies){
-        if(!this.allEnemies[element].isDead()){
+        if(this.allEnemies[element].draw){
             this.allEnemies[element].sprite.draw();
         }
     }
@@ -134,8 +134,9 @@ playManager.prototype.setNext = function(trap){
     clearInterval(this.moveInterval);
     this.characterCanMove = false;
     this.characterStunned = true;
-    this.calculateNext(this.actions[this.actualAction]);
-    this.moveInterval = setInterval(() => this.moveAndStun(trap), 100);
+    this.moveAndStun(trap);
+    //this.calculateNext(this.actions[this.actualAction]);
+    //this.moveInterval = setInterval(() => this.moveAndStun(trap), 100);
 }
 
 playManager.prototype.moveUpdate = function(){
@@ -151,14 +152,13 @@ playManager.prototype.moveUpdate = function(){
 }
 
 playManager.prototype.moveAndStun = function(trap){
-    if(this.character.walk()){
-        this.character.characterCanMove = false;
-        clearInterval(this.moveInterval);
-        this.actualAction++;
-        trap.executeClose();
-        setTimeout(()=> this.releaseTrap(trap), 200*PLAY_SPEED);
-        this.moveInterval = setInterval(() => this.calculateNext(this.actions[this.actualAction]), 100 * PLAY_SPEED);
-    }
+    this.character.characterCanMove = false;
+    clearInterval(this.moveInterval);
+    //this.actualAction++;
+    trap.executeClose();
+    setTimeout(()=> this.releaseTrap(trap), 200*PLAY_SPEED);
+    this.calculateNext(this.actions[this.actualAction]);
+    this.moveInterval = setInterval(() => this.calculateNext(this.actions[this.actualAction]), 100 * PLAY_SPEED);    
 }
 
 playManager.prototype.releaseTrap = function(trap){
