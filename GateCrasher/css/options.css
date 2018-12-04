@@ -7,6 +7,15 @@ body{
     font-family: "Gatecrasher";
     
 }
+
+#options-title{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: auto;
+    width: auto;
+}
+
 .btn-config {
     -webkit-appearance: button;
     -moz-appearance: button;
@@ -15,18 +24,31 @@ body{
     text-decoration: none;
     color: initial;
 
-    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
+    vertical-align: middle;
+    max-width: 100%;
+    width: 20%;
+    min-width: 20%;
+    max-height: 100%;
+    height: auto;
     min-height: 10vh;
-    margin:70px;
 }
 
 .btn-sound{
-    margin: 5px;
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
 
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    text-decoration: none;
+    color: initial;
+    height: auto;
 }
 #sound_container{
    
@@ -35,8 +57,13 @@ body{
     align-items: center;
     text-align: center;
     min-height: 10vh;
-    margin:70px;
+    margin:30px;
 }
+
+#basicbuttons_container{
+    text-align: center;    
+}
+
 
 .hidden{
     display: none;
