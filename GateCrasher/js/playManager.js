@@ -154,7 +154,7 @@ playManager.prototype.moveUpdate = function(){
 playManager.prototype.moveAndStun = function(trap){
     this.character.characterCanMove = false;
     clearInterval(this.moveInterval);
-    this.actualAction++;
+    //this.actualAction++;
     trap.executeClose();
     setTimeout(()=> this.releaseTrap(trap), 200*PLAY_SPEED);
     this.calculateNext(this.actions[this.actualAction]);
