@@ -193,9 +193,9 @@ var lManager;
 var lCharacter;
 
 function resize(){
+    var aspect_ratio = 400/600;
     if($(window).width() >800){
         console.log("hola");
-        var aspect_ratio = 400/600;
         var window_width = $(window).width() - 200;
         var window_height = $(window).height() - 50;
         var relative_height = aspect_ratio * window_width;
@@ -203,17 +203,44 @@ function resize(){
             $(".canvas_responsive").outerWidth($(window).width()-200);
             $("#canvas_container").outerWidth($(window).width()-200);
             $("#enemy_selector").outerHeight(relative_height);
-            var enemy_width = relative_height/5;
-            $("#enemy_selector").outerWidth(enemy_width);
-            $("#enemy_selector").removeClass("responsive").removeClass("hidden");
-            $("#responsive_menu").hide();
+            $(".canvas_responsive").outerHeight(relative_height);
+            $("#canvas_container").outerHeight(relative_height);
         }
+        else{
+            var relative_width = window_height / aspect_ratio;           
+            $(".canvas_responsive").outerWidth(relative_width);
+            $("#canvas_container").outerWidth(relative_width);
+            $(".canvas_responsive").outerHeight(window_height);
+            $("#canvas_container").outerHeight(window_height);            
+            $("#enemy_selector").outerHeight(window_height);
+        }
+        
+        var enemy_width = relative_height/5;
+        $("#enemy_selector").outerWidth(enemy_width);
+        $("#enemy_selector").removeClass("responsive").removeClass("hidden");
+        $("#responsive_menu").hide();
     }
     else if(true){
         console.log("adios");
         var window_width = $(window).width() - 10;
-        $(".canvas_responsive").outerWidth(window_width);
-        $("#canvas_container").outerWidth(window_width);
+        window_height = $(window).height() -25;
+        var relative_height = window_width * aspect_ratio;
+        if(relative_height<window_height){
+            $(".canvas_responsive").outerWidth(window_width);
+            $("#canvas_container").outerWidth(window_width);
+            $(".canvas_responsive").outerHeight(relative_height);
+            $("#canvas_containter").outerHeight(relative_height);            
+            $("#enemy_selector").outerHeight(relative_height);
+        }
+        else{
+            console.log("entro al else");
+            var relative_width = window_height / aspect_ratio;            
+            $(".canvas_responsive").outerWidth(relative_width);
+            $("#canvas_container").outerWidth(relative_width);
+            $(".canvas_responsive").outerHeight(window_height);
+            $("#canvas_container").outerHeight(window_height);            
+            $("#enemy_selector").outerHeight(window_height);
+        }
         var offset= $("#myCanvas").offset().top;
         console.log("He saltado");
         $("#enemy_selector").addClass("responsive").addClass("hidden");
@@ -395,6 +422,11 @@ $(document).ready(function(){
     }
 
     $(window).on("resize", function(){                      
+        resize();
+    });
+
+    $( window ).on( "orientationchange", function( event ) {
+        console.log("Tilted");
         resize();
     });
 
