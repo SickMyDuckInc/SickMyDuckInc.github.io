@@ -48,7 +48,7 @@ playManager.prototype.update = function(){
 playManager.prototype.calculateNext = function(turnActions){
     for(i = 0; i<turnActions.length; i++){
         var thisAction = turnActions[i];
-        if(thisAction.character = this.character){
+        if(thisAction.character == this.character){
             switch(thisAction.action){
                 case 'walk':                
                     var posX = thisAction.data.target[0] * this.levelManager.drawWidth;
@@ -62,6 +62,13 @@ playManager.prototype.calculateNext = function(turnActions){
                 default:
                     break;
             }
+        }
+        else{
+           switch(thisAction.action){
+                case 'attack':
+                thisAction.character.executeAction();
+                break;
+           } 
         }
     }
 }

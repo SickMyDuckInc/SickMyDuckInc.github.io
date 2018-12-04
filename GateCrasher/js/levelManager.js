@@ -287,7 +287,32 @@ levelManager.prototype.startGame = function(){
     var this_action;
     for(i = 0; i<pathToUse.length; i++){
         actions = Array();
-        var characterCanMove = true;   
+        var characterCanMove = true; 
+        for(var actualEnemyIndex in allEnemies){
+            var actualEnemy = allEnemies[actualEnemyIndex];
+
+            if(actualEnemy.autoAttack){
+                console.log("Added autoattack");
+                this_action = {
+                    action : "attack",
+                    character : actualEnemy,
+                    data:{
+                        //meter aqui variables que se necesiten para la funcion attack
+                    }
+                }
+                actions.push(this_action);
+            }
+            else if(actualEnemy.checkAttack(pathToUse[i].x, pathToUse[i].y)){
+                this_action = {
+                    action : "attack",
+                    character : actualEnemy,
+                    data:{
+                        //meter aqui variables que se necesiten para la funcion attack
+                    }
+                }
+                actions.push(this_action);
+            }
+        }
         //Si hay alguna trampa
         if(characterCanMove){     
             this_action = {
@@ -298,19 +323,6 @@ levelManager.prototype.startGame = function(){
                 }
             };
             actions.push(this_action);
-        }
-
-        for(var actualEnemy in allEnemies){
-            if(allEnemies[actualEnemy].checkAttack(pathToUse[i].x, pathToUse[i].y)){
-                this_action = {
-                    action : "attack",
-                    character : allEnemies[actualEnemy],
-                    data:{
-                        //meter aqui variables que se necesiten para la funcion attack
-                    }
-                }
-                actions.push(this_action);
-            }
         }
         turnos.push(actions);
     }

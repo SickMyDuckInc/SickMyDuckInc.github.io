@@ -80,7 +80,7 @@ function enemy( rows, cols, sprite, indexEnemy, canvas){
 
 enemy.prototype.fight = function(){
     if(this.count == 0){
-        this.sprite.playAnimation("attack");
+    this.sprite.playAnimation("attack", false, "idle");
     
         if(this.shoot){
             bullets.push(new bullet(this.direc,this.spriteShoot,this.cols,this.rows,1,this.canvas)); 
