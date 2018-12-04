@@ -67,12 +67,12 @@ function enemy( rows, cols, sprite, indexEnemy, canvas,character){
             break;
         case 3:
         //angel melee
-            this.sprite.addAnimation("attack","res/goodies/angel_idle.png",anim_frames["angel"].attack,200,200);
+            this.sprite.addAnimation("attack","res/goodies/angel_attack.png",anim_frames["angel"].attack,200,200);
             this.autoAttack = false;
             this.life = 50;
             this.shoot = false;
             this.damage = 20;
-            this.range = 1;
+            this.range = 0;
             this.countAttack = 0;
             this.count = 0;
             break;
@@ -151,4 +151,26 @@ enemy.prototype.checkAttack= function(col, row){
     
     return false;
     
+}
+
+enemy.prototype.Neighbour= function(Enemies){
+    for(var item in Enemies){
+        if(Enemies[i].cols == this.cols -1){
+            this.leftNeighbour = Enemies[i];
+        }
+        if(Enemies[i].cols == this.cols+1){
+            this.rightNeighbour = Enemies[i];
+        }
+    }
+}
+
+enemy.prototype.checkEnemyAttack = function(){
+    if(this.dir == "LEFT" && this.leftNeighbour!= undefined && !this.leftNeighbour.isDead){
+        this.sprite.playAnimation("attack", false, "idle");
+        this.leftNeighbour.takeDamage(this.damage);
+    }
+    else if(this.dir == "RIGHT" && this.leftNeighbour!= undefined && !this.leftNeighbour.isDead){
+        this.sprite.playAnimation("attack", false, "idle");
+        this.rightNeighbour.takeDamage(this.damage);
+    }
 }
