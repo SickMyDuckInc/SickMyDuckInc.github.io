@@ -17,6 +17,7 @@ row: número de filas
 
 //Parámetro que determina el tiempo que tarda un personaje en avanzar a la siguiente casilla del mapa
 var PLAY_SPEED =  10;
+var BULLET_SPEED = 5;
 
 function playManager(actions, levelManager, allEnemies, character, canvas){
 
@@ -41,6 +42,13 @@ function playManager(actions, levelManager, allEnemies, character, canvas){
 playManager.prototype.update = function(){
     this.canvas.clear();    
 
+    if(!this.character.isDead()){
+        this.character.sprite.draw();
+    }
+    else{
+        console.log("HE MUERTO");
+    }
+    
     for(var element in this.allEnemies){
         if(!this.allEnemies[element].isDead()){
             this.allEnemies[element].sprite.draw();
@@ -57,12 +65,6 @@ playManager.prototype.update = function(){
             this.allBullets[element].bulletSprite.moveInDirection(this.allBullets[element].direction);
             this.allBullets[element].checkCollision(this.allEnemies);
         }
-    }
-    if(!this.character.isDead()){
-        this.character.sprite.draw();
-    }
-    else{
-        console.log("HE MUERTO");
     }
 }
 
@@ -110,9 +112,20 @@ playManager.prototype.calculateNext = function(turnActions){
                     thisAction.character.executeAction(this);
                 }
                 break;
+            case 'checkEnemyAttack':
+                thisAction.character.checkEnemyAttack();
+                break;
            } 
         }
     }
+}
+
+playManager.prototype.setNext = function(trap){
+    //this.actualAction++;
+    clearInterval(this.moveInterval);
+    this.characterCanMove = false;
+    this.calculateNext(this.actions[this.actualAction]);
+    this.moveInterval = setInterval(() => this.moveAndStun(trap), 100);
 }
 
 playManager.prototype.moveUpdate = function(){
@@ -124,6 +137,14 @@ playManager.prototype.moveUpdate = function(){
         else{
             this.calculateNext(this.actions[this.actualAction]);
         }
+    }
+}
+
+playManager.prototype.moveAndStun = function(trap){
+    if(this.character.walk()){
+        this.character.characterCanMove = false;
+        clearInterval(this.moveInterval);
+        trap.executeClose();
     }
 }
 

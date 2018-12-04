@@ -29,8 +29,8 @@
             "maxNumber":3
         },
         {
-            "sprite":"turret",
-            "type": 0,
+            "sprite":"angel",
+            "type": 3,
             "maxNumber":2
         },
         {
