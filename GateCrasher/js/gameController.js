@@ -192,14 +192,37 @@ var anim_frames = {
 var lManager;
 var lCharacter;
 
-function resize(){    
-    $("#myCanvas").outerHeight($(window).height()-$("#myCanvas").offset().top- Math.abs($("#myCanvas").outerHeight(true) - $("#myCanvas").outerHeight() -10));
-    var outerHeight = $("#myCanvas").outerHeight();
-    var outerWidth = $("#myCanvas").outerWidth();
-    $("#enemy_selector").outerHeight(outerHeight);
+function resize(){
+    if($(window).width() >600){
+        console.log("hola");
+        var aspect_ratio = 400/600;
+        var window_width = $(window).width() - 200;
+        var window_height = $(window).height() - 50;
+        var relative_height = aspect_ratio * window_width;
+        if(relative_height<window_height){
+            $(".canvas_responsive").outerWidth($(window).width()-200);
+            $("#canvas_container").outerWidth($(window).width()-200);
+            $("#enemy_selector").outerHeight(relative_height);
+            var enemy_width = relative_height/5;
+            $("#enemy_selector").outerWidth(enemy_width);
+        }
+    }
+    else if(true){
+        var window_width = $(window).width();
+        $(".canvas_responsive").outerWidth(windowWidth);
+        $("#canvas_container").outerWidth(windowWidth);
+    }
+    else{    
+        $("#myCanvas").outerHeight($(window).height()-$("#myCanvas").offset().top- Math.abs($("#myCanvas").outerHeight(true) - $("#myCanvas").outerHeight() -10));
+        $("#myCanvas").outerWidth($(window).width()-$("#myCanvas").offset().left- Math.abs($("#myCanvas").outerWidth(true) - $("#myCanvas").outerWidth() -10));
+        var outerHeight = $("#myCanvas").outerHeight();
+        var outerWidth = $("#myCanvas").outerWidth();
+        console.log($(window).width());
+        $("#enemy_selector").outerHeight(outerHeight);
 
-    $(".canvas_responsive").outerHeight(outerHeight);
-    $("#canvas_container").outerWidth(outerWidth);
+        $(".canvas_responsive").outerHeight(outerHeight);
+        $("#canvas_container").outerWidth(outerWidth);
+    }
 
     var windowWidth = $(window).width();
 

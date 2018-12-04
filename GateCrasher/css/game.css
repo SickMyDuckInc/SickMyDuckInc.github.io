@@ -34,8 +34,8 @@ canvas{
 .canvas_responsive{
     border: solid 1px blue;  
     width: 100%;
-    max-width: 600px;
-    max-height: 400px;
+    /* max-width: 600px;
+    max-height: 400px; */
     cursor: pointer;
 }
 
@@ -61,6 +61,19 @@ canvas{
     display:inline-block;
     vertical-align: top;
     cursor:pointer;
+}
+@media (min-width : 800){
+    .canvas_responsive{
+        max-width: 1200px;
+        max-height: 800px;
+    }
+    /* #canvas_container{
+       width: 1200px;
+       height: 800px; 
+    }
+    #enemy_selector{
+        height: 800px;
+    } */
 }
 
 #enemy_selector.responsive{
