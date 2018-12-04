@@ -112,6 +112,9 @@ var myGameArea = {
     },
     removeSelected : function(){
         $("#responsive_menu img").attr("src","/res/goodies/empty.png");
+    },
+    addSelected : function(){
+
     }
 }
 
@@ -276,7 +279,7 @@ function preload(){
 }
 
 function startGame(){
-    $.getJSON("res/levels/level3.json", function(data){
+    $.getJSON("res/levels/level2.json", function(data){
         lManager = new levelManager(myGameArea, images, data);
 
         var rows = lManager.numRows;
