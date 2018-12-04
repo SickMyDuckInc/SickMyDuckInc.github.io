@@ -79,7 +79,7 @@ var myGameArea = {
     },
     setDrawHeight : function(h){
         this.drawHeight = h;
-    }
+    },
     drawLine : function(fromX, fromY, toX, toY){
         this.contexts[2].moveTo(fromX, fromY);
         this.contexts[2].lineTo(toX, toY);

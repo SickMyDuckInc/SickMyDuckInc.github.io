@@ -297,7 +297,7 @@ levelManager.prototype.startGame = function(){
         for(var actualEnemyIndex in allEnemies){
             var actualEnemy = allEnemies[actualEnemyIndex];
 
-            if(Math.abs(pathToUse[0] - actualEnemy.rows == 1)){
+            if((pathToUse[0] == actualEnemy.rows) && (pathToUse[1] == actualEnemy.cols)){
                 console.log("Adyacente en " + pathToUse[0] + ", " + pathToUse[0]);
             }
 
