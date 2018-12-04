@@ -320,7 +320,7 @@ levelManager.prototype.startGame = function(){
             }
             else{
                 var checkPathX = pathToUse[i-1][0];
-                var checkPathY = pathToUse[i-1][0];
+                var checkPathY = pathToUse[i-1][1];
             }
 
             if(actualEnemy.autoAttack){

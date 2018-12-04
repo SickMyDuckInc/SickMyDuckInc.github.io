@@ -99,7 +99,7 @@ function enemy( rows, cols, sprite, indexEnemy, canvas,character){
             this.life = 50;
             this.shoot = false;
             this.damage = 20;
-            this.range = 0;
+            this.range = 1;
             this.melee = true;
             this.countAttack = 0;
             this.count = 0;
@@ -113,7 +113,7 @@ function enemy( rows, cols, sprite, indexEnemy, canvas,character){
             this.life = 100;
             this.shoot = false;
             this.damage = 5;
-            this.range = 0;
+            this.range = 1;
             this.melee = true;
             this.countAttack = 0;
             this.count = 0;
