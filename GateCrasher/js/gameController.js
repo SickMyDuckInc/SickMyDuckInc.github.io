@@ -244,7 +244,7 @@ function preload(){
 }
 
 function startGame(){
-    $.getJSON("res/levels/level2.json", function(data){
+    $.getJSON("res/levels/level3.json", function(data){
         lManager = new levelManager(myGameArea, images, data);
 
         var rows = lManager.numRows;
@@ -293,7 +293,7 @@ $(document).ready(function(){
         "res/background/heaven_corner4.png", // 5
         "res/background/heaven_intersectiondown.png", // 6
         "res/background/snow_end.png", // 7
-        "res/background/cloud.png", // 8
+        "res/background/cloud_blank.png", // 8
         "res/background/heaven_intersectionder.png", // 9
         "res/background/heaven_intersectionizq.png", // 10
         "res/background/heaven_intersectionup.png", // 11
@@ -308,6 +308,8 @@ $(document).ready(function(){
         "res/background/cloud_big4.png", // 20
         "res/background/cloud_big5.png", // 21
         "res/background/cloud_big6.png", // 22
+        "res/background/heaven_intersection.png", // 23
+
         "res/enemies/enemy01_stand.png",
         "res/enemies/enemy01_idle.png",
         "res/enemies/enemy01_attack.png",
