@@ -51,6 +51,7 @@ playManager.prototype.update = function(){
         else{
             this.allBullets[element].bulletSprite.draw();
             this.allBullets[element].bulletSprite.moveInDirection("LEFT");
+            this.allBullets[element].checkCollision(this.allEnemies);
         }
     }
 
