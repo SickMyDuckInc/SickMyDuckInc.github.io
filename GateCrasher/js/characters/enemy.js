@@ -35,7 +35,7 @@ function enemy( rows, cols, sprite, indexEnemy, canvas,character){
             this.shoot = true;
             this.spriteShoot = "bullet";
             this.shoots = []; 
-            this.damage = 5;
+            this.damage = 4;
             this.range = 15;
             this.countAttack = 0;
             this.count = 0;
@@ -49,7 +49,7 @@ function enemy( rows, cols, sprite, indexEnemy, canvas,character){
             this.shoot = true;
             this.spriteShoot = "ball";
             this.shoots = []; 
-            this.damage = 60;
+            this.damage = 30;
             this.range = 2;
             this.countAttack = 4;
             this.count = 0;

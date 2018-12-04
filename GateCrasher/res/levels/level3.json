@@ -26,7 +26,7 @@
         {
             "sprite":"turret",
             "type": 0,
-            "maxNumber":3
+            "maxNumber":1
         },
         {
             "sprite":"trumpet",
@@ -36,7 +36,7 @@
         {
             "sprite":"trap",
             "type": 2,
-            "maxNumber":2
+            "maxNumber":1
         },
         {
             "sprite":"tank",
