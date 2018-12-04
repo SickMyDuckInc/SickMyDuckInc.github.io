@@ -97,6 +97,7 @@ character.prototype.fight = function(enemyTarget){
     var moveY = this.currentTile.y;
     this.sprite.moveTo(moveX, moveY);
     enemyTarget.takeDamage(this.damage);
+    enemyTarget.sprite.setRedTint();
 }
 
 character.prototype.pathfinding = function(){

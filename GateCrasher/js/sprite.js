@@ -11,6 +11,8 @@ function sprite(context, spriteImage, height, width, posX, posY) {
     this.isFlipped = false;
     this.repeat = true;
 
+    this.tintRed = false;
+
     this.image = new Image();
     this.image.src = spriteImage;
     this.width = width;
@@ -93,7 +95,7 @@ sprite.prototype.scaleSpriteXY = function (scaleX, scaleY) {
     this.scaleY = scaleY;
 }
 
-function frame(srcImage, x, y, width, height, spriteWidth, spriteHeight) {
+function frame(srcImage, x, y, width, height, spriteWidth, spriteHeight, sprite) {
     this.srcImage = srcImage;
     this.x = x;
     this.y = y;
@@ -101,6 +103,7 @@ function frame(srcImage, x, y, width, height, spriteWidth, spriteHeight) {
     this.height = height;
     this.spriteWidth = spriteWidth;
     this.spriteHeight = spriteHeight;
+    this.sprite = sprite;
 
     this.draw = function(context, x, y, scaleX, scaleY, isFlipped){
         context.save();
@@ -111,6 +114,24 @@ function frame(srcImage, x, y, width, height, spriteWidth, spriteHeight) {
         }
         
         context.drawImage(this.srcImage, this.x, this.y, this.width, this.height, flipWidth * x, y, flipWidth * this.spriteWidth * scaleX, this.spriteHeight * scaleY);
+        
+        if(this.sprite.tintRed){
+            console.log("red");
+            var map = context.getImageData(x, y, this.width, this.height);
+            
+            console.log("x "  + x + ", y " + y);
+            var imdata = map.data;
+
+            var r,g,b,avg;
+            for(var p = 0, len = imdata.length; p < len; p += 4) {
+                r = imdata[p]
+                g = imdata[p + 1];
+                b = imdata[p + 2];
+                imdata[p + 1] = imdata[p + 2] = 0;
+            }
+            context.putImageData(map, x, y);
+        }
+
         context.restore();
         
     }
@@ -127,7 +148,7 @@ sprite.prototype.saveAnimation = function(image, animationName, framesNumber, wi
             xIndex = 0;
         }
         for(j = 0; j<multiplier; j++){
-            animationSheet[i+j] = new frame(image, xIndex * width, yIndex * height, width, height, this.width, this.height);
+            animationSheet[i+j] = new frame(image, xIndex * width, yIndex * height, width, height, this.width, this.height, this);
         }
         xIndex++;
     }
@@ -171,4 +192,15 @@ sprite.prototype.flip = function () {
 
 sprite.prototype.update = function(){
     this.prototype.draw();
+}
+
+sprite.prototype.setRedTint = function(){
+    this.tintRed = true;
+    console.log("Tinted red");
+    setTimeout(() => this.removeTint(), 100 * 3);
+}
+
+sprite.prototype.removeTint = function(){
+    this.tintRed = false;
+    console.log("Removed tint");
 }
