@@ -27,51 +27,68 @@ function enemy( rows, cols, sprite, indexEnemy, canvas){
         //torreta
             this.sprite.addAnimation("attack", "res/goodies/turret_attack.png", anim_frames["turret"].attack, 200, 200);
             this.autoAttack = true;
-            this.life = 10;
+            this.life = 50;
             this.shoot = true;
             this.spriteShoot = "bullet";
             this.shoots = []; 
-            this.damage = 1;
-            this.range = 10;
+            this.damage = 5;
+            this.range = 15;
+            this.countAttack = 0;
+            this.count = 0;
             break;
         case 1:
-        //melee
+        //angel de distancia
             this.sprite.addAnimation("attack", "res/goodies/turret_idle.png", 4, 200, 200);
             this.autoAttack = false;
-            this.life = 10;
+            this.life = 50;
             this.shoot = false;
-            this.damage = 3;
-            this.range = 1;
+            this.damage = 60;
+            this.range = 4;
+            this.countAttack = 4;
+            this.count = 0;
             break;
         case 2:
         //trampa
-            this.sprite.addAnimation("attack","res/goodies/turret_idle.png",4,200,200);
+            this.sprite.addAnimation("attack","res/goodies/trap_attack.png",anim_frames["trap"].attack,200,200);
             this.autoAttack = false;
             this.life = 0;
             this.shoot = false;
             this.damage = 0;
             this.range = 0;
             this.stun = 2;
+            this.countAttack = 100;
+            this.count = 0;
             break;
         case 3:
-        //otro
-            this.sprite.addAnimation("attack","res/goodies/turret_idle.png");
+        //angel melee
+            this.sprite.addAnimation("attack","res/goodies/angel_idle.png",anim_frames["angel"].attack,200,200);
             this.autoAttack = false;
-            this.life = 10;
+            this.life = 50;
             this.shoot = false;
-            this.damage = 2;
-            this.range = 2;
+            this.damage = 20;
+            this.range = 1;
+            this.countAttack = 0;
+            this.count = 0;
             break;
+        case 4:
+        //tank
+            this.sprite.addAnimation("attack","res/goodies/tank.png")
 
     }
 }
 
 
-enemy.prototype.fight = function(bullets){
-    this.sprite.playAnimation("attack");
+enemy.prototype.fight = function(){
+    if(this.count == 0){
+        this.sprite.playAnimation("attack");
     
-    if(this.shoot){
-        bullets.push(new bullet(this.direc,this.spriteShoot,this.cols,this.rows,1,this.canvas)); 
+        if(this.shoot){
+            bullets.push(new bullet(this.direc,this.spriteShoot,this.cols,this.rows,1,this.canvas)); 
+        }
+        this.count = this.countAttack;
+    }
+    else{
+        this.count--;
     }
 }
 
