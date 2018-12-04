@@ -352,6 +352,7 @@ levelManager.prototype.startGame = function(){
     //this.canvas.clear();
     clearInterval(this.updateInterval);
 
+    this.canvas.clearLines();
     var pM = new playManager(turnos, this, allEnemies, characterToUse, this.canvas);
 
 }

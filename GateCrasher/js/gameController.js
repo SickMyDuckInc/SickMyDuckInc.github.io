@@ -83,6 +83,9 @@ var myGameArea = {
         this.contexts[2].lineTo(toX, toY);
         this.contexts[2].stroke();
     },
+    clearLines : function(){
+        this.contexts[2].clearRect(0, 0, this.canvas.width, this.canvas.height);
+    },
     drawSquare : function(fromX, fromY, width, height){
         this.context.fillRect(fromX, fromY, width, height);
         this.context.stroke();
@@ -249,7 +252,7 @@ $(document).ready(function(){
     $("#responsive_menu").hide();
 
     preload(
-        "res/background/snow_horizontal.png",
+        "res/background/heaven_horizontal.png",
         "res/background/heaven_vertical.png",
         "res/background/snow_corner1.png",
         "res/background/snow_corner2.png",

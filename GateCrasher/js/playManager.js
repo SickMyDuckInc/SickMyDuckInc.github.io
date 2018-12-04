@@ -102,7 +102,9 @@ playManager.prototype.calculateNext = function(turnActions){
         else{
            switch(thisAction.action){
                 case 'attack':
-                thisAction.character.executeAction(this);
+                if(!thisAction.character.isDead()){
+                    thisAction.character.executeAction(this);
+                }
                 break;
            } 
         }
