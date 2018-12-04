@@ -70,6 +70,9 @@ playManager.prototype.update = function(){
 }
 
 playManager.prototype.calculateNext = function(turnActions){
+    for(i = 0; i<this.allEnemies.length; i++){
+        this.allEnemies[i].update();
+    }
     for(i = 0; i<turnActions.length; i++){
         var thisAction = turnActions[i];
         if(thisAction.character == this.character){
