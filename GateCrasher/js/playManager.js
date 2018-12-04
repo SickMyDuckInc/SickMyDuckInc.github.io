@@ -26,6 +26,7 @@ function playManager(actions, levelManager, allEnemies, character, canvas){
     this.character = character;
     this.canvas = canvas;
     this.actualAction = 0;
+    this.allBullets = Array();
 
 
     this.updateInterval = setInterval(() => this.update(), 100);
@@ -42,13 +43,24 @@ playManager.prototype.update = function(){
         this.allEnemies[element].sprite.draw();
     }
 
+    
+    for(var element in this.allBullets){
+        if(this.allBullets[element].collisioned){
+            this.allBullets.splice(element, 1);
+        }
+        else{
+            this.allBullets[element].bulletSprite.draw();
+            this.allBullets[element].bulletSprite.moveInDirection("LEFT");
+        }
+    }
+
     this.character.sprite.draw();
 }
 
 playManager.prototype.calculateNext = function(turnActions){
     for(i = 0; i<turnActions.length; i++){
         var thisAction = turnActions[i];
-        if(thisAction.character = this.character){
+        if(thisAction.character == this.character){
             switch(thisAction.action){
                 case 'walk':                
                     var posX = thisAction.data.target[0] * this.levelManager.drawWidth;
@@ -63,6 +75,13 @@ playManager.prototype.calculateNext = function(turnActions){
                     break;
             }
         }
+        else{
+           switch(thisAction.action){
+                case 'attack':
+                thisAction.character.executeAction(this);
+                break;
+           } 
+        }
     }
 }
 
@@ -71,6 +90,10 @@ playManager.prototype.moveUpdate = function(){
         this.actualAction++;
         this.calculateNext(this.actions[this.actualAction]);
     }
+}
+
+playManager.prototype.addBullet = function(bullet){
+    this.allBullets.push(bullet);
 }
 
 //Constructior de la clase, 

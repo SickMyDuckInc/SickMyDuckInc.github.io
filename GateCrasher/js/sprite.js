@@ -9,6 +9,7 @@ function sprite(context, spriteImage, height, width, posX, posY) {
     this.scaleY = 1;
     this.animations = {};
     this.isFlipped = false;
+    this.repeat = true;
 
     this.image = new Image();
     this.image.src = spriteImage;
@@ -63,6 +64,9 @@ sprite.prototype.draw = function () {
         this.animationFrame++;   
         if(this.animationFrame >= this.currentAnimation.length) {
             this.animationFrame = 0;
+            if(!this.repeat){
+                this.playAnimation(this.nextAnimation);
+            }
         }        
     }
     else {
@@ -138,13 +142,21 @@ sprite.prototype.addAnimation = function (animationName, imageUri, framesNumber,
     imageSheet.onload = this.saveAnimation(imageSheet, animationName, framesNumber, width, height, multiplier);
 }
 
-sprite.prototype.playAnimation = function (animationName) {
+sprite.prototype.playAnimation = function (animationName, repeat = true, nextAnimation = null) {
     if(this.animations[animationName] != undefined) {
         this.animationFrame = 0;
-        this.currentAnimation = this.animations[animationName];        
+        this.currentAnimation = this.animations[animationName];
+        this.repeat = repeat;  
+        if(!repeat){
+            this.repeat = false;
+            this.nextAnimation = nextAnimation;
+        }
+        else{
+            this.nextAnimation = null;
+        }      
     }
     else {
-        console.log("ERROR - The animation you're trying to play doesn't exist");
+        console.log("ERROR - The animation you're trying to  doesn't exist");
     }
 }
 

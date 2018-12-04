@@ -79,6 +79,9 @@ function levelManager(canvas, allImages, level){
     this.drawHeight = this.canvas.getDrawHeight() / this.numRows;
     this.drawWidth = this.canvas.getDrawWidth() / this.numCols;
 
+    this.canvas.setDrawWidth(this.drawWidth);
+    this.canvas.setDrawHeight(this.drawHeight);
+
 
     this.canvas.drawTile(0, 0, this.drawWidth, this.drawHeight, this.allImages[0]);
     
@@ -92,7 +95,10 @@ levelManager.prototype.drawMap = function(){
     this.intervalWidth = this.canvas.getWidth() / this.numCols;
 
     this.drawHeight = this.canvas.getDrawHeight() /this.numRows;
-    this.drawWidth = this.canvas.getDrawWidth() / this.numCols;    
+    this.drawWidth = this.canvas.getDrawWidth() / this.numCols;  
+    
+    this.canvas.setDrawWidth(this.drawWidth);
+    this.canvas.setDrawHeight(this.drawHeight);
 
     this.canvas.resizeEnemies(this.numEnemies);
     this.paintTile();
@@ -279,7 +285,7 @@ levelManager.prototype.startGame = function(){
     for(var en in this.spawnedSprites){
         if(this.spawnedSprites[en].isEnemy){
             var enemyLevel = this.spawnedSprites[en];
-            var enemyToAdd = new enemy(enemyLevel.posX, enemyLevel.posY, enemyLevel.sprite, enemyLevel.type);
+            var enemyToAdd = new enemy(enemyLevel.posX, enemyLevel.posY, enemyLevel.sprite, enemyLevel.type, this.canvas, characterToUse);
             allEnemies.push(enemyToAdd);
         }
     }
@@ -287,7 +293,36 @@ levelManager.prototype.startGame = function(){
     var this_action;
     for(i = 0; i<pathToUse.length; i++){
         actions = Array();
-        var characterCanMove = true;   
+        var characterCanMove = true; 
+        for(var actualEnemyIndex in allEnemies){
+            var actualEnemy = allEnemies[actualEnemyIndex];
+
+            if((pathToUse[0] == actualEnemy.rows) && (pathToUse[1] == actualEnemy.cols)){
+                console.log("Adyacente en " + pathToUse[0] + ", " + pathToUse[0]);
+            }
+
+            if(actualEnemy.autoAttack){
+                console.log("Added autoattack");
+                this_action = {
+                    action : "attack",
+                    character : actualEnemy,
+                    data:{
+                        //meter aqui variables que se necesiten para la funcion attack
+                    }
+                }
+                actions.push(this_action);
+            }
+            else if(actualEnemy.checkAttack(pathToUse[i].x, pathToUse[i].y)){
+                this_action = {
+                    action : "attack",
+                    character : actualEnemy,
+                    data:{
+                        //meter aqui variables que se necesiten para la funcion attack
+                    }
+                }
+                actions.push(this_action);
+            }
+        }
         //Si hay alguna trampa
         if(characterCanMove){     
             this_action = {
@@ -298,19 +333,6 @@ levelManager.prototype.startGame = function(){
                 }
             };
             actions.push(this_action);
-        }
-
-        for(var actualEnemy in allEnemies){
-            if(allEnemies[actualEnemy].checkAttack(pathToUse[i].x, pathToUse[i].y)){
-                this_action = {
-                    action : "attack",
-                    character : allEnemies[actualEnemy],
-                    data:{
-                        //meter aqui variables que se necesiten para la funcion attack
-                    }
-                }
-                actions.push(this_action);
-            }
         }
         turnos.push(actions);
     }
