@@ -252,6 +252,7 @@ levelManager.prototype.spawnHeroes = function(){
         var player = new sprite(this.canvas.getContext(), "res/enemies/" +this.characters[i].sprite +"_stand.png", this.drawHeight, this.drawWidth, pos[1] * this.drawHeight, pos[0] * this.drawWidth);
         player.addAnimation("idle", "res/enemies/" + this.characters[i].sprite +"_idle.png", anim_frames[this.characters[i].sprite].idle, 200, 200, anim_multipliers[this.characters[i].sprite].idle);
         player.addAnimation("walk", "res/enemies/" + this.characters[i].sprite +"_walk.png", anim_frames[this.characters[i].sprite].walk, 200, 200,  anim_multipliers[this.characters[i].sprite].walk);
+        player.addAnimation("attack", "res/enemies/" + this.characters[i].sprite +"_attack.png", anim_frames[this.characters[i].sprite].attack, 200, 200,  anim_multipliers[this.characters[i].sprite].attack);
         player.playAnimation("idle");
         player.flip();
         var spriteToAdd = {
