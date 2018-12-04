@@ -241,7 +241,7 @@ function preload(){
 }
 
 function startGame(){
-    $.getJSON("res/levels/level2.json", function(data){
+    $.getJSON("res/levels/level3.json", function(data){
         lManager = new levelManager(myGameArea, images, data);
 
         var rows = lManager.numRows;
@@ -306,7 +306,16 @@ $(document).ready(function(){
         "res/background/cloud_big5.png", // 21
         "res/background/cloud_big6.png", // 22
         "res/background/heaven_intersection.png", // 23
-
+        "res/background/tiles/m00.png", // 24
+        "res/background/tiles/m01.png", // 25
+        "res/background/tiles/m02.png", // 26
+        "res/background/tiles/m10.png", // 27
+        "res/background/tiles/m11.png", // 28
+        "res/background/tiles/m12.png", // 29
+        "res/background/tiles/m20.png", // 30
+        "res/background/tiles/m21.png", // 31
+        "res/background/tiles/m22.png", // 32
+     
         "res/enemies/enemy01_stand.png",
         "res/enemies/enemy01_idle.png",
         "res/enemies/enemy01_attack.png",
