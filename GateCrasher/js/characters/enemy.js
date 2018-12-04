@@ -83,9 +83,7 @@ function enemy( rows, cols, sprite, indexEnemy, canvas,character){
 
             }
 
-            this.release = function(playMan){
-                playMan.characterCanMove = true;
-                playMan.characterStunnned = false;
+            this.release = function(){
                 this.life = 0;
             }
             break;
