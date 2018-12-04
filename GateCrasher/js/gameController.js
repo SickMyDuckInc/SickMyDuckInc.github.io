@@ -324,6 +324,8 @@ $(document).ready(function(){
     });
 
     $(document).on("click", "#play_button", function(){
+        $("#enemy_selector").remove();
+        $("#responsivve_menu").remove();
         lManager.startGame();
     });
 

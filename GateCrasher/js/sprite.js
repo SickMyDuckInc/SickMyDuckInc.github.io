@@ -1,4 +1,4 @@
-function sprite(context, spriteImage, height, width, posX, posY) {
+function sprite(context, spriteImage, height, width, posX, posY, visible = true) {
     this.context = context;
     this.width;
     this.height;
@@ -12,6 +12,7 @@ function sprite(context, spriteImage, height, width, posX, posY) {
     this.isFlipped = false;
     
     this.repeat = true;
+    this.isVisible = visible;
 
     this.tintRed = false;
 
@@ -22,6 +23,10 @@ function sprite(context, spriteImage, height, width, posX, posY) {
     this.draw();
 
     //setInterval(this.draw, 1000/15);
+}
+
+sprite.prototype.setVisible = function(){
+    this.visible = true;
 }
 
 sprite.prototype.moveTo = function (x, y) {
@@ -63,30 +68,32 @@ sprite.prototype.moveInDirection = function (dir) {
 }
 
 sprite.prototype.draw = function () {
-    if(this.currentAnimation != undefined) {
-        this.currentAnimation.anim[this.animationFrame].draw(this.context, this.x, this.y, this.scaleX, this.scaleY, this.isFlipped);     
-        this.animationFrame++;   
-        if(this.animationFrame >= this.currentAnimation.length) {
-            this.animationFrame = 0;
-            if(!this.repeat){
-                if(this.invokeFunction != null){
-                    this.invokeFunction.apply(this.invokeActor);
-                }
-                this.playAnimation(this.nextAnimation);
-            }            
-        }        
-    }
-    else {
-        this.context.save();
-        var flipWidth = 1;
-
-        if (this.isFlipped) {
-            this.context.scale(-1, 1);
-            flipWidth = -1;
+        if(this.isVisible){
+        if(this.currentAnimation != undefined) {
+            this.currentAnimation.anim[this.animationFrame].draw(this.context, this.x, this.y, this.scaleX, this.scaleY, this.isFlipped);     
+            this.animationFrame++;   
+            if(this.animationFrame >= this.currentAnimation.length) {
+                this.animationFrame = 0;
+                if(!this.repeat){
+                    if(this.invokeFunction != null){
+                        this.invokeFunction.apply(this.invokeActor);
+                    }
+                    this.playAnimation(this.nextAnimation);
+                }            
+            }        
         }
-        
-        this.context.drawImage(this.image,flipWidth * this.x, this.y, flipWidth * this.width * this.scaleX, this.height * this.scaleY);
-        //this.context.restore();
+        else {
+            this.context.save();
+            var flipWidth = 1;
+
+            if (this.isFlipped) {
+                this.context.scale(-1, 1);
+                flipWidth = -1;
+            }
+            
+            this.context.drawImage(this.image,flipWidth * this.x, this.y, flipWidth * this.width * this.scaleX, this.height * this.scaleY);
+            //this.context.restore();
+        }
     }
 }
 
