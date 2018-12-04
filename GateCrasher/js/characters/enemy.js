@@ -80,6 +80,13 @@ function enemy( rows, cols, sprite, indexEnemy, canvas,character){
             }
             this.executeClose = function(){
                 this.sprite.playAnimation("attack", false, "closed");
+
+            }
+
+            this.release = function(playMan){
+                playMan.characterCanMove = true;
+                playMan.characterStunnned = false;
+                this.life = 0;
             }
             break;
         case 3:
@@ -113,14 +120,7 @@ function enemy( rows, cols, sprite, indexEnemy, canvas,character){
 
 enemy.prototype.fight = function(playMan){
     console.log("Basic fight");
-    if(this.dir == "LEFT" && this.character.sprite.x > this.sprite.x){
-        this.sprite.flip();
-        this.dir = "RIGHT";
-    }
-    else if(this.dir == "RIGHT" && this.character.sprite.x < this.sprite.x){
-        this.sprite.flip();
-        this.dir = "LEFT";
-    }
+    
     if(this.count == 0 ){
     
         if(this.shoot){
@@ -174,22 +174,33 @@ enemy.prototype.checkAttack= function(col, row){
 
 enemy.prototype.Neighbour= function(Enemies){
     for(var item in Enemies){
-        if(Enemies[i].cols == this.cols -1){
-            this.leftNeighbour = Enemies[i];
+        if(Enemies[item].cols == (this.cols -1)){
+            this.leftNeighbour = Enemies[item];
         }
-        if(Enemies[i].cols == this.cols+1){
-            this.rightNeighbour = Enemies[i];
+        if(Enemies[item].cols == (this.cols+1)){
+            this.rightNeighbour = Enemies[item];
         }
     }
 }
 
 enemy.prototype.checkEnemyAttack = function(){
-    if(this.dir == "LEFT" && this.leftNeighbour!= undefined && !this.leftNeighbour.isDead){
+    if(this.dir == "LEFT" && this.leftNeighbour!= undefined && !this.leftNeighbour.isDead() &&this.leftNeighbour.canBeAttacked){
         this.sprite.playAnimation("attack", false, "idle");
         this.leftNeighbour.takeDamage(this.damage);
     }
-    else if(this.dir == "RIGHT" && this.leftNeighbour!= undefined && !this.leftNeighbour.isDead){
+    else if(this.dir == "RIGHT" && this.rightNeighbour!= undefined && !this.rightNeighbour.isDead()&&this.rightNeighbour.canBeAttacked){
         this.sprite.playAnimation("attack", false, "idle");
         this.rightNeighbour.takeDamage(this.damage);
+    }
+}
+
+enemy.prototype.update = function(){
+    if(this.dir == "LEFT" && this.character.sprite.x > this.sprite.x){
+        this.sprite.flip();
+        this.dir = "RIGHT";
+    }
+    else if(this.dir == "RIGHT" && this.character.sprite.x < this.sprite.x){
+        this.sprite.flip();
+        this.dir = "LEFT";
     }
 }
