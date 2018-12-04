@@ -6,10 +6,16 @@ function bullet(direction, type, col, rows, vel, canvas,character){
     this.vel = vel;
     this.canvas = canvas;
     this.collisioned = false;
+<<<<<<< HEAD
     this.character = character;
     this.bulletSprite = new sprite(this.canvas.getContext(), "res/goodies/bullet.png", 100, 100, 50, 100);
     this.bulletSprite.addAnimation("move",  "res/goodies/bullet_anim.png", 2, 200, 200);
     this.bulletSprite.playAnimation("move");
+=======
+    //this.bulletSprite = new sprite(this.canvas.getContext(), "res/goodies/bullet.png", 100, 100, 50, 100);
+    //this.bulletSprite.addAnimation("move",  "res/goodies/bullet_anim.png", 2, 200, 200);
+    //this.bulletSprite.playAnimation("move");
+>>>>>>> cfdf560e160df0f9d753b60760d87ee7679b7b1d
 
     this.updateInterval = setInterval(() => this.update(), 100);
 }

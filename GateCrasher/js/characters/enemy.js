@@ -21,6 +21,7 @@ function enemy( rows, cols, sprite, indexEnemy, canvas,character){
     this.rows = rows;
 
     this.canvas = canvas;
+    this.character = character;
 
     switch(indexEnemy){
         case 0:
