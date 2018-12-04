@@ -185,6 +185,7 @@ levelManager.prototype.manageCanvasClick = function(posX, posY){
             }
             else{
                 this.selectedEnemy = -1;
+                this.canvas.removeSelected();
             }
         }
         else if(actualOccuping == NON_WALKABLE){
@@ -219,6 +220,7 @@ levelManager.prototype.manageEnemyClick = function(enemyId){
         else{
             this.selectedEnemy = -1;
             console.log("Deseleccionado el enemigo: " + enemyId);
+            this.canvas.removeSelected();
         }
     }
     else{
