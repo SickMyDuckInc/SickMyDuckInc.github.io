@@ -153,13 +153,15 @@ playManager.prototype.moveAndStun = function(trap){
         clearInterval(this.moveInterval);
         this.actualAction++;
         trap.executeClose();
-        setTimeout(()=> this.releaseTrap(trap), 100*PLAY_SPEED);
+        setTimeout(()=> this.releaseTrap(trap), 200*PLAY_SPEED);
         this.moveInterval = setInterval(() => this.calculateNext(this.actions[this.actualAction]), 100 * PLAY_SPEED);
     }
 }
 
 playManager.prototype.releaseTrap = function(trap){
-
+    trap.release();
+    this.characterStunned = false;
+    this.characterCanMove = true;
 }
 
 playManager.prototype.addBullet = function(bullet){
