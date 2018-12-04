@@ -130,7 +130,9 @@ var anim_multipliers = {
     },
     "trap":{
         idle: 1,
-        hurt : 2
+        hurt : 2,
+        attack: 1,
+        closed : 1
     },
     "trumpet":{
         idle: 1,
@@ -167,7 +169,8 @@ var anim_frames = {
     },
     "trap":{
         idle: 1,
-        hurt : 1
+        attack: 5,
+        closed : 1
     },
     "trumpet":{
         idle: 5,

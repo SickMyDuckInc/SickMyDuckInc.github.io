@@ -293,6 +293,10 @@ levelManager.prototype.startGame = function(){
         }
     }
 
+    for(var en in allEnemies){
+        allEnemies[en].Neighbour(allEnemies);
+    }
+
     var this_action;
     for(i = 0; i<pathToUse.length; i++){
         actions = Array();
@@ -330,6 +334,14 @@ levelManager.prototype.startGame = function(){
                     data:{
                         //meter aqui variables que se necesiten para la funcion attack
                     }
+                }
+                actions.push(this_action);
+            }
+
+            if(actualEnemy.melee){
+                this_action = {
+                    action : "checkEnemyAttack",
+                    character : actualEnemy
                 }
                 actions.push(this_action);
             }
