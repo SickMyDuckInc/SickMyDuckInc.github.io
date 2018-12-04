@@ -67,8 +67,11 @@ sprite.prototype.draw = function () {
         if(this.animationFrame >= this.currentAnimation.length) {
             this.animationFrame = 0;
             if(!this.repeat){
+                if(this.invokeFunction != null){
+                    this.invokeFunction.apply(this.invokeActor);
+                }
                 this.playAnimation(this.nextAnimation);
-            }
+            }            
         }        
     }
     else {
@@ -101,6 +104,7 @@ function frame(srcImage, x, y, width, height, spriteWidth, spriteHeight, sprite)
     this.y = y;
     this.width = width;
     this.height = height;
+    console.log("height " + this.height);
     this.spriteWidth = spriteWidth;
     this.spriteHeight = spriteHeight;
     this.sprite = sprite;
@@ -117,10 +121,11 @@ function frame(srcImage, x, y, width, height, spriteWidth, spriteHeight, sprite)
         context.drawImage(this.srcImage, this.x, this.y, this.width, this.height, flipWidth * x, y, flipWidth * this.spriteWidth * scaleX, this.spriteHeight * scaleY);
         
         if(this.sprite.tintRed){
-            console.log("red");
-            var map = context.getImageData(x, y, this.width, this.height);
+            var newX = x - (x%50);
+            var newY = "";
+            var map = context.getImageData(x, y, this.sprite.width, this.sprite.height);
+            console.log(this.height);
             
-            console.log("x "  + x + ", y " + y);
             var imdata = map.data;
 
             var r,g,b,avg;
@@ -164,7 +169,7 @@ sprite.prototype.addAnimation = function (animationName, imageUri, framesNumber,
     imageSheet.onload = this.saveAnimation(imageSheet, animationName, framesNumber, width, height, multiplier);
 }
 
-sprite.prototype.playAnimation = function (animationName, repeat = true, nextAnimation = null) {
+sprite.prototype.playAnimation = function (animationName, repeat = true, nextAnimation = null, invokeFunction = null, invokeActor = null) {
     if(this.animations[animationName] != undefined) {
         this.animationFrame = 0;
         this.currentAnimation = this.animations[animationName];
@@ -172,9 +177,12 @@ sprite.prototype.playAnimation = function (animationName, repeat = true, nextAni
         if(!repeat){
             this.repeat = false;
             this.nextAnimation = nextAnimation;
+            this.invokeFunction = invokeFunction;
+            this.invokeActor = invokeActor;
         }
         else{
             this.nextAnimation = null;
+            this.invokeFunction = null;
         }      
     }
     else {
@@ -197,11 +205,10 @@ sprite.prototype.update = function(){
 
 sprite.prototype.setRedTint = function(){
     this.tintRed = true;
-    console.log("Tinted red");
     setTimeout(() => this.removeTint(), 100 * 3);
 }
 
 sprite.prototype.removeTint = function(){
     this.tintRed = false;
-    console.log("Removed tint");
+    
 }

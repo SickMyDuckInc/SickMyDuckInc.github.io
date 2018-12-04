@@ -22,6 +22,7 @@ function enemy( rows, cols, sprite, indexEnemy, canvas,character){
 
     this.canvas = canvas;
     this.character = character;
+    this.dir = "LEFT";
 
     switch(indexEnemy){
         case 0:
@@ -36,13 +37,16 @@ function enemy( rows, cols, sprite, indexEnemy, canvas,character){
             this.range = 15;
             this.countAttack = 0;
             this.count = 0;
+            
             break;
         case 1:
         //angel de distancia
-            this.sprite.addAnimation("attack", "res/goodies/trumpet_attack.png", 4, 200, 200);
+            this.sprite.addAnimation("attack", "res/goodies/turret_attack.png", anim_frames["turret"].attack, 4, 200, 200);
             this.autoAttack = false;
             this.life = 50;
             this.shoot = false;
+            this.spriteShoot = "bullet";
+            this.shoots = []; 
             this.damage = 60;
             this.range = 4;
             this.countAttack = 4;
@@ -80,10 +84,18 @@ function enemy( rows, cols, sprite, indexEnemy, canvas,character){
 
 
 enemy.prototype.fight = function(playMan){
+    if(this.dir == "left" && this.character.col > this.cols){
+        this.sprite.flip();
+        this.dir = "right";
+    }
+    else if(this.dir == "right" && this.character.col < this.cols){
+        this.sprite.flip();
+        this.dir = "left";
+    }
     if(this.count == 0 ){
     this.sprite.playAnimation("attack", false, "idle");
         if(this.shoot){
-            playMan.addBullet(new bullet(this.direc,this.spriteShoot,this.cols,this.rows,1,this.canvas,this.character,this)); 
+            playMan.addBullet(new bullet(this.dir,this.spriteShoot,this.cols,this.rows,1,this.canvas,this.character,this,this.spriteShoot)); 
         }
         this.count = this.countAttack;
     }
@@ -97,8 +109,9 @@ enemy.prototype.executeAction = function(playMan){
 }
 
 enemy.prototype.takeDamage = function(dmg){
-    console.log("Life: " + this.life);
+    this.sprite.setRedTint();
     this.life -= dmg;
+    console.log("Life: " + this.life);
 }
 
 enemy.prototype.isDead = function(){

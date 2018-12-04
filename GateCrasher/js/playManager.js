@@ -54,7 +54,7 @@ playManager.prototype.update = function(){
         }
         else{
             this.allBullets[element].bulletSprite.draw();
-            this.allBullets[element].bulletSprite.moveInDirection("LEFT");
+            this.allBullets[element].bulletSprite.moveInDirection(this.allBullets[element].direction);
             this.allBullets[element].checkCollision(this.allEnemies);
         }
     }
@@ -84,13 +84,14 @@ playManager.prototype.calculateNext = function(turnActions){
                     var posX = thisAction.data.target[0] * this.levelManager.drawWidth;
                     var posY = thisAction.data.target[1] * this.levelManager.drawHeight;
                     thisAction.character.setNextTile({x : posY, y : posX});
-                    thisAction.character.calculateWalk();
                     clearInterval(this.moveInterval);
-                    if(this.characterCanMove){                    
+                    if(this.characterCanMove){                          
+                        thisAction.character.calculateWalk(true);                  
                         this.moveInterval = setInterval(() => this.moveUpdate(), 100);
                         console.log("Character walking to: " + thisAction.data.target + ", position: " + posX + ", " + posY);
                     }
-                    else{
+                    else{                        
+                        thisAction.character.calculateWalk(false);
                         console.log("Cant move");
                     }
                     break;
@@ -101,7 +102,9 @@ playManager.prototype.calculateNext = function(turnActions){
         else{
            switch(thisAction.action){
                 case 'attack':
-                thisAction.character.executeAction(this);
+                if(!thisAction.character.isDead()){
+                    thisAction.character.executeAction(this);
+                }
                 break;
            } 
         }
@@ -111,7 +114,12 @@ playManager.prototype.calculateNext = function(turnActions){
 playManager.prototype.moveUpdate = function(){
     if(this.character.walk()){
         this.actualAction++;
-        this.calculateNext(this.actions[this.actualAction]);
+        if(this.actualAction>= this.actions.length){
+            console.log("HE GANADO");
+        }
+        else{
+            this.calculateNext(this.actions[this.actualAction]);
+        }
     }
 }
 
