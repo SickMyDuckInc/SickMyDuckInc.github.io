@@ -21,6 +21,7 @@ function character(inicio, end, rows, cols, matrix, sprite){
     //tipe GridNode {x = fila, y = columna, weight}
     this.path = null;
     this.life = 100;
+    this.damage = 25;
     
     this.cols = cols;
     this.rows = rows;
@@ -85,20 +86,17 @@ character.prototype.walk =  function(){
     return ret;
 }
 
-character.prototype.fight = function(){
-
-}
-
-character.prototype.executeAction = function(){
-    var posx = gridnode[i].y;
-    var posy = gridnode[y].x;
-
-    if(ThereIsEnemy(posx,posy)){
-        this.fight();
+character.prototype.fight = function(enemyTarget){
+    this.sprite.playAnimation("attack", false, "idle");
+    if(!this.isFlipped){
+        var moveX = this.currentTile.x + 10;
     }
     else{
-        this.walk();
+        var moveX = this.currentTile.x - 10;
     }
+    var moveY = this.currentTile.y;
+    this.sprite.moveTo(moveX, moveY);
+    enemyTarget.takeDamage(this.damage);
 }
 
 character.prototype.pathfinding = function(){

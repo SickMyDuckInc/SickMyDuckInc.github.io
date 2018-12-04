@@ -27,6 +27,8 @@ function playManager(actions, levelManager, allEnemies, character, canvas){
     this.canvas = canvas;
     this.actualAction = 0;
     this.allBullets = Array();
+    this.characterCanMove = true;
+    this.targetEnemy;
 
 
     this.updateInterval = setInterval(() => this.update(), 100);
@@ -40,7 +42,9 @@ playManager.prototype.update = function(){
     this.canvas.clear();    
 
     for(var element in this.allEnemies){
-        this.allEnemies[element].sprite.draw();
+        if(!this.allEnemies[element].isDead()){
+            this.allEnemies[element].sprite.draw();
+        }
     }
 
     
@@ -63,14 +67,32 @@ playManager.prototype.calculateNext = function(turnActions){
         var thisAction = turnActions[i];
         if(thisAction.character == this.character){
             switch(thisAction.action){
+                case 'attack':
+                this.characterCanMove = true;
+                    if(thisAction.data.enemy.isDead()){
+                        this.characterCanMove = true;
+                    }
+                    else{           
+                        this.targetEnemy = thisAction.data.enemy;
+                        this.playerAttack();
+                        console.log("ataco");
+                        this.characterCanMove = false;
+                    }
+
+                    break;
                 case 'walk':                
                     var posX = thisAction.data.target[0] * this.levelManager.drawWidth;
                     var posY = thisAction.data.target[1] * this.levelManager.drawHeight;
                     thisAction.character.setNextTile({x : posY, y : posX});
                     thisAction.character.calculateWalk();
-                    clearInterval(this.moveInterval);                    
-                    this.moveInterval = setInterval(() => this.moveUpdate(), 100);
-                    console.log("Character walking to: " + thisAction.data.target + ", position: " + posX + ", " + posY);
+                    clearInterval(this.moveInterval);
+                    if(this.characterCanMove){                    
+                        this.moveInterval = setInterval(() => this.moveUpdate(), 100);
+                        console.log("Character walking to: " + thisAction.data.target + ", position: " + posX + ", " + posY);
+                    }
+                    else{
+                        console.log("Cant move");
+                    }
                     break;
                 default:
                     break;
@@ -95,6 +117,20 @@ playManager.prototype.moveUpdate = function(){
 
 playManager.prototype.addBullet = function(bullet){
     this.allBullets.push(bullet);
+}
+
+playManager.prototype.playerAttack = function(){    
+    this.character.fight(this.targetEnemy);
+    var mult = 0;
+    if(this.targetEnemy.isDead()){
+        this.characterCanMove = true;
+        //this.calculateNext(this.actions[this.actualAction]);
+    }
+    else{
+        mult = 10;
+    }
+    
+    setTimeout(()=> this.calculateNext(this.actions[this.actualAction]), 100*mult);
 }
 
 //Constructior de la clase, 
