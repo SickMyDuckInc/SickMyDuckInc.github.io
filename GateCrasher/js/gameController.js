@@ -101,7 +101,8 @@ var myGameArea = {
 
 var anim_multipliers = {
     "turret":{
-        idle : 3
+        idle : 3,
+        attack : 1
     },
     "enemy01":{
         idle : 2,
@@ -249,6 +250,7 @@ $(document).ready(function(){
         "res/goodies/enemy01_idle.png",
         "res/goodies/turret_idle.png",
         "res/goodies/turret_stand.png",
+        "res/goodies/turret_attack.png",
         "res/goodies/angel_stand.png",
         "res/goodies/angel_idle.png",
         "res/goodies/bullet.png",

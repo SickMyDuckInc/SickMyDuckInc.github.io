@@ -30,7 +30,7 @@
         },
         {
             "sprite":"turret",
-            "type": 2,
+            "type": 0,
             "maxNumber":2
         },
         {

@@ -68,10 +68,10 @@ function enemy( rows, cols, sprite, indexEnemy, canvas){
 
 
 enemy.prototype.fight = function(bullets){
-    this.sprite.playAnimation("attack");
+    this.sprite.playAnimation("attack", false, "idle");
     
     if(this.shoot){
-        bullets.push(new bullet(this.direc,this.spriteShoot,this.cols,this.rows,1,this.canvas)); 
+        //bullets.push(new bullet(this.direc,this.spriteShoot,this.cols,this.rows,1,this.canvas)); 
     }
 }
 
