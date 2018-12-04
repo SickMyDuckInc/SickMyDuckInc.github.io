@@ -13,7 +13,7 @@ function character(inicio, end, rows, cols, matrix, sprite){
     this.end = end;
     this.currentTile = {x :sprite.x, y : sprite.y};
     this.nextTile;
-    this.interval = 10;
+    this.interval = PLAY_SPEED;
     this.isFlipped = false;
 
     this.matrix = matrix;
@@ -108,6 +108,10 @@ character.prototype.executeFightEnd = function(){
 character.prototype.takeDamage = function(dmg){
     this.life -= dmg;
     this.sprite.setRedTint();
+}
+
+character.prototype.isDead = function(dmg){
+    return this.life <= 0;
 }
 
 character.prototype.pathfinding = function(){

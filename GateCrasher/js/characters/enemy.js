@@ -23,6 +23,7 @@ function enemy( rows, cols, sprite, indexEnemy, canvas,character){
     this.canvas = canvas;
     this.character = character;
     this.dir = "LEFT";
+    this.distance = 0;
 
     switch(indexEnemy){
         case 0:
@@ -41,14 +42,14 @@ function enemy( rows, cols, sprite, indexEnemy, canvas,character){
             break;
         case 1:
         //angel de distancia
-            this.sprite.addAnimation("attack", "res/goodies/turret_attack.png", anim_frames["turret"].attack, 4, 200, 200);
+            this.sprite.addAnimation("attack", "res/goodies/trumpet_attack.png", anim_frames["trumpet"].attack, 200, 200);
             this.autoAttack = false;
             this.life = 50;
-            this.shoot = false;
-            this.spriteShoot = "bullet";
+            this.shoot = true;
+            this.spriteShoot = "ball";
             this.shoots = []; 
             this.damage = 60;
-            this.range = 4;
+            this.range = 2;
             this.countAttack = 4;
             this.count = 0;
             break;
@@ -77,20 +78,29 @@ function enemy( rows, cols, sprite, indexEnemy, canvas,character){
             break;
         case 4:
         //tank
-            this.sprite.addAnimation("attack","res/goodies/tank.png")
+            this.sprite.addAnimation("attack","res/goodies/tank_attack.png",anim_frames["tank"].attack,200,200)
+            this.autoAttack = false;
+            this.life = 50;
+            this.shoot = false;
+            this.damage = 20;
+            this.range = 1;
+            this.countAttack = 0;
+            this.count = 0;
+            break;
 
     }
 }
 
 
 enemy.prototype.fight = function(playMan){
-    if(this.dir == "left" && this.character.col > this.cols){
+
+    if(this.dir == "LEFT" && this.character.sprite.x > this.sprite.x){
         this.sprite.flip();
-        this.dir = "right";
+        this.dir = "RIGHT";
     }
-    else if(this.dir == "right" && this.character.col < this.cols){
+    else if(this.dir == "RIGHT" && this.character.sprite.x < this.sprite.x){
         this.sprite.flip();
-        this.dir = "left";
+        this.dir = "LEFT";
     }
     if(this.count == 0 ){
     this.sprite.playAnimation("attack", false, "idle");
@@ -119,37 +129,17 @@ enemy.prototype.isDead = function(){
 }
 
 enemy.prototype.checkAttack= function(col, row){
-    if(col == this.cols){
-        var fila = this.row -row;
+    
+    if(col == this.rows){
+        var fila = Math.abs(this.cols -row);
         //dirección arriba
-        if(fila >0){
-            this.direc = 1;
-        }
-        //dirección abajo
-        else{
-            this.direc = -1;
-        }
+        
 
-        if(Math.abs(fila)<= this.range){
+        if(fila<= this.range){
             return true;
         }
     }
-    else if(row == this.rows){
-        var fila = this.cols -col;
-        //dirección derecha
-        if(fila >0){
-            this.direc = 2;
-        }
-        //dirección izquierda
-        else{
-            this.direc = -2;
-        }
-
-        if(Math.abs(fila)<= this.range){
-            return true;
-        }
-    }
-    else{
-        return false;
-    }
+    
+    return false;
+    
 }
