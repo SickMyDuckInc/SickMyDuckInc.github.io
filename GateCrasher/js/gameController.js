@@ -190,7 +190,7 @@ var lManager;
 var lCharacter;
 
 function resize(){
-    if($(window).width() >600){
+    if($(window).width() >800){
         console.log("hola");
         var aspect_ratio = 400/600;
         var window_width = $(window).width() - 200;
@@ -202,12 +202,21 @@ function resize(){
             $("#enemy_selector").outerHeight(relative_height);
             var enemy_width = relative_height/5;
             $("#enemy_selector").outerWidth(enemy_width);
+            $("#enemy_selector").removeClass("responsive").removeClass("hidden");
+            $("#responsive_menu").hide();
         }
     }
     else if(true){
-        var window_width = $(window).width();
-        $(".canvas_responsive").outerWidth(windowWidth);
-        $("#canvas_container").outerWidth(windowWidth);
+        console.log("adios");
+        var window_width = $(window).width() - 10;
+        $(".canvas_responsive").outerWidth(window_width);
+        $("#canvas_container").outerWidth(window_width);
+        var offset= $("#myCanvas").offset().top;
+        console.log("He saltado");
+        $("#enemy_selector").addClass("responsive").addClass("hidden");
+        $("#enemy_selector").outerHeight($(".canvas_responsive").outerHeight());
+        $(".responsive").css("top", offset);
+        $("#responsive_menu").show();
     }
     else{    
         $("#myCanvas").outerHeight($(window).height()-$("#myCanvas").offset().top- Math.abs($("#myCanvas").outerHeight(true) - $("#myCanvas").outerHeight() -10));
@@ -220,7 +229,7 @@ function resize(){
         $(".canvas_responsive").outerHeight(outerHeight);
         $("#canvas_container").outerWidth(outerWidth);
     }
-
+/*
     var windowWidth = $(window).width();
 
     var totalWidth = 25 + outerWidth + $("#enemy_selector").outerWidth();
@@ -239,7 +248,7 @@ function resize(){
             $("#enemy_selector").removeClass("responsive").removeClass("hidden");
             $("#responsive_menu").hide();
         }
-    }
+    }*/
 
     lManager.drawMap();
     lManager.update();
