@@ -6,9 +6,9 @@ function bullet(direction, type, col, rows, vel, canvas){
     this.vel = vel;
     this.canvas = canvas;
     this.collisioned = false;
-    this.bulletSprite = new sprite(this.canvas.getContext(), "res/goodies/bullet.png", 100, 100, 50, 100);
-    this.bulletSprite.addAnimation("move",  "res/goodies/bullet_anim.png", 2, 200, 200);
-    this.bulletSprite.playAnimation("move");
+    //this.bulletSprite = new sprite(this.canvas.getContext(), "res/goodies/bullet.png", 100, 100, 50, 100);
+    //this.bulletSprite.addAnimation("move",  "res/goodies/bullet_anim.png", 2, 200, 200);
+    //this.bulletSprite.playAnimation("move");
 
     this.updateInterval = setInterval(() => this.update(), 100);
 }
