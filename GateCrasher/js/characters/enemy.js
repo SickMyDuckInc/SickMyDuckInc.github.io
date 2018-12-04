@@ -80,10 +80,10 @@ function enemy( rows, cols, sprite, indexEnemy, canvas,character){
         //tank
             this.sprite.addAnimation("attack","res/goodies/tank_attack.png",anim_frames["tank"].attack,200,200)
             this.autoAttack = false;
-            this.life = 50;
+            this.life = 100;
             this.shoot = false;
-            this.damage = 20;
-            this.range = 1;
+            this.damage = 5;
+            this.range = 0;
             this.countAttack = 0;
             this.count = 0;
             break;
@@ -103,9 +103,13 @@ enemy.prototype.fight = function(playMan){
         this.dir = "LEFT";
     }
     if(this.count == 0 ){
-    this.sprite.playAnimation("attack", false, "idle");
+    
         if(this.shoot){
+            this.sprite.playAnimation("attack", false, "idle");
             playMan.addBullet(new bullet(this.dir,this.spriteShoot,this.cols,this.rows,1,this.canvas,this.character,this,this.spriteShoot)); 
+        }
+        else{
+            this.sprite.playAnimation("attack", false, "idle", this.executeFightEnd, this);
         }
         this.count = this.countAttack;
     }
@@ -114,6 +118,11 @@ enemy.prototype.fight = function(playMan){
     }
 }
 
+enemy.prototype.executeFightEnd = function(){    
+    this.character.takeDamage(this.damage);
+    //this.enemyTarget.sprite.setRedTint();
+    console.log("executedEnd");
+}
 enemy.prototype.executeAction = function(playMan){
     this.fight(playMan);
 }
