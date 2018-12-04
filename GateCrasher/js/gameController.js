@@ -272,20 +272,29 @@ $(document).ready(function(){
     $("#responsive_menu").hide();
 
     preload(
-        "res/background/heaven_horizontal.png",
-        "res/background/heaven_vertical.png",
-        "res/background/heaven_corner1.png",
-        "res/background/heaven_corner2.png",
-        "res/background/heaven_corner3.png",
-        "res/background/heaven_corner4.png",
-        "res/background/heaven_intersectiondown.png",
-        "res/background/snow_end.png",
-        "res/background/cloud.png",
-        "res/background/heaven_intersectionder.png",
-        "res/background/grass_corner1.png",
-        "res/background/grass_empty.png",
-        "res/background/grass_horizontal.png",
-        "res/background/grass_vertical.png",
+        "res/background/heaven_horizontal.png", // 0
+        "res/background/heaven_vertical.png", // 1
+        "res/background/heaven_corner1.png", // 2
+        "res/background/heaven_corner2.png", // 3
+        "res/background/heaven_corner3.png", // 4
+        "res/background/heaven_corner4.png", // 5
+        "res/background/heaven_intersectiondown.png", // 6
+        "res/background/snow_end.png", // 7
+        "res/background/cloud.png", // 8
+        "res/background/heaven_intersectionder.png", // 9
+        "res/background/heaven_intersectionizq.png", // 10
+        "res/background/heaven_intersectionup.png", // 11
+        "res/background/cloud_puzzle1.png", // 12
+        "res/background/cloud_puzzle2.png", // 13
+        "res/background/cloud_puzzle3.png", // 14
+        "res/background/cloud_puzzle4.png", // 15
+        "res/background/cloud_double.png", // 16
+        "res/background/cloud_big1.png", // 17
+        "res/background/cloud_big2.png", // 18
+        "res/background/cloud_big3.png", // 19
+        "res/background/cloud_big4.png", // 20
+        "res/background/cloud_big5.png", // 21
+        "res/background/cloud_big6.png", // 22
         "res/enemies/enemy01_stand.png",
         "res/enemies/enemy01_idle.png",
         "res/enemies/enemy01_attack.png",
