@@ -113,6 +113,7 @@ function frame(srcImage, x, y, width, height, spriteWidth, spriteHeight, sprite)
             flipWidth = -1;
         }
         
+        
         context.drawImage(this.srcImage, this.x, this.y, this.width, this.height, flipWidth * x, y, flipWidth * this.spriteWidth * scaleX, this.spriteHeight * scaleY);
         
         if(this.sprite.tintRed){

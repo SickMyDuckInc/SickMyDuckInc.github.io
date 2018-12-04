@@ -39,7 +39,7 @@ function enemy( rows, cols, sprite, indexEnemy, canvas,character){
             break;
         case 1:
         //angel de distancia
-            this.sprite.addAnimation("attack", "res/goodies/turret_idle.png", 4, 200, 200);
+            this.sprite.addAnimation("attack", "res/goodies/trumpet_attack.png", 4, 200, 200);
             this.autoAttack = false;
             this.life = 50;
             this.shoot = false;
@@ -80,11 +80,10 @@ function enemy( rows, cols, sprite, indexEnemy, canvas,character){
 
 
 enemy.prototype.fight = function(playMan){
-    if(this.count == 0){
+    if(this.count == 0 ){
     this.sprite.playAnimation("attack", false, "idle");
-    
         if(this.shoot){
-            playMan.addBullet(new bullet(this.direc,this.spriteShoot,this.cols,this.rows,1,this.canvas)); 
+            playMan.addBullet(new bullet(this.direc,this.spriteShoot,this.cols,this.rows,1,this.canvas,this.character,this)); 
         }
         this.count = this.countAttack;
     }
