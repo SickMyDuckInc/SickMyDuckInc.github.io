@@ -10,7 +10,7 @@ function bullet(direction, type, col, rows, vel, canvas,character, parent,name){
     this.character = character;
     this.bulletSprite = new sprite(this.canvas.getContext(), "res/goodies/"+name+".png", this.canvas.getDrawHeightDivided(), this.canvas.getDrawWidthDivided(),col*this.canvas.getDrawHeightDivided(),rows*this.canvas.getDrawWidthDivided());
     this.bulletSprite.addAnimation("move",  "res/goodies/"+name+"_anim.png", 2, 200, 200);
-    this.bulletSprite.setSpeed(5);
+    this.bulletSprite.setSpeed(PLAY_SPEED/2);
 
     this.bulletSprite.playAnimation("move");
 
