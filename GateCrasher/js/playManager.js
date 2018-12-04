@@ -26,7 +26,7 @@ function playManager(actions, levelManager, allEnemies, character, canvas){
     this.character = character;
     this.canvas = canvas;
     this.actualAction = 0;
-    this.bullets = Array();
+    this.allBullets = Array();
 
 
     this.updateInterval = setInterval(() => this.update(), 100);
@@ -93,7 +93,7 @@ playManager.prototype.moveUpdate = function(){
 }
 
 playManager.prototype.addBullet = function(bullet){
-    this.bullets.push(bullet);
+    this.allBullets.push(bullet);
 }
 
 //Constructior de la clase, 
