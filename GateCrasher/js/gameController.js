@@ -68,6 +68,18 @@ var myGameArea = {
     getContext : function(){
         return this.context;
     },
+    getDrawHeightDivided : function(){
+        return this.drawHeight;
+    },
+    getDrawWidthDivided : function(){
+        return this.drawWidth;
+    },
+    setDrawWidth : function(w){
+        this.drawWidth = w;
+    },
+    setDrawHeight : function(h){
+        this.drawHeight = h;
+    },
     drawLine : function(fromX, fromY, toX, toY){
         this.contexts[2].moveTo(fromX, fromY);
         this.contexts[2].lineTo(toX, toY);
