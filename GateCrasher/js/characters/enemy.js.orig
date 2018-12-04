@@ -8,7 +8,7 @@ Todas las diferencias entre los tipos de enemigo deben estar definidas como vari
 (por ejemplo, el sprite que llevan), y recibirlas por medio del constructor.
  */
 
-function enemy( rows, cols, sprite, indexEnemy, canvas,character){
+function enemy( rows, cols, sprite, indexEnemy, canvas){
 
     this.sprite = sprite;
     //tipe GridNode {x = fila, y = columna, weight}
@@ -21,7 +21,6 @@ function enemy( rows, cols, sprite, indexEnemy, canvas,character){
     this.rows = rows;
 
     this.canvas = canvas;
-    this.character = character;
 
     switch(indexEnemy){
         case 0:
@@ -79,30 +78,34 @@ function enemy( rows, cols, sprite, indexEnemy, canvas,character){
 }
 
 
-enemy.prototype.fight = function(playMan){
+<<<<<<< HEAD
+enemy.prototype.fight = function(){
     if(this.count == 0){
-    this.sprite.playAnimation("attack", false, "idle");
+        this.sprite.playAnimation("attack");
     
         if(this.shoot){
-            playMan.addBullet(new bullet(this.direc,this.spriteShoot,this.cols,this.rows,1,this.canvas)); 
+            bullets.push(new bullet(this.direc,this.spriteShoot,this.cols,this.rows,1,this.canvas)); 
         }
         this.count = this.countAttack;
     }
     else{
         this.count--;
+=======
+enemy.prototype.fight = function(bullets){
+    this.sprite.playAnimation("attack", false, "idle");
+    
+    if(this.shoot){
+        //bullets.push(new bullet(this.direc,this.spriteShoot,this.cols,this.rows,1,this.canvas)); 
+>>>>>>> 801aa0f3a86e5281c0941196899960c39bf3fafe
     }
 }
 
-enemy.prototype.executeAction = function(playMan){
-    this.fight(playMan);
+enemy.prototype.executeAction = function(){
+    this.fight();
 }
 
 enemy.prototype.takeDamage = function(dmg){
     this.life -= dmg;
-}
-
-enemy.prototype.isDead = function(){
-    return life<=0;
 }
 
 enemy.prototype.checkAttack= function(col, row){
