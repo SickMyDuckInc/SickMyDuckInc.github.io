@@ -21,7 +21,7 @@ function character(inicio, end, rows, cols, matrix, sprite){
     //tipe GridNode {x = fila, y = columna, weight}
     this.path = null;
     this.life = 100;
-    this.damage = 25;
+    this.damage = 20;
     
     this.cols = cols;
     this.rows = rows;
@@ -49,8 +49,10 @@ character.prototype.setNextTile = function(pos){
     this.nextTile = pos;
 }
 
-character.prototype.calculateWalk = function(){
-    this.sprite.playAnimation("walk");
+character.prototype.calculateWalk = function(playAnim = true){
+    if(playAnim){
+        this.sprite.playAnimation("walk");
+    }
     this.diffX = this.nextTile.x - this.currentTile.x;
     this.diffY = this.nextTile.y - this.currentTile.y;
     if(this.diffX != 0){
@@ -68,7 +70,6 @@ character.prototype.calculateWalk = function(){
         this.diffY = this.diffY / this.interval;
     }
 
-    console.log("Calculated walk. DiffX: " + this.diffX + ", diffY: " + this.diffY);
 }
 
 character.prototype.walk =  function(){
@@ -79,7 +80,6 @@ character.prototype.walk =  function(){
         this.sprite.moveTo(moveX, moveY);
     }
     else{
-        console.log("Ya he llegado");
         this.currentTile = this.nextTile;
         ret = true;
     }
@@ -87,7 +87,7 @@ character.prototype.walk =  function(){
 }
 
 character.prototype.fight = function(enemyTarget){
-    this.sprite.playAnimation("attack", false, "idle");
+    this.sprite.playAnimation("attack", false, "idle", this.executeFightEnd, this);
     if(!this.isFlipped){
         var moveX = this.currentTile.x + 10;
     }
@@ -96,8 +96,13 @@ character.prototype.fight = function(enemyTarget){
     }
     var moveY = this.currentTile.y;
     this.sprite.moveTo(moveX, moveY);
-    enemyTarget.takeDamage(this.damage);
-    enemyTarget.sprite.setRedTint();
+    this.enemyTarget = enemyTarget;
+}
+
+character.prototype.executeFightEnd = function(){    
+    this.enemyTarget.takeDamage(this.damage);
+    this.enemyTarget.sprite.setRedTint();
+    console.log("executedEnd");
 }
 
 character.prototype.pathfinding = function(){

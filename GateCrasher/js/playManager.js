@@ -84,13 +84,14 @@ playManager.prototype.calculateNext = function(turnActions){
                     var posX = thisAction.data.target[0] * this.levelManager.drawWidth;
                     var posY = thisAction.data.target[1] * this.levelManager.drawHeight;
                     thisAction.character.setNextTile({x : posY, y : posX});
-                    thisAction.character.calculateWalk();
                     clearInterval(this.moveInterval);
-                    if(this.characterCanMove){                    
+                    if(this.characterCanMove){                          
+                        thisAction.character.calculateWalk(true);                  
                         this.moveInterval = setInterval(() => this.moveUpdate(), 100);
                         console.log("Character walking to: " + thisAction.data.target + ", position: " + posX + ", " + posY);
                     }
-                    else{
+                    else{                        
+                        thisAction.character.calculateWalk(false);
                         console.log("Cant move");
                     }
                     break;

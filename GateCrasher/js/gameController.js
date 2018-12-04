@@ -41,9 +41,7 @@ var myGameArea = {
     },
     resizeEnemies : function(numEnemies){
         var totalHeight = $("#enemy_selector").outerHeight();
-        console.log(totalHeight);
         var height = totalHeight / (numEnemies+1);
-        console.log("Altura individual: " + height);
         $(".single_enemy").outerHeight(height);
         $("#play_button").outerHeight(height-5);
     },
@@ -252,7 +250,7 @@ $(document).ready(function(){
 
     preload(
         "res/background/snow_horizontal.png",
-        "res/background/snow_vertical.png",
+        "res/background/heaven_vertical.png",
         "res/background/snow_corner1.png",
         "res/background/snow_corner2.png",
         "res/background/snow_corner3.png",
@@ -303,11 +301,9 @@ $(document).ready(function(){
     });
 
     $("#backgroundCanvas").on('click', function(){
-        console.log("background");
     });
 
     $(document).on('click', ".single_enemy", function(e){
-        console.log("qie coño");
         lManager.manageEnemyClick($(this).data("enemy"));
     });
 
