@@ -177,11 +177,11 @@ enemy.prototype.Neighbour= function(Enemies){
 }
 
 enemy.prototype.checkEnemyAttack = function(){
-    if(this.dir == "LEFT" && this.leftNeighbour!= undefined && !this.leftNeighbour.isDead()){
+    if(this.dir == "LEFT" && this.leftNeighbour!= undefined && !this.leftNeighbour.isDead() &&this.Neighbour.canBeAttacked){
         this.sprite.playAnimation("attack", false, "idle");
         this.leftNeighbour.takeDamage(this.damage);
     }
-    else if(this.dir == "RIGHT" && this.rightNeighbour!= undefined && !this.leftNeighbour.isDead()){
+    else if(this.dir == "RIGHT" && this.rightNeighbour!= undefined && !this.leftNeighbour.isDead()&&this.Neighbour.canBeAttacked){
         this.sprite.playAnimation("attack", false, "idle");
         this.rightNeighbour.takeDamage(this.damage);
     }
