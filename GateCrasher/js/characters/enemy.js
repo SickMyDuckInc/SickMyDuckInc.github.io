@@ -88,6 +88,7 @@ function enemy( rows, cols, sprite, indexEnemy, canvas,character){
 
             this.release = function(){
                 this.life = 0;
+                this.draw = false;
             }
             break;
         case 3:
