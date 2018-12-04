@@ -16,7 +16,7 @@ row: número de filas
 */
 
 //Parámetro que determina el tiempo que tarda un personaje en avanzar a la siguiente casilla del mapa
-var TIME_SQUARE =  1;
+var PLAY_SPEED =  10;
 
 function playManager(actions, levelManager, allEnemies, character, canvas){
 
@@ -58,8 +58,12 @@ playManager.prototype.update = function(){
             this.allBullets[element].checkCollision(this.allEnemies);
         }
     }
-
-    this.character.sprite.draw();
+    if(!this.character.isDead()){
+        this.character.sprite.draw();
+    }
+    else{
+        console.log("HE MUERTO");
+    }
 }
 
 playManager.prototype.calculateNext = function(turnActions){
