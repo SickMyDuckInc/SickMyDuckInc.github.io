@@ -8,7 +8,7 @@ Todas las diferencias entre los tipos de enemigo deben estar definidas como vari
 (por ejemplo, el sprite que llevan), y recibirlas por medio del constructor.
  */
 
-function enemy( rows, cols, sprite, indexEnemy, canvas){
+function enemy( rows, cols, sprite, indexEnemy, canvas,character){
 
     this.sprite = sprite;
     //tipe GridNode {x = fila, y = columna, weight}
@@ -21,6 +21,8 @@ function enemy( rows, cols, sprite, indexEnemy, canvas){
     this.rows = rows;
 
     this.canvas = canvas;
+    this.character = character;
+    this.dir = "LEFT";
 
     switch(indexEnemy){
         case 0:
@@ -35,13 +37,16 @@ function enemy( rows, cols, sprite, indexEnemy, canvas){
             this.range = 15;
             this.countAttack = 0;
             this.count = 0;
+            
             break;
         case 1:
         //angel de distancia
-            this.sprite.addAnimation("attack", "res/goodies/turret_idle.png", 4, 200, 200);
+            this.sprite.addAnimation("attack", "res/goodies/turret_attack.png", anim_frames["turret"].attack, 4, 200, 200);
             this.autoAttack = false;
             this.life = 50;
             this.shoot = false;
+            this.spriteShoot = "bullet";
+            this.shoots = []; 
             this.damage = 60;
             this.range = 4;
             this.countAttack = 4;
@@ -78,34 +83,43 @@ function enemy( rows, cols, sprite, indexEnemy, canvas){
 }
 
 
-<<<<<<< HEAD
-enemy.prototype.fight = function(){
-    if(this.count == 0){
-        this.sprite.playAnimation("attack");
-    
+enemy.prototype.fight = function(playMan){
+    if(this.dir == "left" && this.character.col > this.cols){
+        this.sprite.flip();
+        this.dir = "right";
+    }
+    else if(this.dir == "right" && this.character.col < this.cols){
+        this.sprite.flip();
+        this.dir = "left";
+    }
+    if(this.count == 0 ){
+    this.sprite.playAnimation("attack", false, "idle");
         if(this.shoot){
-            bullets.push(new bullet(this.direc,this.spriteShoot,this.cols,this.rows,1,this.canvas)); 
+            playMan.addBullet(new bullet(this.dir,this.spriteShoot,this.cols,this.rows,1,this.canvas,this.character,this,this.spriteShoot)); 
         }
         this.count = this.countAttack;
     }
     else{
         this.count--;
-=======
-enemy.prototype.fight = function(bullets){
-    this.sprite.playAnimation("attack", false, "idle");
-    
-    if(this.shoot){
-        //bullets.push(new bullet(this.direc,this.spriteShoot,this.cols,this.rows,1,this.canvas)); 
->>>>>>> 801aa0f3a86e5281c0941196899960c39bf3fafe
     }
 }
 
-enemy.prototype.executeAction = function(){
-    this.fight();
+enemy.prototype.executeAction = function(playMan){
+    this.fight(playMan);
 }
 
 enemy.prototype.takeDamage = function(dmg){
+<<<<<<< HEAD
+=======
+    console.log("Life: " + this.life);
+    this.sprite.setRedTint();
+>>>>>>> 3de9ed1741b428334d0086dcdc77affd6a5cf7df
     this.life -= dmg;
+    console.log("Life: " + this.life);
+}
+
+enemy.prototype.isDead = function(){
+    return this.life<=0;
 }
 
 enemy.prototype.checkAttack= function(col, row){
