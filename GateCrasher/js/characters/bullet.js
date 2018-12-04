@@ -13,7 +13,7 @@ function bullet(direction, type, col, rows, vel, canvas,character, parent,name){
         this.bulletSprite.flip();
     this.bulletSprite.setVisible();
     this.bulletSprite.addAnimation("move",  "res/goodies/"+name+"_anim.png", 2, 200, 200);
-    this.bulletSprite.setSpeed(PLAY_SPEED/2);
+    this.bulletSprite.setSpeed(BULLET_SPEED);
 
     this.bulletSprite.playAnimation("move");
 
