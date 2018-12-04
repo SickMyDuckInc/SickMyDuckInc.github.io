@@ -109,6 +109,9 @@ var myGameArea = {
     },
     hideBar : function(){
         $("#enemy_selector.responsive").addClass("hidden");
+    },
+    removeSelected : function(){
+        $("#responsive_menu img").attr("src","/res/goodies/empty.png");
     }
 }
 
@@ -372,6 +375,8 @@ $(document).ready(function(){
 
     $(document).on('click', ".single_enemy", function(e){
         lManager.manageEnemyClick($(this).data("enemy"));
+        var img = $(this).find("img").attr('src');
+        $("#responsive_menu img").attr("src",img);
     });
 
     $("#responsive_menu, #play_button").on('click', function(){
