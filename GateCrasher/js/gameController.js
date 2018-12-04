@@ -131,7 +131,12 @@ var anim_multipliers = {
     "trap":{
         idle: 1,
         hurt : 2
-    }
+    },
+    "trumpet":{
+        idle: 1,
+        attack: 1,
+        hurt : 2
+    },
 }
 
 var anim_frames = {
@@ -153,7 +158,12 @@ var anim_frames = {
     "trap":{
         idle: 1,
         hurt : 1
-    }
+    },
+    "trumpet":{
+        idle: 5,
+        attack: 5,
+        hurt : 1
+    },
 }
 
 var lManager;
@@ -258,10 +268,10 @@ $(document).ready(function(){
         "res/background/heaven_corner2.png",
         "res/background/heaven_corner3.png",
         "res/background/heaven_corner4.png",
-        "res/background/snow_intersection.png",
+        "res/background/heaven_intersectiondown.png",
         "res/background/snow_end.png",
-        "res/background/snow_empty.png",
-        "res/background/snow_intersection2.png",
+        "res/background/cloud.png",
+        "res/background/heaven_intersectionder.png",
         "res/background/grass_corner1.png",
         "res/background/grass_empty.png",
         "res/background/grass_horizontal.png",
@@ -277,10 +287,16 @@ $(document).ready(function(){
         "res/goodies/turret_stand.png",
         "res/goodies/turret_attack.png",
         "res/goodies/turret_red.png",
+        "res/goodies/trumpet_stand.png",
+        "res/goodies/trumpet_idle.png",
+        "res/goodies/trumpet_attack.png",
+        "res/goodies/trumpet_red.png",
         "res/goodies/angel_stand.png",
         "res/goodies/angel_idle.png",
         "res/goodies/bullet.png",
         "res/goodies/bullet_anim.png",
+        "res/goodies/ball.png",
+        "res/goodies/ball_anim.png",
         "res/goodies/trap_stand.png",
         "res/goodies/trap_closed.png",
         "res/goodies/trap_idle.png",
