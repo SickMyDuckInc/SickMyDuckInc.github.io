@@ -314,13 +314,13 @@ levelManager.prototype.startGame = function(){
                 actions.push(this_action);
             }
 
-            if( i == -2){
+            if( i == 0){
                 var checkPathX = characterToUse.init[0];
                 var checkPathY = characterToUse.init[1];
             }
             else{
-                var checkPathX = pathToUse[i][0];
-                var checkPathY = pathToUse[i][1];
+                var checkPathX = pathToUse[i-1][0];
+                var checkPathY = pathToUse[i-1][1];
             }
 
             if(actualEnemy.autoAttack){
