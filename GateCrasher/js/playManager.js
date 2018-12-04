@@ -29,6 +29,7 @@ function playManager(actions, levelManager, allEnemies, character, canvas){
     this.actualAction = 0;
     this.allBullets = Array();
     this.characterCanMove = true;
+    this.characterStunned = false;
     this.targetEnemy;
 
 
@@ -48,7 +49,7 @@ playManager.prototype.update = function(){
     else{
         console.log("HE MUERTO");
     }
-    
+
     for(var element in this.allEnemies){
         if(!this.allEnemies[element].isDead()){
             this.allEnemies[element].sprite.draw();
@@ -78,7 +79,7 @@ playManager.prototype.calculateNext = function(turnActions){
                     if(thisAction.data.enemy.isDead()){
                         this.characterCanMove = true;
                     }
-                    else{           
+                    else if(!this.characterStunned){           
                         this.targetEnemy = thisAction.data.enemy;
                         this.playerAttack();
                         console.log("ataco");
@@ -90,8 +91,8 @@ playManager.prototype.calculateNext = function(turnActions){
                     var posX = thisAction.data.target[0] * this.levelManager.drawWidth;
                     var posY = thisAction.data.target[1] * this.levelManager.drawHeight;
                     thisAction.character.setNextTile({x : posY, y : posX});
-                    clearInterval(this.moveInterval);
-                    if(this.characterCanMove){                          
+                    if(this.characterCanMove && !this.characterStunned){                           
+                        clearInterval(this.moveInterval);                       
                         thisAction.character.calculateWalk(true);                  
                         this.moveInterval = setInterval(() => this.moveUpdate(), 100);
                         console.log("Character walking to: " + thisAction.data.target + ", position: " + posX + ", " + posY);
@@ -124,6 +125,7 @@ playManager.prototype.setNext = function(trap){
     //this.actualAction++;
     clearInterval(this.moveInterval);
     this.characterCanMove = false;
+    this.characterStunned = true;
     this.calculateNext(this.actions[this.actualAction]);
     this.moveInterval = setInterval(() => this.moveAndStun(trap), 100);
 }
@@ -144,7 +146,9 @@ playManager.prototype.moveAndStun = function(trap){
     if(this.character.walk()){
         this.character.characterCanMove = false;
         clearInterval(this.moveInterval);
+        this.actualAction++;
         trap.executeClose();
+        this.moveInterval = setInterval(() => this.calculateNext(this.actions[this.actualAction]), 100 * PLAY_SPEED);
     }
 }
 
@@ -160,7 +164,7 @@ playManager.prototype.playerAttack = function(){
         //this.calculateNext(this.actions[this.actualAction]);
     }
     else{
-        mult = 10;
+        mult = PLAY_SPEED;
     }
     
     setTimeout(()=> this.calculateNext(this.actions[this.actualAction]), 100*mult);

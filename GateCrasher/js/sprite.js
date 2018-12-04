@@ -113,7 +113,6 @@ function frame(srcImage, x, y, width, height, spriteWidth, spriteHeight, sprite)
     this.y = y;
     this.width = width;
     this.height = height;
-    console.log("height " + this.height);
     this.spriteWidth = spriteWidth;
     this.spriteHeight = spriteHeight;
     this.sprite = sprite;
