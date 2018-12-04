@@ -7,6 +7,11 @@ body{
     font-family: "Gatecrasher";
     
 }
+
+#mainmenu_container{
+    max-height: 100%;
+}
+
 .btn-menu {
     -webkit-appearance: button;
     -moz-appearance: button;
