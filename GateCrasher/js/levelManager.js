@@ -79,6 +79,9 @@ function levelManager(canvas, allImages, level){
     this.drawHeight = this.canvas.getDrawHeight() / this.numRows;
     this.drawWidth = this.canvas.getDrawWidth() / this.numCols;
 
+    this.canvas.setDrawWidth(this.drawWidth);
+    this.canvas.setDrawHeight(this.drawHeight);
+
 
     this.canvas.drawTile(0, 0, this.drawWidth, this.drawHeight, this.allImages[0]);
     
@@ -92,7 +95,10 @@ levelManager.prototype.drawMap = function(){
     this.intervalWidth = this.canvas.getWidth() / this.numCols;
 
     this.drawHeight = this.canvas.getDrawHeight() /this.numRows;
-    this.drawWidth = this.canvas.getDrawWidth() / this.numCols;    
+    this.drawWidth = this.canvas.getDrawWidth() / this.numCols;  
+    
+    this.canvas.setDrawWidth(this.drawWidth);
+    this.canvas.setDrawHeight(this.drawHeight);
 
     this.canvas.resizeEnemies(this.numEnemies);
     this.paintTile();
@@ -290,6 +296,10 @@ levelManager.prototype.startGame = function(){
         var characterCanMove = true; 
         for(var actualEnemyIndex in allEnemies){
             var actualEnemy = allEnemies[actualEnemyIndex];
+
+            if(Math.abs(pathToUse[0] - actualEnemy.rows == 1)){
+                console.log("Adyacente en " + pathToUse[0] + ", " + pathToUse[0]);
+            }
 
             if(actualEnemy.autoAttack){
                 console.log("Added autoattack");
