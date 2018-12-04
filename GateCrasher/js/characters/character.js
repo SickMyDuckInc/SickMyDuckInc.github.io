@@ -101,8 +101,13 @@ character.prototype.fight = function(enemyTarget){
 
 character.prototype.executeFightEnd = function(){    
     this.enemyTarget.takeDamage(this.damage);
-    this.enemyTarget.sprite.setRedTint();
+    //this.enemyTarget.sprite.setRedTint();
     console.log("executedEnd");
+}
+
+character.prototype.takeDamage = function(dmg){
+    this.life -= dmg;
+    this.sprite.setRedTint();
 }
 
 character.prototype.pathfinding = function(){

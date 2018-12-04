@@ -310,7 +310,7 @@ $(document).ready(function(){
         lManager.manageEnemyClick($(this).data("enemy"));
     });
 
-    $("#responsive_menu").on('click', function(){
+    $("#responsive_menu, #play_button").on('click', function(){
         if($("#enemy_selector").hasClass("hidden")){
             $("#enemy_selector").removeClass("hidden");
         }

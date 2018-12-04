@@ -104,6 +104,7 @@ function frame(srcImage, x, y, width, height, spriteWidth, spriteHeight, sprite)
     this.y = y;
     this.width = width;
     this.height = height;
+    console.log("height " + this.height);
     this.spriteWidth = spriteWidth;
     this.spriteHeight = spriteHeight;
     this.sprite = sprite;
@@ -120,7 +121,10 @@ function frame(srcImage, x, y, width, height, spriteWidth, spriteHeight, sprite)
         context.drawImage(this.srcImage, this.x, this.y, this.width, this.height, flipWidth * x, y, flipWidth * this.spriteWidth * scaleX, this.spriteHeight * scaleY);
         
         if(this.sprite.tintRed){
-            var map = context.getImageData(x, y, this.width, this.height);
+            var newX = x - (x%50);
+            var newY = "";
+            var map = context.getImageData(x, y, this.sprite.width, this.sprite.height);
+            console.log(this.height);
             
             var imdata = map.data;
 
@@ -206,4 +210,5 @@ sprite.prototype.setRedTint = function(){
 
 sprite.prototype.removeTint = function(){
     this.tintRed = false;
+    
 }

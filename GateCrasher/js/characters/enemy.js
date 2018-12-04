@@ -98,6 +98,7 @@ enemy.prototype.executeAction = function(playMan){
 
 enemy.prototype.takeDamage = function(dmg){
     console.log("Life: " + this.life);
+    this.sprite.setRedTint();
     this.life -= dmg;
 }
 
