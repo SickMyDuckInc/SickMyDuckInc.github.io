@@ -5,6 +5,7 @@ $(document).ready(function(){
     $("#samelevel").attr("href","game.html?level="+level);
     if(win == 0){
         $("#stars").hide();
+        $("#stars_parent").hide();
         $("#nextlevel").hide();
         $("#win_loose").attr("src","/res/menus/game_over.png");
     }
