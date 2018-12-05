@@ -112,9 +112,13 @@ var myGameArea = {
     },
     removeSelected : function(){
         $("#responsive_menu img").attr("src","/res/goodies/empty.png");
+        $(".single_enemy").removeClass("selected");
     },
-    addSelected : function(){
-
+    addSelected : function(enemy_index){        
+        $(".single_enemy").removeClass("selected");
+        var img = $("#enemy_" + enemy_index).find("img").attr('src');
+        $("#enemy_" + enemy_index).addClass("selected");
+        $("#responsive_menu img").attr("src",img);       
     }
 }
 
@@ -196,27 +200,56 @@ var lManager;
 var lCharacter;
 
 function resize(){
+    var aspect_ratio = 400/600;
     if($(window).width() >800){
         console.log("hola");
-        var aspect_ratio = 400/600;
+        var title_height = $("#title").outerHeight();
         var window_width = $(window).width() - 200;
-        var window_height = $(window).height() - 50;
+        var window_height = $(window).height() - title_height - 10;
         var relative_height = aspect_ratio * window_width;
         if(relative_height<window_height){
             $(".canvas_responsive").outerWidth($(window).width()-200);
             $("#canvas_container").outerWidth($(window).width()-200);
             $("#enemy_selector").outerHeight(relative_height);
-            var enemy_width = relative_height/5;
-            $("#enemy_selector").outerWidth(enemy_width);
-            $("#enemy_selector").removeClass("responsive").removeClass("hidden");
-            $("#responsive_menu").hide();
+            $(".canvas_responsive").outerHeight(relative_height);
+            $("#canvas_container").outerHeight(relative_height);
         }
+        else{
+            var relative_width = window_height / aspect_ratio;           
+            $(".canvas_responsive").outerWidth(relative_width);
+            $("#canvas_container").outerWidth(relative_width);
+            $(".canvas_responsive").outerHeight(window_height);
+            $("#canvas_container").outerHeight(window_height);            
+            $("#enemy_selector").outerHeight(window_height);
+        }
+        
+        var enemy_width = relative_height/5;
+        $("#enemy_selector").outerWidth(enemy_width);
+        $("#enemy_selector").removeClass("responsive").removeClass("hidden");
+        $("#responsive_menu").hide();
     }
     else if(true){
         console.log("adios");
-        var window_width = $(window).width() - 10;
-        $(".canvas_responsive").outerWidth(window_width);
-        $("#canvas_container").outerWidth(window_width);
+        var window_width = $(window).width() - 10;        
+        var title_height = $("#title").outerHeight();
+        window_height = $(window).height() -title_height - 15;
+        var relative_height = window_width * aspect_ratio;
+        if(relative_height<window_height){
+            $(".canvas_responsive").outerWidth(window_width);
+            $("#canvas_container").outerWidth(window_width);
+            $(".canvas_responsive").outerHeight(relative_height);
+            $("#canvas_containter").outerHeight(relative_height);            
+            $("#enemy_selector").outerHeight(relative_height);
+        }
+        else{
+            console.log("entro al else");
+            var relative_width = window_height / aspect_ratio;            
+            $(".canvas_responsive").outerWidth(relative_width);
+            $("#canvas_container").outerWidth(relative_width);
+            $(".canvas_responsive").outerHeight(window_height);
+            $("#canvas_container").outerHeight(window_height);            
+            $("#enemy_selector").outerHeight(window_height);
+        }
         var offset= $("#myCanvas").offset().top;
         console.log("He saltado");
         $("#enemy_selector").addClass("responsive").addClass("hidden");
@@ -279,7 +312,7 @@ function preload(){
 }
 
 function startGame(){
-    $.getJSON("res/levels/level2.json", function(data){
+    $.getJSON("res/levels/level3.json", function(data){
         lManager = new levelManager(myGameArea, images, data);
 
         var rows = lManager.numRows;
@@ -416,6 +449,11 @@ $(document).ready(function(){
         resize();
     });
 
+    $( window ).on( "orientationchange", function( event ) {
+        console.log("Tilted");
+        resize();
+    });
+
     $("#myCanvas").on('click', function(e){
         lManager.manageCanvasClick(e.clientX, e.clientY);
     });
@@ -425,8 +463,6 @@ $(document).ready(function(){
 
     $(document).on('click', ".single_enemy", function(e){
         lManager.manageEnemyClick($(this).data("enemy"));
-        var img = $(this).find("img").attr('src');
-        $("#responsive_menu img").attr("src",img);
     });
 
     $("#responsive_menu, #play_button").on('click', function(){
