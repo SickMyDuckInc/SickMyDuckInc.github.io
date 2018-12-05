@@ -7,11 +7,11 @@ $(document).ready(function(){
         $("#stars").hide();
         $("#stars_parent").hide();
         $("#nextlevel").hide();
-        $("#win_loose").attr("src","/res/menus/game_over.png");
+        $("#win_loose").attr("src","res/menus/game_over.png");
     }
     else{
-        $("#win_loose").attr("src","/res/menus/enhorabuena.png");
-        $("#stars").attr("src","/res/menus/stars/stars"+stars+".png");
+        $("#win_loose").attr("src","res/menus/enhorabuena.png");
+        $("#stars").attr("src","res/menus/stars/stars"+stars+".png");
         
         if(level <3){
             var nexlevel = parseInt(level) +1;
