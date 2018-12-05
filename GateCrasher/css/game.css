@@ -47,6 +47,11 @@ canvas{
     z-index: 3;
 }
 
+.play_button_img{
+    max-width: 100%;
+    max-height: 100%;
+}
+
 #lineCanvas{
     z-index: 2;
 }
@@ -137,7 +142,7 @@ canvas{
 
 #play_button{
     width:100%;
-    background-color: darkgoldenrod;
+    background-color: white;
     font-family: 'Gatecrasher';
 }
 

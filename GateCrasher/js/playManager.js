@@ -16,8 +16,8 @@ row: número de filas
 */
 
 //Parámetro que determina el tiempo que tarda un personaje en avanzar a la siguiente casilla del mapa
-var PLAY_SPEED =  10;
-var BULLET_SPEED = 5;
+var PLAY_SPEED =  5;
+var BULLET_SPEED = 10;
 
 function playManager(actions, levelManager, allEnemies, character, canvas){
 
@@ -49,7 +49,8 @@ playManager.prototype.update = function(){
     else{
         console.log("HE MUERTO");
         var score = this.calculateScore();
-        window.location.replace("gameover.html?win=1&stars="+score+"&level="+levelGobal);
+        var level = getUrlParameter("level");
+        window.location.replace("gameover.html?win=1&stars="+score+"&level="+level);
     }
 
     for(var element in this.allEnemies){
@@ -147,7 +148,8 @@ playManager.prototype.moveUpdate = function(){
         if(this.actualAction>= this.actions.length){
 
             console.log("HE GANADO");
-            window.location.replace("gameover.html?win=0&stars=0&level="+levelGobal);
+            var level = getUrlParameter("level");
+            window.location.replace("gameover.html?win=0&stars=0&level="+level);
         }
         else{
             this.calculateNext(this.actions[this.actualAction]);
@@ -202,6 +204,21 @@ playManager.prototype.calculateScore = function(){
         return 1;
     }
 }
+
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = window.location.search.substring(1),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+        }
+    }
+};
 
 //Constructior de la clase, 
 // function playManager(matrixMovement,listAction, listCharacters, myGameArea, col, rows){
