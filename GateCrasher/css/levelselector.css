@@ -16,6 +16,7 @@ body{
     width: auto;
 }
 #levelselector_container{
+    max-height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -23,24 +24,6 @@ body{
     text-align: center; 
 }
 
-.btn-game {
-    -webkit-appearance: button;
-    -moz-appearance: button;
-    appearance: button;
-
-    text-decoration: none;
-    color: green;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    min-height: 10vh;
-    width: 30%;
-    height: auto;
-    margin:20px;
-}
 
 #basicbuttons_container{
     display: flex;
@@ -48,4 +31,8 @@ body{
     justify-content: center;
     align-items: center;
     text-align: center; 
+}
+
+.select_image{
+    max-height: 130% !important;
 }

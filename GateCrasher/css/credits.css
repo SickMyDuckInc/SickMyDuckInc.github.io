@@ -18,7 +18,15 @@ body{
 #btn_container{
     height: auto;
     width: auto;
-    margin: 100px;
+    text-align: center;
+}
+
+.inline_block{
+    display: inline-block !important;
+}
+
+.height_40{
+    height: 40vh !important;
 }
 
 .btn-credits {
