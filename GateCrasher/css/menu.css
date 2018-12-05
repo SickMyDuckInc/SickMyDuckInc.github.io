@@ -6,6 +6,7 @@
 body{
     font-family: "Gatecrasher";
     overflow: hidden;
+    background-image: "res/menus/main_background.png"
 }
 
 #game-title{
@@ -31,8 +32,7 @@ body{
     appearance: button;
 
     text-decoration: none;
-    color: initial;
-
+    
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -42,6 +42,19 @@ body{
     width: 30%;
     height: auto;
     margin:20px;
+}
+
+#levelselector {
+    background-image: "res/menus/jugar.png"
+}
+#howtoplay {
+    background-image: "res/menus/como_jugar.png"
+}
+#options {
+    background-image: "res/menus/opciones.png"
+}
+#credits {
+    background-image: "res/menus/atras.png"
 }
 
 

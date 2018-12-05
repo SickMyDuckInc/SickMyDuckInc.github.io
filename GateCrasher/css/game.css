@@ -4,7 +4,7 @@
 }
 
 body{
-    font-family: "Gatecrasher";
+    font-family: "Gatecrasher" !important;
 }
 
 canvas{
@@ -18,14 +18,18 @@ canvas{
     display: inline-block;
     width: 600px;
     height: 400px;
-
 }
 
 #title{
-    text-align: center;
+    text-align: left;
+}
+
+#title img{
+    max-height: 100px;
 }
 
 #main_container{
+    white-space: nowrap;
     max-height: 100%;
     padding-left: 5px;
     display: inline-block;
@@ -51,17 +55,29 @@ canvas{
     z-index: 1;
 }
 
+#back_arrow{
+    position: absolute;
+    z-index: 5;
+    width: 6%;
+}
+
 #enemy_selector{
     border: solid 3px darkred;
     background-color: palevioletred;
     width: 100px;
     margin-left: 20px;
     max-height: 100%;
+    max-width: 20%;
     height:400px;
     display:inline-block;
     vertical-align: top;
     cursor:pointer;
 }
+
+.single_enemy.selected{
+    background-color: aquamarine;
+}
+
 @media (min-width : 800){
     .canvas_responsive{
         max-width: 1200px;
@@ -101,7 +117,9 @@ canvas{
 }
 
 .selector_img{
-    height: 90%;
+    max-width: 100%;
+    max-height: 100%;
+    height: auto;
     display: block;
     margin: auto;
 }
@@ -120,6 +138,7 @@ canvas{
 #play_button{
     width:100%;
     background-color: darkgoldenrod;
+    font-family: 'Gatecrasher';
 }
 
 .hidden{
