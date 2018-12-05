@@ -62,6 +62,7 @@ function levelManager(canvas, allImages, level){
             this.walkable[i][j] = this.matrix[i][j] + 2;
         }
     }
+    this.matrix = level.matrix;
 
 
     console.log("Enemies Matrix: ");
