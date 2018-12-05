@@ -407,7 +407,8 @@ $(document).ready(function(){
         "res/goodies/trap_stand.png",
         "res/goodies/trap_closed.png",
         "res/goodies/trap_idle.png",
-        "res/goodies/trap_attack.png"
+        "res/goodies/trap_attack.png",
+        "res/goodies/empty.png"
 
     );
 
