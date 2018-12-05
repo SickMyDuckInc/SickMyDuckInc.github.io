@@ -200,10 +200,10 @@ enemy.prototype.checkAttack= function(col, row){
 
 enemy.prototype.Neighbour= function(Enemies){
     for(var item in Enemies){
-        if(Enemies[item].cols == (this.cols -1)){
+        if(Enemies[item].cols == (this.cols -1) && Enemies[item].rows== this.rows){
             this.leftNeighbour = Enemies[item];
         }
-        if(Enemies[item].cols == (this.cols+1)){
+        if(Enemies[item].cols == (this.cols+1) && Enemies[item].rows== this.rows){
             this.rightNeighbour = Enemies[item];
         }
     }
