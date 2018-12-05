@@ -26,7 +26,7 @@ bullet.prototype.checkCollision = function(allEnemies){
         this.collisioned = true;
     }
     for(var element in allEnemies){
-        if( (allEnemies[element].cols != this.parent.cols || allEnemies[element].rows != this.parent.rows) && allEnemies[element].canBeAttacked){
+        if( !allEnemies[element].isDead() && (allEnemies[element].cols != this.parent.cols || allEnemies[element].rows != this.parent.rows) && allEnemies[element].canBeAttacked){
             if( this.bulletSprite.y < allEnemies[element].rows*this.canvas.getDrawWidthDivided()+this.canvas.getDrawWidthDivided()*0.8&&
             this.bulletSprite.y > allEnemies[element].rows*this.canvas.getDrawWidthDivided()-this.canvas.getDrawWidthDivided() && 
             this.bulletSprite.x < allEnemies[element].cols*this.canvas.getDrawHeightDivided()+this.canvas.getDrawHeightDivided() &&  
