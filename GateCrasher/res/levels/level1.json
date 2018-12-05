@@ -41,12 +41,12 @@
         {
             "sprite":"angel",
             "type": 3,
-            "maxNumber":3
+            "maxNumber":2
         },
         {
             "sprite":"trap",
             "type": 4,
-            "maxNumber":3
+            "maxNumber":2
         },
         {
             "sprite":"trumpet",
@@ -58,7 +58,7 @@
         {
             "sprite":"enemy01",
             "initialPos": [7, 2],
-            "goal": [0, 9]
+            "goal": [0, 1]
         }
     ]
 }
