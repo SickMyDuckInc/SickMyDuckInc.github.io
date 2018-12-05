@@ -36,7 +36,7 @@ var myGameArea = {
             this.selector.append(str);
         }
 
-        var button_str = '<button id="play_button"><img class="play_button_img" src="/res/menus/button_play.png"/></button>';
+        var button_str = '<button id="play_button"><img class="play_button_img" src="res/menus/button_play.png"/></button>';
         this.selector.append(button_str);
     },
     resizeEnemies : function(numEnemies){
