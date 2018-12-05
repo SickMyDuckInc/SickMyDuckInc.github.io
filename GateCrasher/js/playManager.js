@@ -17,7 +17,7 @@ row: número de filas
 
 //Parámetro que determina el tiempo que tarda un personaje en avanzar a la siguiente casilla del mapa
 var PLAY_SPEED =  5;
-var BULLET_SPEED = 10;
+var BULLET_SPEED = 15;
 
 function playManager(actions, levelManager, allEnemies, character, canvas){
 
