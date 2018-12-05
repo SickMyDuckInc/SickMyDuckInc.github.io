@@ -28,6 +28,10 @@ body{
     height: 65vh !important;
 }
 
+.margin_bt_0{
+    margin-bottom: 0 !important;
+}
+
 
 #game-title{
     justify-content: center;
