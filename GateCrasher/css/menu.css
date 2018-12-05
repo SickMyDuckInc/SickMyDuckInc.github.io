@@ -6,7 +6,7 @@
 body{
     font-family: "Gatecrasher";
     overflow: hidden;
-    background-image: "res/menus/main_background.png"
+    background-image: url(../res/menus/main_background.png);
 }
 
 #game-title{
