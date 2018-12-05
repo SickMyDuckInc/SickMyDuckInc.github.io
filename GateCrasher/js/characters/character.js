@@ -74,7 +74,7 @@ character.prototype.calculateWalk = function(playAnim = true){
 
 character.prototype.walk =  function(){
     var ret = false;
-    if(this.nextTile.x != this.sprite.x || this.nextTile.y != this.sprite.y){
+    if((Math.abs(this.nextTile.x - this.sprite.x) > 10) || (Math.abs(this.nextTile.y - this.sprite.y) >10)){
         var moveX = this.sprite.x + this.diffX;
         var moveY = this.sprite.y + this.diffY;
         this.sprite.moveTo(moveX, moveY);
