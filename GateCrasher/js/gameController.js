@@ -312,7 +312,9 @@ function preload(){
 }
 
 function startGame(){
-    $.getJSON("res/levels/level3.json", function(data){
+    var level = getUrlParameter("level");
+    console.log("Selected level: " + level);
+    $.getJSON("res/levels/level"+level+".json", function(data){
         lManager = new levelManager(myGameArea, images, data);
 
         var rows = lManager.numRows;
@@ -488,4 +490,19 @@ $(document).ready(function(){
     })
 
 });
+
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = window.location.search.substring(1),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+        }
+    }
+};
 
