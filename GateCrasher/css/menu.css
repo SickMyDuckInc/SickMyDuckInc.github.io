@@ -9,6 +9,15 @@ body{
     background-image: url(../res/menus/main_background.png);
     background-size: cover;
 }
+#btn_container{
+    height: auto;
+    width: auto;
+    text-align: center;
+}
+
+.inline_block{
+    display: inline-block !important;
+}
 
 #game-title{
     justify-content: center;
