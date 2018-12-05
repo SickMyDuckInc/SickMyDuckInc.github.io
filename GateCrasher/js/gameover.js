@@ -1,6 +1,6 @@
 $(document).ready(function(){
     var win = getUrlParameter("win");
-    var stars = getUrlParameter("score");
+    var stars = getUrlParameter("stars");
     var level = getUrlParameter("level");
     $("#samelevel").attr("href","game.html?level="+level);
     if(win == 0){
