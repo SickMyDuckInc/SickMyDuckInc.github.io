@@ -228,7 +228,7 @@ function resize(){
         $("#enemy_selector").removeClass("responsive").removeClass("hidden");
         $("#responsive_menu").hide();
     }
-    else if(true){
+    else{
         console.log("adios");
         var window_width = $(window).width() - 10;        
         var title_height = $("#title").outerHeight();
@@ -257,37 +257,7 @@ function resize(){
         $(".responsive").css("top", offset);
         $("#responsive_menu").show();
     }
-    else{    
-        $("#myCanvas").outerHeight($(window).height()-$("#myCanvas").offset().top- Math.abs($("#myCanvas").outerHeight(true) - $("#myCanvas").outerHeight() -10));
-        $("#myCanvas").outerWidth($(window).width()-$("#myCanvas").offset().left- Math.abs($("#myCanvas").outerWidth(true) - $("#myCanvas").outerWidth() -10));
-        var outerHeight = $("#myCanvas").outerHeight();
-        var outerWidth = $("#myCanvas").outerWidth();
-        console.log($(window).width());
-        $("#enemy_selector").outerHeight(outerHeight);
 
-        $(".canvas_responsive").outerHeight(outerHeight);
-        $("#canvas_container").outerWidth(outerWidth);
-    }
-/*
-    var windowWidth = $(window).width();
-
-    var totalWidth = 25 + outerWidth + $("#enemy_selector").outerWidth();
-
-    if(windowWidth <= totalWidth){
-        if(!$("#enemy_selector").hasClass("responsive")){
-            var offset= $("#myCanvas").offset().top;
-            console.log("He saltado");
-            $("#enemy_selector").addClass("responsive").addClass("hidden");
-            $(".responsive").css("top", offset);
-            $("#responsive_menu").show();
-        }
-    }
-    else{
-        if($("#enemy_selector").hasClass("responsive")){
-            $("#enemy_selector").removeClass("responsive").removeClass("hidden");
-            $("#responsive_menu").hide();
-        }
-    }*/
 
     lManager.drawMap();
     lManager.update();
