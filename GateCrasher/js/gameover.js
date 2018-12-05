@@ -1,6 +1,6 @@
 $(document).ready(function(){
     var win = getUrlParameter("win");
-    var stars = getUrlParameter("stars");
+    var stars = getUrlParameter("score");
 
     if(win == 0){
         $("#stars").hide();
@@ -8,7 +8,8 @@ $(document).ready(function(){
         $("#win_loose").attr("src","/res/menus/game_over.png");
     }
     else{
-        $("#win_loose").attr("src","/res/menus/game_over.png");
+        $("#win_loose").attr("src","/res/menus/enhorabuena.png");
+        $("#stars").attr("src","/res/menus/stars/stars"+stars+".png");
     }
 });
 
