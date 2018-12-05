@@ -1,8 +1,0 @@
-Seleccionar un nivel
-Aparecerá un tablero, y a su derecha, un selector de enemigos distintos, junto a la cantidad de
-enemigos disponibles
-Hacer click en el enemigo que se quiera situar y posteriormente hacer clic en la casilla deseada.
-Colocar los enemigos buscando la manera idónea de detener al soldado
-Para eliminar un enemigo que se ha colocado en una posición no deseada, basta con tocarlo
-y volverá a estar disponible en el selector
-Una vez configurado el tablero, pulsar play
