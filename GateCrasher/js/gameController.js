@@ -111,7 +111,7 @@ var myGameArea = {
         $("#enemy_selector.responsive").addClass("hidden");
     },
     removeSelected : function(){
-        $("#responsive_menu img").attr("src","res/goodies/empty.png");
+       // $("#responsive_menu img").attr("src","res/goodies/empty.png");
         $(".single_enemy").removeClass("selected");
     },
     addSelected : function(enemy_index){        
