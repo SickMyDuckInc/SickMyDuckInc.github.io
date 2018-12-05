@@ -36,7 +36,7 @@ var myGameArea = {
             this.selector.append(str);
         }
 
-        var button_str = '<button id="play_button">Play</button>';
+        var button_str = '<button id="play_button"><img class="play_button_img" src="/res/menus/button_play.png"/></button>';
         this.selector.append(button_str);
     },
     resizeEnemies : function(numEnemies){
@@ -454,7 +454,7 @@ $(document).ready(function(){
 
     $(document).on("click", "#play_button", function(){
         $("#enemy_selector").remove();
-        $("#responsivve_menu").remove();
+        $("#responsive_menu").remove();
         lManager.startGame();
     });
     $("#back_arrow").on("click", function(){
