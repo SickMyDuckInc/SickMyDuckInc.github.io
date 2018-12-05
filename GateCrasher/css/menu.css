@@ -6,7 +6,7 @@
 body{
     font-family: "Gatecrasher";
     overflow: hidden;
-    background-image: "res/menus/main_background.png"
+    background-image: url(../res/menus/main_background.png);
 }
 
 #game-title{
@@ -15,6 +15,10 @@ body{
     text-align: center;
     height: auto;
     width: auto;
+    height: 20vh;
+}
+#game-title img{
+    max-height: 100%;
 }
 
 #mainmenu_container{
