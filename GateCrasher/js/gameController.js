@@ -483,6 +483,9 @@ $(document).ready(function(){
         $("#responsivve_menu").remove();
         lManager.startGame();
     });
+    $("#back_arrow").on("click", function(){
+        window.location.replace("/levelselector.html");
+    })
 
 });
 
