@@ -49,7 +49,7 @@ playManager.prototype.update = function(){
     else{
         console.log("HE MUERTO");
         var score = this.calculateScore();
-        window.location.replace("gameover.html?score="+score);
+        window.location.replace("gameover.html?win=1&stars="+score);
     }
 
     for(var element in this.allEnemies){
@@ -147,7 +147,7 @@ playManager.prototype.moveUpdate = function(){
         if(this.actualAction>= this.actions.length){
 
             console.log("HE GANADO");
-            
+            window.location.replace("gameover.html?win=0&stars=0");
         }
         else{
             this.calculateNext(this.actions[this.actualAction]);
