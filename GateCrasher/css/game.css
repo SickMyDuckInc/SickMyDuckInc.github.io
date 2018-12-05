@@ -18,14 +18,18 @@ canvas{
     display: inline-block;
     width: 600px;
     height: 400px;
-
 }
 
 #title{
-    text-align: center;
+    text-align: left;
+}
+
+#title img{
+    max-height: 100px;
 }
 
 #main_container{
+    white-space: nowrap;
     max-height: 100%;
     padding-left: 5px;
     display: inline-block;
@@ -51,6 +55,12 @@ canvas{
     z-index: 1;
 }
 
+#back_arrow{
+    position: absolute;
+    z-index: 5;
+    width: 6%;
+}
+
 #enemy_selector{
     border: solid 3px darkred;
     background-color: palevioletred;
@@ -63,6 +73,11 @@ canvas{
     vertical-align: top;
     cursor:pointer;
 }
+
+.single_enemy.selected{
+    background-color: aquamarine;
+}
+
 @media (min-width : 800){
     .canvas_responsive{
         max-width: 1200px;

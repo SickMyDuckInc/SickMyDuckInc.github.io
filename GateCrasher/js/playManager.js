@@ -48,6 +48,8 @@ playManager.prototype.update = function(){
     }
     else{
         console.log("HE MUERTO");
+        var score = this.calculateScore();
+        window.location.replace("gameover.html?score="+score);
     }
 
     for(var element in this.allEnemies){
@@ -143,7 +145,9 @@ playManager.prototype.moveUpdate = function(){
     if(this.character.walk()){
         this.actualAction++;
         if(this.actualAction>= this.actions.length){
+
             console.log("HE GANADO");
+            
         }
         else{
             this.calculateNext(this.actions[this.actualAction]);
@@ -183,6 +187,20 @@ playManager.prototype.playerAttack = function(){
     }
     
     setTimeout(()=> this.calculateNext(this.actions[this.actualAction]), 100*mult);
+}
+
+playManager.prototype.calculateScore = function(){
+    var total = this.actions.length;
+    var percentaje = this.actualAction/total;
+    if(percentaje <0.5){
+        return 3;
+    }
+    else if(percentaje <0.8){
+        return 2;
+    }
+    else{
+        return 1;
+    }
 }
 
 //Constructior de la clase, 
