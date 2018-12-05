@@ -198,7 +198,7 @@ var anim_frames = {
 
 var lManager;
 var lCharacter;
-var levelGlobal;
+
 
 function resize(){
     var aspect_ratio = 400/600;
@@ -284,7 +284,6 @@ function preload(){
 
 function startGame(){
     var level = getUrlParameter("level");
-    levelGlobal = level;
     console.log("Selected level: " + level);
     $.getJSON("res/levels/level"+level+".json", function(data){
         lManager = new levelManager(myGameArea, images, data);
