@@ -18,11 +18,14 @@ canvas{
     display: inline-block;
     width: 600px;
     height: 400px;
-
 }
 
 #title{
-    text-align: center;
+    text-align: left;
+}
+
+#title img{
+    max-height: 100px;
 }
 
 #main_container{
@@ -63,6 +66,11 @@ canvas{
     vertical-align: top;
     cursor:pointer;
 }
+
+.single_enemy.selected{
+    background-color: aquamarine;
+}
+
 @media (min-width : 800){
     .canvas_responsive{
         max-width: 1200px;
