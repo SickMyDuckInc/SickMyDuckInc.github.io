@@ -457,7 +457,7 @@ $(document).ready(function(){
         lManager.startGame();
     });
     $("#back_arrow").on("click", function(){
-        window.location.replace("/levelselector.html");
+        window.location.replace("levelselector.html");
     })
 
 });
