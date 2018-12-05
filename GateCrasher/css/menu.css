@@ -8,6 +8,7 @@ body{
     overflow: hidden;
     background-image: url(../res/menus/main_background.png);
     background-size: cover;
+    background-repeat: no-repeat;
 }
 #btn_container{
     height: auto;
@@ -18,6 +19,15 @@ body{
 .inline_block{
     display: inline-block !important;
 }
+
+.height_40{
+    height: 40vh !important;
+}
+
+.height_65{
+    height: 65vh !important;
+}
+
 
 #game-title{
     justify-content: center;
@@ -37,6 +47,7 @@ body{
 }
 #game-title img, .game-title img{
     max-height: 100%;
+    max-width: 100%;
 }
 
 #mainmenu_container{
