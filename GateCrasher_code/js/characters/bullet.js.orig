@@ -1,0 +1,61 @@
+function bullet(direction, type, col, rows, vel, canvas,character, parent,name){
+    this.direction = direction;
+    this.type = type;
+    this.col = col;
+    this.rows = rows;
+    this.vel = vel;
+    this.canvas = canvas;
+    this.collisioned = false;
+    this.parent =parent;
+    this.character = character;
+    this.bulletSprite = new sprite(this.canvas.getContext(), "res/goodies/"+name+".png", this.canvas.getDrawHeightDivided(), this.canvas.getDrawWidthDivided(),col*this.canvas.getDrawHeightDivided(),rows*this.canvas.getDrawWidthDivided(),false);
+    if(direction == "RIGHT")
+        this.bulletSprite.flip();
+    this.bulletSprite.setVisible();
+    this.bulletSprite.addAnimation("move",  "res/goodies/"+name+"_anim.png", 2, 200, 200);
+<<<<<<< HEAD
+    
+    this.bulletSprite.setSpeed(5);
+=======
+    this.bulletSprite.setSpeed(PLAY_SPEED/2);
+>>>>>>> e179b91666c5a9ef5da5e1d5af80c17fe83ed2c3
+
+    this.bulletSprite.playAnimation("move");
+
+    //this.updateInterval = setInterval(() => this.update(), 100);
+}
+
+bullet.prototype.checkCollision = function(allEnemies){
+    
+    if(this.bulletSprite.y < this.canvas.getDrawHeightDivided()*0.2 || this.bulletSprite.x < this.canvas.getDrawHeightDivided()*0.2 || this.bulletSprite.y >=this.canvas.getDrawHeight()-this.canvas.getDrawHeightDivided()*0.2 || this.bulletSprite.x>= this.canvas.getDrawWidth()-this.canvas.getDrawHeightDivided()*0.2){
+        this.collisioned = true;
+    }
+    for(var element in allEnemies){
+        if( allEnemies[element].cols != this.parent.cols || allEnemies[element].rows != this.parent.rows ){
+            if( this.bulletSprite.y < allEnemies[element].rows*this.canvas.getDrawWidthDivided()+this.canvas.getDrawWidthDivided()*0.8&&
+            this.bulletSprite.y > allEnemies[element].rows*this.canvas.getDrawWidthDivided()-this.canvas.getDrawWidthDivided() && 
+            this.bulletSprite.x < allEnemies[element].cols*this.canvas.getDrawHeightDivided()+this.canvas.getDrawHeightDivided() &&  
+            this.bulletSprite.x > allEnemies[element].cols*this.canvas.getDrawHeightDivided()-this.canvas.getDrawHeightDivided()){
+                this.collisioned = true;
+                allEnemies[element].takeDamage(this.parent.damage);
+            }
+        }
+    }
+
+
+    if( this.bulletSprite.y < this.character.sprite.y+this.canvas.getDrawHeightDivided()&&
+    this.bulletSprite.y > this.character.sprite.y-this.canvas.getDrawHeightDivided() && 
+    this.bulletSprite.x < this.character.sprite.x+this.canvas.getDrawHeightDivided() &&  
+    this.bulletSprite.x > this.character.sprite.x-this.canvas.getDrawHeightDivided()){
+        this.collisioned = true;
+        this.character.takeDamage(this.parent.damage);
+    }
+    
+    //this.canvas.getDrawHeight()-this.canvas.getDrawHeightDivided() 
+    //this.canvas.getDrawWidth()-this.canvas.getDrawWidthDivided()
+    
+    //this.bulletSprite.draw();
+    
+
+    //this.character.sprite.draw();
+}

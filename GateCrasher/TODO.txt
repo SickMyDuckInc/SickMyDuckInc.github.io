@@ -1,3 +1,0 @@
-- Indicar de alguna manera que señor hay seleccionado
-- Poner en disabled el boton de Play al darle
-- Botón de volver atrás
