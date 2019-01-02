@@ -1,12 +1,18 @@
 // Global styling for this template
 
+@font-face {
+  font-family: "Balaclava";
+  src: url(../res/fonts/balaclava.ttf) format("truetype");
+}
+
 html {
   position: relative;
   min-height: 100%;
 }
 
 body {
-  height: 100%;
+  height: 100%;  
+  font-family: "Balaclava";
 }
 
 #wrapper {

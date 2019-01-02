@@ -1,8 +1,13 @@
 /*!
  * Start Bootstrap - SB Admin v5.0.2 (https://startbootstrap.com/template-overviews/sb-admin)
- * Copyright 2013-2018 Start Bootstrap
+ * Copyright 2013-2019 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-sb-admin/blob/master/LICENSE)
  */
+
+@font-face {
+  font-family: "Balaclava";
+  src: url(../res/fonts/balaclava.ttf) format("truetype");
+}
 
 html {
   position: relative;
@@ -11,6 +16,7 @@ html {
 
 body {
   height: 100%;
+  font-family: "Balaclava";
 }
 
 #wrapper {
@@ -90,7 +96,7 @@ body.fixed-nav.sidebar-toggled #content-wrapper {
 }
 
 .navbar-nav .nav-item.active .nav-link {
-  color: #fff;
+  color: #28a745;
 }
 
 .navbar-nav .nav-item.dropdown .dropdown-toggle::after {
@@ -169,11 +175,11 @@ body.fixed-nav.sidebar-toggled #content-wrapper {
 }
 
 .sidebar .nav-item .nav-link {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(40, 167, 69, 0.5);
 }
 
 .sidebar .nav-item .nav-link:active, .sidebar .nav-item .nav-link:focus, .sidebar .nav-item .nav-link:hover {
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(40, 167, 69, 0.75);
 }
 
 .sidebar.toggled {
