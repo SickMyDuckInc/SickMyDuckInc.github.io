@@ -81,6 +81,24 @@
 }
 
 @media (min-width: 768px) {
+
+  .nav-item.show + .nav-item{
+    .nav-link{
+      padding-top: 0px;
+    }
+  }
+  
+  .dropdown-menu{
+    background-color: inherit;
+    border: none;
+    .nav-item{
+      .nav-link{
+        padding: 0 !important;
+        padding-bottom: 10px !important;
+      }
+    }
+  }
+
   .sidebar {
     width: $sidebar-base-width !important;
 

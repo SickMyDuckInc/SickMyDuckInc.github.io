@@ -15,6 +15,11 @@
             "type": "gulp",
             "task": "css:compile",
             "problemMatcher": []
+        },
+        {
+            "type": "gulp",
+            "task": "dev",
+            "problemMatcher": []
         }
     ]
 }
