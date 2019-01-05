@@ -22,6 +22,8 @@ body {
     width: 100%;
     padding-top: 1rem;
     padding-bottom: $sticky-footer-height;
+    background-color: $black;
+    color: $green;
   }
 }
 // Fixed Nav Option
@@ -69,4 +71,8 @@ body.fixed-nav {
   i {
     font-weight: 800;
   }
+}
+
+.padding-right-lg{
+  padding-right: 1.5rem;
 }

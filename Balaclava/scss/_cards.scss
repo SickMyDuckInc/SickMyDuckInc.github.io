@@ -11,6 +11,10 @@
   @include rotate;
 }
 
+.card{
+  background-color: $black;
+}
+
 // Override breakpoints for card columns to work well with sidebar layout
 .card-columns {
   @media (min-width: 576px) {

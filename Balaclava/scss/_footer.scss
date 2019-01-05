@@ -1,11 +1,11 @@
 footer.sticky-footer {
   display: flex;
   position: absolute;
+  background-color: $black;
   right: 0;
   bottom: 0;
   width: calc(100% - #{$sidebar-collapsed-width});
   height: $sticky-footer-height;
-  background-color: $gray-200;
   .copyright {
     line-height: 1;
     font-size: 0.8rem;

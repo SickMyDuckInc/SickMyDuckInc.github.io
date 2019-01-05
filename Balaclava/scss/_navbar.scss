@@ -8,10 +8,11 @@
     &.active {
       .nav-link {
         color: $green;
+        width: 100% !important;
       }
     }
     &.dropdown {
-      .dropdown-toggle {
+      .dropdown-toggle, .dropdown-toggle .dropdown-toggle {
         &::after {
           width: 1rem;
           text-align: center;
@@ -24,7 +25,7 @@
         }
       }
       &.show {
-        .dropdown-toggle::after {
+        >.dropdown-toggle::after {
           content: '\f107';
         }
       }
@@ -35,6 +36,7 @@
       }
     }
     .nav-link {
+      width: 100% !important;
       &:focus {
         // remove outline for Safari and Firefox
         outline: none;
@@ -78,56 +80,67 @@
     width: 0 !important;
     overflow: hidden;
   }
+
+  ul{
+    padding-inline-start: 20px;
+  }
 }
 
-@media (min-width: 768px) {
 
-  .nav-item.show + .nav-item{
+.nav-item.show + .nav-item{
+  .nav-link{
+    padding-top: 0px;
+  }
+}
+
+.dropdown-menu{
+  background-color: inherit;
+  border: none;
+  .nav-item{
     .nav-link{
-      padding-top: 0px;
+      padding: 0 !important;
+      padding-bottom: 10px !important;
     }
   }
-  
-  .dropdown-menu{
-    background-color: inherit;
-    border: none;
-    .nav-item{
-      .nav-link{
-        padding: 0 !important;
-        padding-bottom: 10px !important;
+}
+
+.sidebar {
+  width: $sidebar-base-width !important;
+
+  .nav-item {
+    .nav-link {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 1rem;
+      width: $sidebar-base-width;
+      span {
+        font-size: 1rem;
+        display: inline;
       }
+    }
+    .dropdown-menu {
+      position: static !important;
+      margin: 0 1rem;
+      // Position fix for Firefox
+      top: 0;
+    }
+    &.dropdown .dropdown-toggle::after {
+      display: block;
     }
   }
+}
 
-  .sidebar {
-    width: $sidebar-base-width !important;
 
-    .nav-item {
-      .nav-link {
-        display: block;
-        width: 100%;
-        text-align: left;
-        padding: 1rem;
-        width: $sidebar-base-width;
-        span {
-          font-size: 1rem;
-          display: inline;
-        }
-      }
-      .dropdown-menu {
-        position: static !important;
-        margin: 0 1rem;
-        // Position fix for Firefox
-        top: 0;
-      }
-      &.dropdown .dropdown-toggle::after {
-        display: block;
-      }
-    }
-    &.toggled {
-      overflow: visible;
-      width: $sidebar-collapsed-width !important;
-      @include sidebar-icons;
+@media (max-width: 760px) {
+
+  .sidebar{
+    width: 100% !important;
+    position: absolute;
+    z-index: 3;
+    &.toggled{
+    width: 0 !important;
+    overflow: hidden;
     }
   }
 }
