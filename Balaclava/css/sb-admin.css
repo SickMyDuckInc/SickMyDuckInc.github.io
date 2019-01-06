@@ -244,7 +244,7 @@ body.fixed-nav.sidebar-toggled #content-wrapper {
   display: block;
 }
 
-@media (max-width: 760px) {
+@media (max-width: 350px) {
   .sidebar {
     width: 100% !important;
     position: absolute;
@@ -363,6 +363,19 @@ body.fixed-nav.sidebar-toggled #content-wrapper {
   padding-bottom: calc(var(--input-padding-y) / 3);
   font-size: 12px;
   color: #777;
+}
+
+.banks img {
+  max-width: 100%;
+}
+
+.banks > div {
+  padding: 20px 10px;
+}
+
+.banks > div > div {
+  border: 2px solid #89ff00;
+  height: 100%;
 }
 
 footer.sticky-footer {

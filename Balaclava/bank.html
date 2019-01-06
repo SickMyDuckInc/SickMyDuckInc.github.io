@@ -60,7 +60,7 @@
     <ul class="sidebar navbar-nav">
 
       <!--Bancos-->
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link" href="index.html">
           <i class="fas fa-fw fa-university"></i>
           <span>Bancos</span>
@@ -68,13 +68,13 @@
       </li>
 
       <!--Mapas-->
-      <li class="nav-item dropdown">
+      <li class="nav-item dropdown show">
         <a class="nav-link dropdown-toggle" href="#" id="pagesDropdownMaps" role="button" data-toggle="dropdown"
-          data-target="maps" aria-haspopup="true" aria-expanded="false">
+          data-target="maps" aria-haspopup="true" aria-expanded="true">
           <i class="fas fa-fw fa-folder"></i>
           <span>Mapas</span>
         </a>
-        <div class="dropdown-menu" aria-labelledby="pagesDropdownMaps" id="maps">
+        <div class="dropdown-menu show" aria-labelledby="pagesDropdownMaps" id="maps">
           <ul>
 
             <!--Cantabria-->
@@ -86,13 +86,13 @@
               </a>
               <div id="santander" class="dropdown-menu" aria-labelledby="bank1Dropwdown">
                 <ul>
-                  <li class="nav-item">
+                  <li class="nav-item" data-bankid="1" data-dropdown="bank1Dropdown">
                     <a class="nav-link" href="bank.html?id=1">
                       <i class="fas fa-fw fa-map"></i>
                       <span>Sucursal 1</span>
                     </a>
                   </li>
-                  <li class="nav-item">
+                  <li class="nav-item" data-bankid="2" data-dropdown="bank1Dropdown">
                     <a class="nav-link" href="bank.html?id=2">
                       <i class="fas fa-fw fa-map"></i>
                       <span>Sucursal 2</span>
@@ -111,13 +111,13 @@
               </a>
               <div id="bbva" class="dropdown-menu" aria-labelledby="bank2Dropwdown">
                 <ul>
-                  <li class="nav-item">
+                  <li class="nav-item" data-bankid="5" data-dropdown="bank2Dropdown">
                     <a class="nav-link" href="bank.html?id=5">
                       <i class="fas fa-fw fa-map"></i>
                       <span>Sucursal 5</span>
                     </a>
                   </li>
-                  <li class="nav-item">
+                  <li class="nav-item" data-bankid="18" data-dropdown="bank2Dropdown">
                     <a class="nav-link" href="bank.html?id=18">
                       <i class="fas fa-fw fa-map"></i>
                       <span>Sucursal 18</span>
@@ -126,6 +126,7 @@
                 </ul>
               </div>
             </li>
+
 
             <!--Banka-->
             <li class="nav-item dropdown ">
@@ -136,13 +137,13 @@
               </a>
               <div id="banka" class="dropdown-menu" aria-labelledby="bank3Dropwdown">
                 <ul>
-                  <li class="nav-item">
+                  <li class="nav-item" data-bankid="146" data-dropdown="bank3Dropdown">
                     <a class="nav-link" href="bank.html?id=146">
                       <i class="fas fa-fw fa-map"></i>
                       <span>Sucursal 146</span>
                     </a>
                   </li>
-                  <li class="nav-item">
+                  <li class="nav-item" data-bankid="232" data-dropdown="bank3Dropdown">
                     <a class="nav-link" href="bank.html?id=232">
                       <i class="fas fa-fw fa-map"></i>
                       <span>Sucursal 232</span>
@@ -161,13 +162,13 @@
               </a>
               <div id="lacaja" class="dropdown-menu" aria-labelledby="bank4Dropwdown">
                 <ul>
-                  <li class="nav-item">
+                  <li class="nav-item" data-bankid="89" data-dropdown="bank4Dropdown">
                     <a class="nav-link" href="bank.html?id=89">
                       <i class="fas fa-fw fa-map"></i>
                       <span>Sucursal 89</span>
                     </a>
                   </li>
-                  <li class="nav-item">
+                  <li class="nav-item" data-bankid="555" data-dropdown="bank4Dropdown">
                     <a class="nav-link" href="bank.html?id=555">
                       <i class="fas fa-fw fa-map"></i>
                       <span>Sucursal 555</span>
@@ -179,6 +180,7 @@
           </ul>
         </div>
       </li>
+
 
       <!--Seguridad-->
       <li class="nav-item dropdown">
@@ -253,50 +255,6 @@
           </li>
         </ol>
 
-        <div class="row col-md-12">
-          Escribir una introducción sobre los bancos aquí (un poco extensa para meter paja)
-        </div>
-        <div class="row banks">
-          <div class="col-md-4">
-            <div>
-              <img src="res/img/cantabria.png">
-              <ul>
-                <li>Puertas cercanas a la entrada de la sucursal</li>
-                <li>Ordenadores para controlar la seguridad y la tecnología de la sucursal</li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div>
-              <img src="res/img/benca.png">
-              <ul>
-                <li>Puertas cercanas a la entrada de la sucursal</li>
-                <li>Ordenadores para ayudar a los trabajadores con la gestión (podemos hacer que en el BANCO 2 no haya
-                  info importante en los PCs)</li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div>
-              <img src="res/img/vbba.png">
-              <ul>
-                <li>Puertas cercanas a la entrada de la sucursal</li>
-                <li>Más pajaaaaa</li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div>
-              <img src="res/img/lacaja.png">
-              <ul>
-                <li>Ordenadores que contienen información vital sobre las sucursales y su gestión (INFORMACIÓN DE ALTO
-                  RIESGO)</li>
-                <li>Aquí hay que meter más movida pero se lo dejo a evisha</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
       </div>
       <!-- /.container-fluid -->
 
@@ -353,6 +311,7 @@
 
   <!-- Custom scripts for all pages-->
   <script src="js/sb-admin.js"></script>
+  <script src="js/bank.js"></script>
 
   <!-- Demo scripts for this page-->
   <script src="js/demo/datatables-demo.js"></script>

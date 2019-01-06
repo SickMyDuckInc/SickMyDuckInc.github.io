@@ -38,26 +38,24 @@
   });
 
   $(".dropdown-toggle").on("click", function(e){
-    if($(window).width()>1){
-      var target = $(this).data("target"); 
-      if(target != undefined){
-        e.stopPropagation();
-        $("#" + target).toggle();
-        if($(this).parent().hasClass("show")){
-          $(this).parent().removeClass("show");
-          //$(this).siblings(".dropdown-menu").find(".dropdown-menu").toggle("collapse");
-        }
-        else{
-          $(this).parent().addClass("show");
-        }
+    var target = $(this).data("target"); 
+    if(target != undefined){
+      e.stopPropagation();
+      $("#" + target).toggle();
+      if($(this).parent().hasClass("show")){
+        $(this).parent().removeClass("show");
+        //$(this).siblings(".dropdown-menu").find(".dropdown-menu").toggle("collapse");
       }
-    }
-    else{
-      console.log($(window).width);
+      else{
+        $(this).parent().addClass("show");
+      }
     }
   });
 
-  $
+  if($(window).width()<768){
+    $("body").toggleClass("sidebar-toggled");
+    $(".sidebar").toggleClass("toggled");
+  }
 
   $(".dropdown-menu").on("hide.bs.collapse",function(e){
     console.log("me cierro");
