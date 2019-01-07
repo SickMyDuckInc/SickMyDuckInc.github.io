@@ -8,6 +8,16 @@
   max-width: 100%;
 }
 
+.banks img.top-width {
+  width: 100%;
+}
+
+.banks img.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 .banks > div {
   padding: 20px 10px;
 }
@@ -15,4 +25,9 @@
 .banks > div > div {
   border: 2px solid #89ff00;
   height: 100%;
+}
+
+.banks .map-container {
+  padding: 0 !important;
+  position: relative;
 }

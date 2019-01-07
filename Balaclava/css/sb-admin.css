@@ -17,6 +17,7 @@ html {
 body {
   height: 100%;
   font-family: "Balaclava";
+  background-color: black;
 }
 
 #wrapper {
@@ -369,6 +370,16 @@ body.fixed-nav.sidebar-toggled #content-wrapper {
   max-width: 100%;
 }
 
+.banks img.top-width {
+  width: 100%;
+}
+
+.banks img.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 .banks > div {
   padding: 20px 10px;
 }
@@ -376,6 +387,11 @@ body.fixed-nav.sidebar-toggled #content-wrapper {
 .banks > div > div {
   border: 2px solid #89ff00;
   height: 100%;
+}
+
+.banks .map-container {
+  padding: 0 !important;
+  position: relative;
 }
 
 footer.sticky-footer {
