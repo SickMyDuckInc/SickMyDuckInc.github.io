@@ -1,0 +1,26 @@
+.banks{
+    img{
+        max-width: 100%;
+        &.top-width{
+            width: 100%;
+        }
+        &.overlay{
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    }
+    >div{
+        padding: 20px 10px;  
+        >div{      
+            border: 2px solid #89ff00;
+            height: 100%;
+        }
+        
+    }
+
+    .map-container{
+        padding: 0 !important;
+        position: relative;
+    }
+}

@@ -43,43 +43,40 @@ body {
 
 /* Carousel base class */
 .carousel {
-  height: 500px;
-  margin-bottom: 60px;
+  height: 100vh;
 }
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption {
-  z-index: 10;
+  bottom: 100px;
+  z-index: 2;
+}
+
+.img-title{
+  z-index: 2;
+  position: absolute;    
+  right: 15%;
+  bottom: 350px;
+  left: 15%;
+}
+
+.img-title img{
+  max-width: 100%;
 }
 
 /* Declare heights because of positioning of img element */
 .carousel .item {
-  height: 500px;
+  height: 100vh;
   background-color: #777;
 }
 .carousel-inner > .item > img {
   position: absolute;
   top: 0;
   left: 0;
+  object-fit: cover;
   min-width: 100%;
-  height: 500px;
+  height: 100vh;
 }
 
-
-/* MARKETING CONTENT
--------------------------------------------------- */
-
-/* Center align the text within the three columns below the carousel */
-.marketing .col-lg-4 {
-  margin-bottom: 20px;
-  text-align: center;
-}
-.marketing h2 {
-  font-weight: normal;
-}
-.marketing .col-lg-4 p {
-  margin-right: 10px;
-  margin-left: 10px;
-}
 
 
 /* Featurettes
@@ -103,6 +100,7 @@ body {
 .project-img>div{
   text-align: center;
 }
+
 
 .project-img>div>img{
   object-fit: cover;
@@ -138,8 +136,20 @@ body {
     line-height: 1.4;
   }
 
+  .img-title{
+    right: 20%;
+    left: 30%;
+    padding-bottom: 30px;
+    bottom: 300px;
+  }
+
   .featurette-heading {
     font-size: 50px;
+  }
+
+  .project{    
+    display: flex;
+    align-items: center;
   }
 }
 
@@ -147,4 +157,184 @@ body {
   .featurette-heading {
     margin-top: 120px;
   }
+}
+
+/* SICK MY DUCK CSS */
+
+.rounded-circle{
+  border-radius: 50%;
+  transition: transform .3s;
+}
+
+.rounded-circle:hover{
+  transform: scale(1.2);
+}
+
+.rounded-circle:not(:hover){
+  opacity: .8;
+}
+
+.fill-screen{
+  min-height: 100vh;
+}
+
+.fit-padding{
+  padding-top: 60px;
+}
+
+.next span{
+  font-size: 50px;
+  color: #BD691B;
+  display: block;
+  transition: transform .3s, padding .3s;
+}
+
+.next .first-arrow{
+  padding-top: 15px;
+}
+
+.next .second-arrow{
+  margin-top: -25px;
+  font-size: 45px;
+}
+
+.next:hover{
+  text-decoration: none;
+}
+
+.next:hover span{
+  transform: scale(1.3);
+}
+
+.next:hover .second-arrow{
+  margin-top: -15px;
+}
+
+.project{
+  min-height: 27vh;
+  padding: 0;
+  margin: 0 0;
+  min-width: 100%;
+  background-position: center;
+  background-size: cover;
+  transition: transform .3s;
+  overflow: hidden;
+}
+
+.project:hover{
+  transform: scale(1.05);
+}
+
+.project img{
+  max-width: 100%;
+  padding: 0 20px;
+}
+
+
+.project-1{
+  background-image: url("GateCrasher/res/menus/main_background.png");  
+}
+
+.project-2{
+  background-image: url("res/img/diveeddie.png");  
+}
+
+.project-3{
+  background-image: url("res/img/unpoissonandalou2.png");  
+}
+
+.pd-bottom-xl{
+  padding-bottom: 20px;
+}
+
+.description{
+  color: black;
+  font-weight: 600;
+  text-shadow: 1px 1px sandybrown;
+}
+
+.play_col{
+  text-align: center;
+  padding-top: 20px;
+}
+
+.play_button{
+  min-width: 100px;
+  min-height: 100px;
+  background-image: url("GateCrasher/res/menus/button_play.png");
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+}
+
+.play_button:focus{
+  outline: none;
+}
+
+.play_button:active{
+  transform: scale(0.9);
+}
+
+.play_button a{
+  width:100%;
+  height: 100%;
+}
+
+.project_next{
+  position: absolute;
+  bottom: 5px;
+  left: 49%;
+  right: 50%;
+}
+
+#projects{
+  position: relative;
+}
+
+/* BUTTON */
+
+.btn-smd { 
+  color: #ffffff; 
+  background-color: #BD691B; 
+  border-color: #EB6B2F; 
+} 
+ 
+.btn-smd:hover, 
+.btn-smd:focus, 
+.btn-smd:active, 
+.btn-smd.active, 
+.open .dropdown-toggle.btn-smd { 
+  color: #ffffff; 
+  background-color: #F26100; 
+  border-color: #EB6B2F; 
+} 
+ 
+.btn-smd:active, 
+.btn-smd.active, 
+.open .dropdown-toggle.btn-smd { 
+  background-image: none; 
+} 
+ 
+.btn-smd.disabled, 
+.btn-smd[disabled], 
+fieldset[disabled] .btn-smd, 
+.btn-smd.disabled:hover, 
+.btn-smd[disabled]:hover, 
+fieldset[disabled] .btn-smd:hover, 
+.btn-smd.disabled:focus, 
+.btn-smd[disabled]:focus, 
+fieldset[disabled] .btn-smd:focus, 
+.btn-smd.disabled:active, 
+.btn-smd[disabled]:active, 
+fieldset[disabled] .btn-smd:active, 
+.btn-smd.disabled.active, 
+.btn-smd[disabled].active, 
+fieldset[disabled] .btn-smd.active { 
+  background-color: #BD691B; 
+  border-color: #EB6B2F; 
+} 
+ 
+.btn-smd .badge { 
+  color: #BD691B; 
+  background-color: #ffffff; 
 }

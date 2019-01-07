@@ -1,0 +1,33 @@
+/*!
+ * Start Bootstrap - SB Admin v5.0.2 (https://startbootstrap.com/template-overviews/sb-admin)
+ * Copyright 2013-2019 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-sb-admin/blob/master/LICENSE)
+ */
+
+.banks img {
+  max-width: 100%;
+}
+
+.banks img.top-width {
+  width: 100%;
+}
+
+.banks img.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.banks > div {
+  padding: 20px 10px;
+}
+
+.banks > div > div {
+  border: 2px solid #89ff00;
+  height: 100%;
+}
+
+.banks .map-container {
+  padding: 0 !important;
+  position: relative;
+}

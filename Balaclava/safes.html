@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Balaclava</title>
+
+  <!-- Bootstrap core CSS-->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template-->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+  <!-- Page level plugin CSS-->
+  <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="css/sb-admin.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+
+
+    <button class="btn btn-link btn text-white padding-right-lg" id="sidebarToggle" href="#">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <a class="navbar-brand mr-1" href="index.html">Balaclava</a>
+
+    <!-- Navbar -->
+    <ul class="navbar-nav ml-auto ml-auto mr-0 mr-md-3 my-2 my-md-0">
+      <li class="nav-item dropdown no-arrow">
+        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-cog fa-fw"></i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+          <a class="dropdown-item" href="#">Settings</a>
+          <a class="dropdown-item" href="#">Activity Log</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
+        </div>
+      </li>
+    </ul>
+
+  </nav>
+
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="sidebar navbar-nav">
+
+      <!--Bancos-->
+      <li class="nav-item">
+        <a class="nav-link" href="index.html">
+          <i class="fas fa-fw fa-university"></i>
+          <span>Bancos</span>
+        </a>
+      </li>
+
+      <!--Mapas-->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdownMaps" role="button" data-toggle="dropdown"
+          data-target="maps" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-fw fa-folder"></i>
+          <span>Mapas</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="pagesDropdownMaps" id="maps">
+          <ul>
+
+            <!--Cantabria-->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" data-target="santander" id="bank1Dropdown" role="button"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>Cantabria</span>
+              </a>
+              <div id="santander" class="dropdown-menu" aria-labelledby="bank1Dropwdown">
+                <ul>
+                  <li class="nav-item">
+                    <a class="nav-link" href="bank.html?id=1">
+                      <i class="fas fa-fw fa-map"></i>
+                      <span>Sucursal 1</span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="bank.html?id=2">
+                      <i class="fas fa-fw fa-map"></i>
+                      <span>Sucursal 2</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+
+            <!--VBAA-->
+            <li class="nav-item dropdown ">
+              <a class="nav-link dropdown-toggle" href="#" data-parent="pagesDropdown" data-target="bbva" id="bank2Dropdown"
+                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>VBAA</span>
+              </a>
+              <div id="bbva" class="dropdown-menu" aria-labelledby="bank2Dropwdown">
+                <ul>
+                  <li class="nav-item">
+                    <a class="nav-link" href="bank.html?id=5">
+                      <i class="fas fa-fw fa-map"></i>
+                      <span>Sucursal 5</span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="bank.html?id=18">
+                      <i class="fas fa-fw fa-map"></i>
+                      <span>Sucursal 18</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+
+            <!--Banka-->
+            <li class="nav-item dropdown ">
+              <a class="nav-link dropdown-toggle" href="#" data-parent="pagesDropdown" data-target="banka" id="bank3Dropdown"
+                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>Banka</span>
+              </a>
+              <div id="banka" class="dropdown-menu" aria-labelledby="bank3Dropwdown">
+                <ul>
+                  <li class="nav-item">
+                    <a class="nav-link" href="bank.html?id=146">
+                      <i class="fas fa-fw fa-map"></i>
+                      <span>Sucursal 146</span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="bank.html?id=232">
+                      <i class="fas fa-fw fa-map"></i>
+                      <span>Sucursal 232</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+
+            <!--LaCaja-->
+            <li class="nav-item dropdown ">
+              <a class="nav-link dropdown-toggle" href="#" data-parent="pagesDropdown" data-target="lacaja" id="bank4Dropdown"
+                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>La Caja</span>
+              </a>
+              <div id="lacaja" class="dropdown-menu" aria-labelledby="bank4Dropwdown">
+                <ul>
+                  <li class="nav-item">
+                    <a class="nav-link" href="bank.html?id=89">
+                      <i class="fas fa-fw fa-map"></i>
+                      <span>Sucursal 89</span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="bank.html?id=555">
+                      <i class="fas fa-fw fa-map"></i>
+                      <span>Sucursal 555</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <!--Seguridad-->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdownSecurity" data-target="security" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-fw fa-folder"></i>
+          <span>Seguridad</span>
+        </a>
+        <div class="dropdown-menu" id="security" aria-labelledby="pagesDropdownSecurity">
+          <ul>
+            <!--Camaras-->
+            <li class="nav-item">
+              <a class="nav-link" href="cams.html">
+                <i class="fas fa-fw fa-video"></i>
+                <span>Cámaras</span>
+              </a>
+            </li>
+            <!--Guardias-->
+            <li class="nav-item">
+              <a class="nav-link" href="guards.html">
+                <i class="fas fa-fw fa-binoculars"></i>
+                <span>Guardias</span>
+              </a>
+            </li>
+            <!--Laseres-->
+            <li class="nav-item">
+              <a class="nav-link" href="lasers.html">
+                <i class="fas fa-fw fa-exclamation"></i>
+                <span>Láseres</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <!--Cerraduras-->
+      <li class="nav-item dropdown show">
+        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdownLocks" data-target="locks" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          <i class="fas fa-fw fa-folder"></i>
+          <span>Cerraduras</span>
+        </a>
+        <div class="dropdown-menu show" aria-labelledby="pagesDropdownLocks" id="locks">
+          <ul>
+            <!--Puertas-->
+            <li class="nav-item">
+              <a class="nav-link" href="doors.html">
+                <i class="fas fa-fw fa-door-closed"></i>
+                <span>Puertas</span>
+              </a>
+            </li>
+            <!--Cajas fuertes-->
+            <li class="nav-item active">
+              <a class="nav-link" href="safes.html">
+                <i class="fas fa-fw fa-dollar-sign"></i>
+                <span>Cajas Fuertes</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+
+    <div id="content-wrapper">
+
+      <div class="container-fluid">
+
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item active">
+            Bancos
+          </li>
+        </ol>
+
+      </div>
+      <!-- /.container-fluid -->
+
+      <!-- Sticky Footer -->
+      <footer class="sticky-footer">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright © Balaclava Game 2018</span>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+    <!-- /.content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="login.html">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Page level plugin JavaScript-->
+  <script src="vendor/chart.js/Chart.min.js"></script>
+  <script src="vendor/datatables/jquery.dataTables.js"></script>
+  <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="js/sb-admin.js"></script>
+
+  <!-- Demo scripts for this page-->
+  <script src="js/demo/datatables-demo.js"></script>
+  <script src="js/demo/chart-area-demo.js"></script>
+
+</body>
+
+</html>
