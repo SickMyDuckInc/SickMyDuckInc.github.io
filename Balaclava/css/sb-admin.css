@@ -389,9 +389,40 @@ body.fixed-nav.sidebar-toggled #content-wrapper {
   height: 100%;
 }
 
+.banks > div .checkerbox {
+  height: auto !important;
+  padding: 10px;
+}
+
+.banks > div .checkerbox .icon-container {
+  padding: 5px;
+}
+
 .banks .map-container {
   padding: 0 !important;
   position: relative;
+}
+
+.banks .door {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.banks .door ul {
+  line-height: 2.3;
+}
+
+.banks .lasers {
+  text-align: center;
+}
+
+.banks .lasers > div {
+  display: inline-block;
+  padding-bottom: 15px;
+}
+
+.icon {
+  max-width: 25px !important;
 }
 
 footer.sticky-footer {

@@ -16,6 +16,13 @@
             border: 2px solid #89ff00;
             height: 100%;
         }
+        .checkerbox{
+            height: auto !important;
+            padding: 10px;
+            .icon-container{
+                padding-bottom: 5px;
+            }
+        }
         
     }
 
@@ -23,4 +30,24 @@
         padding: 0 !important;
         position: relative;
     }
+
+    .door{
+        ul{
+            line-height: 2.3;
+        }
+        display: inline-block;
+        vertical-align: middle;
+    }
+    .lasers{
+        text-align: center;
+        >div{
+            display:inline-block;
+            padding-bottom: 15px;
+        }
+    }
+}
+
+
+.icon{
+    max-width: 25px !important;
 }
