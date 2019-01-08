@@ -262,7 +262,7 @@ audio {
   display: block;
 }
 
-@media (max-width: 350px) {
+@media (max-width: 500px) {
   .sidebar {
     width: 100% !important;
     position: absolute;
