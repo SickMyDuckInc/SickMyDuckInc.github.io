@@ -62,3 +62,18 @@
 .icon {
   max-width: 25px !important;
 }
+
+.combination {
+  max-width: 100%;
+  white-space: nowrap;
+}
+
+.combination img {
+  max-height: 100px;
+}
+
+.combination div {
+  display: inline-block;
+  max-width: 20%;
+  padding-bottom: 20px;
+}
