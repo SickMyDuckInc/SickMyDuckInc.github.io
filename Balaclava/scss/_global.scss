@@ -1,0 +1,96 @@
+// Global styling for this template
+
+@font-face {
+  font-family: "Balaclava";
+  src: url(../res/fonts/balaclava.ttf) format("truetype");
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  height: 100%;  
+  font-family: "Balaclava";
+  background-color: black;
+}
+
+#wrapper {
+  display: flex;
+  #content-wrapper {
+    overflow-x: hidden;
+    width: 100%;
+    padding-top: 1rem;
+    padding-bottom: $sticky-footer-height;
+    background-color: $black;
+    color: $green;
+  }
+}
+// Fixed Nav Option
+body.fixed-nav {
+  #content-wrapper {
+    margin-top: $navbar-base-height;
+    padding-left: $sidebar-collapsed-width;
+  }
+  &.sidebar-toggled {
+    #content-wrapper {
+      padding-left: 0;
+    }
+  }
+  @media(min-width: 768px) {
+    #content-wrapper {
+      padding-left: $sidebar-base-width;
+    }
+    &.sidebar-toggled {
+      #content-wrapper {
+        padding-left: $sidebar-collapsed-width;
+      }
+    }
+  }
+}
+
+// Scroll to top button
+.scroll-to-top {
+  position: fixed;
+  right: 15px;
+  bottom: 15px;
+  display: none;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  color: $white;
+  background: fade-out($gray-800, .5);
+  line-height: 46px;
+  &:focus,
+  &:hover {
+    color: white;
+  }
+  &:hover {
+    background: $gray-800;
+  }
+  i {
+    font-weight: 800;
+  }
+}
+
+.padding-right-lg{
+  padding-right: 1.5rem;
+}
+
+.align-center{
+  text-align: center;
+}
+
+.description{
+  font-style: italic;
+}
+
+audio{
+  display: block;
+  padding: 5px 0px;
+}
+
+.danger{
+  color: $red;
+}

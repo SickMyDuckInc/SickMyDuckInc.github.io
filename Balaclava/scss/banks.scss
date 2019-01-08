@@ -1,0 +1,66 @@
+.banks{
+    img{
+        max-width: 100%;
+        &.top-width{
+            width: 100%;
+        }
+        &.overlay{
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    }
+    >div{
+        padding: 20px 10px;  
+        >div{      
+            border: 2px solid #89ff00;
+            height: 100%;
+        }
+        .checkerbox{
+            height: auto !important;
+            padding: 10px;
+            .icon-container{
+                padding-bottom: 5px;
+            }
+        }
+        
+    }
+
+    .map-container{
+        padding: 0 !important;
+        position: relative;
+    }
+
+    .door{
+        ul{
+            line-height: 2.3;
+        }
+        display: inline-block;
+        vertical-align: middle;
+    }
+    .lasers{
+        text-align: center;
+        >div{
+            display:inline-block;
+            padding-bottom: 15px;
+        }
+    }
+}
+
+
+.icon{
+    max-width: 25px !important;
+}
+
+.combination{
+    max-width: 100%;
+    white-space: nowrap;
+    img{
+        max-height: 100px;
+    }
+    div{
+        display: inline-block;
+        max-width: 20%;
+        padding-bottom: 20px;
+    }
+}

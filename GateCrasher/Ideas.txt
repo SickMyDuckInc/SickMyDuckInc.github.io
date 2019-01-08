@@ -1,0 +1,12 @@
+- Glosario: cuando uses un enemigo y te pases el nivel que se te desbloquee en el glosario
+	y puedas ver sus habilidades, rango etc.
+- Botón de reiniciar nivel.
+- Que el A* tenga en cuenta a los enemigos.
+- Que el porcentaje para cada estrella esté en el JSON
+- Idiomas
+- Hacer tutorial 
+- Login y puntuaciones
+- Dependiendo del tipo de enemigo se puede colocar en las verticales o no (mostrar candados
+	por cada enemigo cuando no se pueda colocar)
+- Sonido
+- Daily Run

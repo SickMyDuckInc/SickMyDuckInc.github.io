@@ -1,0 +1,79 @@
+/*!
+ * Start Bootstrap - SB Admin v5.0.2 (https://startbootstrap.com/template-overviews/sb-admin)
+ * Copyright 2013-2019 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-sb-admin/blob/master/LICENSE)
+ */
+
+.banks img {
+  max-width: 100%;
+}
+
+.banks img.top-width {
+  width: 100%;
+}
+
+.banks img.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.banks > div {
+  padding: 20px 10px;
+}
+
+.banks > div > div {
+  border: 2px solid #89ff00;
+  height: 100%;
+}
+
+.banks > div .checkerbox {
+  height: auto !important;
+  padding: 10px;
+}
+
+.banks > div .checkerbox .icon-container {
+  padding-bottom: 5px;
+}
+
+.banks .map-container {
+  padding: 0 !important;
+  position: relative;
+}
+
+.banks .door {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.banks .door ul {
+  line-height: 2.3;
+}
+
+.banks .lasers {
+  text-align: center;
+}
+
+.banks .lasers > div {
+  display: inline-block;
+  padding-bottom: 15px;
+}
+
+.icon {
+  max-width: 25px !important;
+}
+
+.combination {
+  max-width: 100%;
+  white-space: nowrap;
+}
+
+.combination img {
+  max-height: 100px;
+}
+
+.combination div {
+  display: inline-block;
+  max-width: 20%;
+  padding-bottom: 20px;
+}
