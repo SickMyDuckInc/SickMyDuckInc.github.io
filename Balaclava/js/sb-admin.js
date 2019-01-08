@@ -5,7 +5,9 @@
   $("#sidebarToggle").on('click',function(e) {
     e.preventDefault();
     $("body").toggleClass("sidebar-toggled");
+    
     $(".sidebar").toggleClass("toggled");
+    toggleBody();
   });
 
   // Prevent the content wrapper from scrolling when the fixed side navigation hovered over
@@ -17,6 +19,10 @@
       e.preventDefault();
     }
   });
+
+  $(window).resize(function(){
+    toggleBody();
+  })
 
   // Scroll to top button appear
   $(document).on('scroll',function() {
@@ -62,3 +68,17 @@
   });
 
 })(jQuery); // End of use strict
+
+function toggleBody(){
+  if($(window).width()<500){
+    if(!$("body").hasClass("sidebar-toggled")){
+      $("#content-wrapper").addClass("noscroll");
+    }
+    else{
+      $("#content-wrapper").removeClass("noscroll");
+    }
+  }
+  else{
+    $("#content-wrapper").removeClass("noscroll");
+  }
+}
