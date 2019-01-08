@@ -82,6 +82,23 @@ body.fixed-nav.sidebar-toggled #content-wrapper {
   padding-right: 1.5rem;
 }
 
+.align-center {
+  text-align: center;
+}
+
+.description {
+  font-style: italic;
+}
+
+audio {
+  display: block;
+  padding: 5px 0px;
+}
+
+.danger {
+  color: #dc3545;
+}
+
 .smaller {
   font-size: 0.7rem;
 }
@@ -395,7 +412,7 @@ body.fixed-nav.sidebar-toggled #content-wrapper {
 }
 
 .banks > div .checkerbox .icon-container {
-  padding: 5px;
+  padding-bottom: 5px;
 }
 
 .banks .map-container {

@@ -77,3 +77,20 @@ body.fixed-nav {
 .padding-right-lg{
   padding-right: 1.5rem;
 }
+
+.align-center{
+  text-align: center;
+}
+
+.description{
+  font-style: italic;
+}
+
+audio{
+  display: block;
+  padding: 5px 0px;
+}
+
+.danger{
+  color: $red;
+}
