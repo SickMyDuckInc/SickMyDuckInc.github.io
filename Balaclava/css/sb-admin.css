@@ -82,6 +82,10 @@ body.fixed-nav.sidebar-toggled #content-wrapper {
   padding-right: 1.5rem;
 }
 
+.pd-sm-h {
+  padding: 0px 10px !important;
+}
+
 .align-center {
   text-align: center;
 }
@@ -97,6 +101,11 @@ audio {
 
 .danger {
   color: #dc3545;
+}
+
+.noscroll {
+  overflow-y: hidden;
+  display: none;
 }
 
 .smaller {
@@ -262,7 +271,7 @@ audio {
   display: block;
 }
 
-@media (max-width: 350px) {
+@media (max-width: 500px) {
   .sidebar {
     width: 100% !important;
     position: absolute;

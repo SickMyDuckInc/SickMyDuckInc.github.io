@@ -78,6 +78,10 @@ body.fixed-nav {
   padding-right: 1.5rem;
 }
 
+.pd-sm-h{
+  padding: 0px 10px !important;
+}
+
 .align-center{
   text-align: center;
 }
@@ -94,3 +98,10 @@ audio{
 .danger{
   color: $red;
 }
+
+.noscroll{
+  overflow-y: hidden;
+  display: none;
+}
+
+
